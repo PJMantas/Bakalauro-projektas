@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white  sticky-top">
+    <div class="container py-3">
+        <a class="navbar-brand" href="/home">
+            <img src="https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTE4MDAzNDEwNzg5ODI4MTEw/barack-obama-12782369-1-402.jpg" width="30" height="30" class="d-inline-block align-top"/>
+            <span class="ml-3">SphereWatch</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item" >
+                    <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active">Home</a>
+                </li>
+                <li class="nav-item" *ngIf="!isSignedIn">
+                    <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active">Login</a>
+                </li>
+                <li class="nav-item" *ngIf="!isSignedIn">
+                    <a class="nav-link" [routerLink]="['/register']" routerLinkActive="active">Register</a>
+                </li>
+                <li class="nav-item" *ngIf="isSignedIn">
+                    <a class="nav-link" [routerLink]="['/profile']" routerLinkActive="active">Profile</a>
+                </li>
+                <li class="nav-item" *ngIf="isSignedIn">
+                    <a class="nav-link" [routerLink]="['/videoView']" routerLinkActive="active">Videos</a>
+                </li>
+                <li class="nav-item" *ngIf="isSignedIn">
+                    <button class="btn btn-primary" (click)="signOut()" >Log out</button>
+                </li>
+                <li class="nav-item" *ngIf="isSignedIn">
+                    <a class="nav-link" [routerLink]="['/admin']" routerLinkActive="active">Admin</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,9 +1,11 @@
-<div class="auth-wrapper">
+<div class="col-md-6 offset-md-3 mt-5">
+  <div class="card">
     <form class="form-signin" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-      <h3 class="h3 mb-3 font-weight-normal text-center">Register User</h3>
+      <h3 class="card-header h3 mb-3 font-weight-normal text-center">Registration</h3>
+      
       <!-- Errors -->
-      <div *ngIf="errors?.name" class="alert alert-danger mt-3">
-        {{ errors?.name }}
+      <div *ngIf="errors?.username" class="alert alert-danger mt-3">
+        {{ errors?.username }}
       </div>
       <div *ngIf="errors?.email" class="alert alert-danger mt-3">
         {{ errors?.email }}
@@ -15,28 +17,33 @@
         {{ errors?.password_confirmation }}
       </div>
       <!-- Signup form -->
-      <div class="form-group">
-        <label>Name</label>
-        <input type="text" class="form-control" formControlName="name" />
+      <div class="card-body ">
+        <div class="form-group card-text" >
+          <label>Username</label>
+          <input type="text" class="form-control" formControlName="username" />
+        </div>
+        <div class="form-group card-text">
+          <label>Email address</label>
+          <input type="email" class="form-control" formControlName="email" />
+        </div>
+        <div class="form-group card-text">
+          <label>Password</label>
+          <input type="password" class="form-control" formControlName="password" />
+        </div>
+        <div class="form-group card-text">
+          <label>Confirm Password</label>
+          <input
+            type="password"
+            class="form-control"
+            formControlName="password_confirmation"
+          />
+        
       </div>
-      <div class="form-group">
-        <label>Email address</label>
-        <input type="email" class="form-control" formControlName="email" />
-      </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" class="form-control" formControlName="password" />
-      </div>
-      <div class="form-group">
-        <label>Confirm Password</label>
-        <input
-          type="password"
-          class="form-control"
-          formControlName="password_confirmation"
-        />
-      </div>
+      <br>
       <button type="submit" class="btn btn-block btn-primary">
         Register User
       </button>
+    </div>
     </form>
+    </div>
   </div>

@@ -13,6 +13,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { VideoViewComponent } from './components/video-view/video-view.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { AddUserComponent } from './components/admin/add-user/add-user.component';
+import { EditUserComponent } from './components/admin/edit-user/edit-user.component';
+import { HomeComponent } from './components/home/home.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +25,11 @@ import { VideoViewComponent } from './components/video-view/video-view.component
     SignupComponent,
     UserProfileComponent,
     VideoViewComponent,
+    NavbarComponent,
+    AdminComponent,
+    AddUserComponent,
+    EditUserComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

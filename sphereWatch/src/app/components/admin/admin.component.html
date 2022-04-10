@@ -1,0 +1,39 @@
+<div class="container">
+    <h3>Vartotojų sąrašas</h3>
+    
+    <button class="btn btn-dark btn-xs" [routerLink] = "['/admin/add-user/']">Pridėti vartotoją</button>
+  
+    <button class="btn btn-dark btn-xs" [routerLink] = "'/admin/create-report/'">Išvesti ataskaitą</button>
+        
+    <div class="card">
+      <table class="table table-striped mb-0">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Slapyvardis</th>
+            <th scope="col">E. Paštas</th>
+            <th scope="col">Leidimų grupės nr.</th>
+            <th scope="col" style="width: 1%; white-space: nowrap;"></th>
+          </tr>
+        </thead>
+        <tbody>
+            
+          <tr *ngFor="let user of UsersList">
+            <th scope="row">{{user.id}}</th>
+            <td>{{user.username}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.group_id}}</td>
+            <td class="btn-group" style="width: 1%; white-space: nowrap;">
+                
+              <button type="button" class="btn btn-primary btn-xs" [routerLink] = "'/admin/edit-user/' + user.id">Redaguoti</button>
+              <button type="button" class="btn btn-danger btn-xs" (click)="onDelete(user.id)">Trinti</button>
+              
+            </td>
+            <!-- <td><button class="btn btn-danger btn-xs" [routerLink] = "'/admin/ ">Delete</button></td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+  </div>
+ 
