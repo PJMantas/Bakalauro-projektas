@@ -4,8 +4,16 @@
         User Profile
       </div>
       <div class="card-body" style="padding-left: 10%; padding-right: 10%;">
-        <p class="card-text">Name: <strong>{{UserProfile?.username}}</strong></p>
-        <p class="card-text">Email: <strong>{{UserProfile?.email}}</strong></p>
+        <p class="card-text">Slapyvardis: <strong>{{UserProfile?.username}}</strong></p>
+        <p class="card-text">E-paštas: <strong>{{UserProfile?.email}}</strong></p>
+        <p class="card-text">Vardas: <strong>{{UserProfile?.first_name}}</strong></p>
+        <p class="card-text">Pavardė: <strong>{{UserProfile?.last_name}}</strong></p>
+        <p class="card-text">Amžius: <strong>{{UserProfile?.age}}</strong></p>
+        <p class="card-text">Šalis: <strong>{{UserProfile?.country}}</strong></p>
       </div>
+      
+      <button class="btn btn-primary btn-xs " type="button" [routerLink]="['/video/createVideo']">Kurti naują vaizdo įrašą</button>
+      <button class="btn btn-primary btn-xs " type="button" [routerLink]="['/video/userVideos']">Mano vaizdo įrašai</button>
     </div>
+    
   </div>

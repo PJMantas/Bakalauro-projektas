@@ -1,0 +1,16 @@
+
+<div >
+    
+    <div class="card col-sm" style="width: 18rem;" *ngFor="let video of userVideos">
+        <img class="card-img-top" src="" alt="Card image cap">
+        <div class="card-body">
+        <h5 class="card-title">{{video.title}}</h5>
+        <p class="card-text">{{video.description}}</p>
+        <button class="btn btn-primary btn-xs" [routerLink] = "'/viewVideo/' + video.id">Watch</button>
+        <button class="btn btn-primary btn-xs" [routerLink] = "'/video/editVideo/' + video.id">Edit video</button>
+        <button type="button" class="btn btn-danger btn-xs" (click)="onDelete(video.id)">Trinti</button>
+        </div>
+    </div>
+
+    
+</div>

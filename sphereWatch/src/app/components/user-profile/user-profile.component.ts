@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../../shared/auth.service';
-// User interface
-export class User {
-  username: any;
-  email: any;
-}
+import { User } from '../../models/user';
+
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -15,6 +12,7 @@ export class UserProfileComponent implements OnInit {
   constructor(public authService: AuthService) {
     this.authService.profileUser().subscribe((data: any) => {
       this.UserProfile = data;
+      console.log(this.UserProfile);
     });
   }
   ngOnInit() {}

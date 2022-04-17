@@ -30,12 +30,12 @@ export class EditUserComponent implements OnInit {
       {
         username: [''],
         email: [''],
-        first_name: '',
-        last_name: '',
-        age: '',
-        country: '',
-        city: '',
-        group_id: ''
+        first_name: [''],
+        last_name: [''],
+        age: [''],
+        country: [''],
+        city: [''],
+        group_id: ['']
       });
   
   }
@@ -59,7 +59,6 @@ export class EditUserComponent implements OnInit {
         group_id: this.user.group_id
     });
   })
-  
   }
 
   get f() { return this.editForm.controls; }
@@ -71,6 +70,7 @@ export class EditUserComponent implements OnInit {
     
       console.log(response);
     })
+    
   }
 
 }

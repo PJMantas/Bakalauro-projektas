@@ -24,7 +24,7 @@
                     <a class="nav-link" [routerLink]="['/profile']" routerLinkActive="active">Profile</a>
                 </li>
                 <li class="nav-item" *ngIf="isSignedIn">
-                    <a class="nav-link" [routerLink]="['/videoView']" routerLinkActive="active">Videos</a>
+                    <a class="nav-link" [routerLink]="['/videoHome']" routerLinkActive="active">Videos</a>
                 </li>
                 <li class="nav-item" *ngIf="isSignedIn">
                     <button class="btn btn-primary" (click)="signOut()" >Log out</button>

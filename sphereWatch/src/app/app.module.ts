@@ -18,6 +18,10 @@ import { AdminComponent } from './components/admin/admin.component';
 import { AddUserComponent } from './components/admin/add-user/add-user.component';
 import { EditUserComponent } from './components/admin/edit-user/edit-user.component';
 import { HomeComponent } from './components/home/home.component';
+import { VideoHomeComponent } from './components/video/video-home/video-home.component';
+import { EditVideoComponent } from './components/video/edit-video/edit-video.component';
+import { CreateVideoComponent } from './components/video/create-video/create-video.component';
+import { UserVideosComponent } from './components/video/user-videos/user-videos.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +34,10 @@ import { HomeComponent } from './components/home/home.component';
     AddUserComponent,
     EditUserComponent,
     HomeComponent,
+    VideoHomeComponent,
+    EditVideoComponent,
+    CreateVideoComponent,
+    UserVideosComponent,
   ],
   imports: [
     BrowserModule,

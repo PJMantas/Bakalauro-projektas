@@ -20,7 +20,7 @@ class UserController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        $user = DB::select('select id, username, email, first_name, last_name, age, city, country, group_id from users where id=' . $request['id'] . ' LIMIT 1');
+        $user = DB::select('select id, username, email, first_name, last_name, age, city, country, group_id, avatar_url from users where id=' . $request['id'] . ' LIMIT 1');
 
         return response()->json([
             'message' => 'Retrieved User ID: ' . $request['id'],
