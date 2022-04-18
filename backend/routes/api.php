@@ -47,6 +47,7 @@ Route::group([
     'prefix' => 'user'
 ], function ($router) {
     Route::get('/get-user', [UserController::class, 'getUserById']); 
+    Route::post('/update-profile', [UserController::class, 'updateProfile']);
     
 });
 
@@ -60,5 +61,8 @@ Route::group([
     Route::get('/get-videos-list', [VideoController::class, 'getVideosList']);
     Route::post('/update-video', [VideoController::class, 'updateVideo']); 
     Route::get('/get-user-videos-list', [VideoController::class, 'getUserVideosList']);
+    Route::post('/add-video-view', [VideoController::class, 'addVideoView']); 
+    Route::post('/like-video', [VideoController::class, 'likeVideo']); 
+    Route::post('/dislike-video', [VideoController::class, 'dislikeVideo']); 
     
 });

@@ -10,6 +10,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class SignupComponent implements OnInit {
   registerForm: FormGroup;
   errors: any = null;
+  file: any;
+
   constructor(
     public router: Router,
     public fb: FormBuilder,
@@ -20,11 +22,32 @@ export class SignupComponent implements OnInit {
       email: [''],
       password: [''],
       password_confirmation: [''],
+      avatar_url: [''],
     });
   }
   ngOnInit() {}
+
+  onFileChange(event) {
+  
+    if (event.target.files.length > 0) {
+      this.file = event.target.files[0];
+      console.log(this.file);
+    }
+  }
   onSubmit() {
-    this.authService.register(this.registerForm.value).subscribe(
+
+    const formData = new FormData();
+    formData.append('username', this.registerForm.controls['username'].value);
+    formData.append('email', this.registerForm.controls['email'].value);
+    formData.append('password', this.registerForm.controls['password'].value);
+    formData.append('password_confirmation', this.registerForm.controls['password_confirmation'].value);
+    if (this.file) 
+    {
+      formData.append('avatar_url', this.file);
+    }
+    console.log(formData);
+
+    this.authService.register(formData).subscribe(
       (result) => {
         console.log(result);
       },

@@ -2,6 +2,7 @@ export class Video {
     id!: number;
     title!: string;
     video_url!: string;
+    thumbnail_url!: string;
     description!: string;
     clicks!: string;
     likes!: string;

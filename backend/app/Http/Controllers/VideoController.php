@@ -17,7 +17,8 @@ class VideoController extends Controller
             'video_url' => 'required|file|mimetypes:video/mp4',
             'description' => 'required',
             'genre' => 'required|string|between:2,100',
-
+            'thumbnail_url' => 'file|mimes:jpg,png,jpeg,gif,svg|max:5120',
+            
         ]);
 
         if ($validator->fails()) {
@@ -37,6 +38,13 @@ class VideoController extends Controller
             $path = $request->file('video_url')->store('videos', ['disk' => 'videos']);
             $video->video_url = $path;
         }
+
+        if ($request->hasFile('thumbnail_url'))
+        {
+            $path = $request->file('thumbnail_url')->store('thumbnails', ['disk' => 'thumbnails']);
+            $video->thumbnail_url = $path;
+        }
+
         $video->description = $request['description'];
         $video->genre = $request['genre'];
         $video->creator_id = 1;
@@ -59,6 +67,7 @@ class VideoController extends Controller
             'video_url' => 'required|string|max:100|unique:videos',
             'description' => 'required',
             'genre' => 'required|string|between:2,100',
+            'thumbnail_url' => 'file|mimes:jpg,png,jpeg,gif,svg|max:5120',
         ]);
 
         if($validator->fails()){
@@ -72,10 +81,82 @@ class VideoController extends Controller
         $video->description = $request['description'];
         $video->genre = $request['genre'];
 
+        if ($request->hasFile('thumbnail_url'))
+        {
+            $path = $request->file('thumbnail_url')->store('thumbnails', ['disk' => 'thumbnails']);
+            $video->thumbnail_url = $path;
+        }
+
         $video->save();
 
         return response()->json([
             'message' => 'Video edited',
+            'video' => $video
+            ], 201);
+    }
+
+    public function addVideoView(Request $request){
+        $validator = Validator::make($request->all(), [
+            'video_id' => 'required|numeric', 
+            'genre' => 'required|string|between:2,100',
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors(), 400);
+        }
+
+        $video = Video::find($request['video_id']);
+
+        $video->increment('clicks');
+
+        $video->save();
+
+        return response()->json([
+            'message' => 'Video count added',
+            'video' => $video
+            ], 201);
+    }
+
+    public function likeVideo(Request $request){
+        $validator = Validator::make($request->all(), [
+            'video_id' => 'required|numeric', 
+            'genre' => 'required|string|between:2,100',
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors(), 400);
+        }
+
+        $video = Video::find($request['video_id']);
+
+        $video->increment('likes');
+
+        $video->save();
+
+        return response()->json([
+            'message' => 'Video liked',
+            'video' => $video
+            ], 201);
+    }
+
+    public function dislikeVideo(Request $request){
+        $validator = Validator::make($request->all(), [
+            'video_id' => 'required|numeric', 
+            'genre' => 'required|string|between:2,100',
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors(), 400);
+        }
+
+        $video = Video::find($request['video_id']);
+
+        $video->increment('dislikes');
+
+        $video->save();
+
+        return response()->json([
+            'message' => 'Video disliked',
             'video' => $video
             ], 201);
     }
@@ -89,7 +170,7 @@ class VideoController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        $video = DB::select('select id, title, video_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where id=' . $request['id'] . ' LIMIT 1');
+        $video = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where id=' . $request['id'] . ' LIMIT 1');
 
         return response()->json([
             'message' => 'Retrieved Video ID: ' . $request['id'],
@@ -115,7 +196,7 @@ class VideoController extends Controller
     }
 
     public function getVideosList(){
-        $videos = DB::select('select id, title, video_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos');
+        $videos = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos');
 
         return response()->json([
             'message' => 'Retrieved Video List',
@@ -124,8 +205,9 @@ class VideoController extends Controller
     }
 
     public function getUserVideosList(){
-        $videos = DB::select('select id, title, video_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where creator_id=' . auth()->user()->id);
-
+        $videos = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where creator_id=' . auth()->user()->id);
+        //$videos = DB::select('select id, title, video_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where creator_id= 1');
+        
         return response()->json([
             'message' => 'Retrieved Video List',
             'videos' => $videos

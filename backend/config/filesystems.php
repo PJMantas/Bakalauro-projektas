@@ -56,7 +56,18 @@ return [
         'videos' => [
             'driver' => 'local',
             'root'   => public_path() . '/'
-         ]
+        ],
+
+        'users' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/'
+        ],
+        
+        'thumbnails' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/'
+        ]
+
 
     ],
 

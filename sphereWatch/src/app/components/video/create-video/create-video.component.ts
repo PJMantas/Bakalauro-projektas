@@ -23,6 +23,7 @@ export class CreateVideoComponent implements OnInit {
   error: any;
   isLoaded:boolean = false;
   file: any;
+  thumbnail: any;
 
   constructor(
     private VideoService: VideoService,
@@ -33,8 +34,6 @@ export class CreateVideoComponent implements OnInit {
   ) { 
     
     console.log(this.userId);
-    
-
     this.authService.profileUser().subscribe((data: any) => {
       this.currentUser = data;
       this.userId = this.currentUser.id;
@@ -44,7 +43,7 @@ export class CreateVideoComponent implements OnInit {
         title: ['', Validators.required],
         video_url: [null, Validators.required],
         description: ['', Validators.required],
-        //thumbnail: ['', Validators.required],
+        thumbnail_url: [''],
         creator_id: this.userId,
         genre: ['', Validators.required],
         
@@ -66,6 +65,14 @@ export class CreateVideoComponent implements OnInit {
     }
   }
 
+  onThumbnailChange(event) {
+  
+    if (event.target.files.length > 0) {
+      this.thumbnail = event.target.files[0];
+      
+    }
+  }
+
   onSubmit() {
     this.submitted = true;
 
@@ -80,7 +87,10 @@ export class CreateVideoComponent implements OnInit {
     formData.append("title", this.addVideoForm.controls['title'].value);
     formData.append("description", this.addVideoForm.controls['description'].value);
     formData.append("genre", this.addVideoForm.controls['genre'].value);
-    console.log(formData.get('video_url'));
+
+    if (this.thumbnail) {
+      formData.append("thumbnail_url", this.thumbnail);
+    }
 
     this.loading = true;
     

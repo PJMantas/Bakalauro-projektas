@@ -22,6 +22,7 @@ import { VideoHomeComponent } from './components/video/video-home/video-home.com
 import { EditVideoComponent } from './components/video/edit-video/edit-video.component';
 import { CreateVideoComponent } from './components/video/create-video/create-video.component';
 import { UserVideosComponent } from './components/video/user-videos/user-videos.component';
+import { EditProfileComponent } from './components/users/edit-profile/edit-profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +39,7 @@ import { UserVideosComponent } from './components/video/user-videos/user-videos.
     EditVideoComponent,
     CreateVideoComponent,
     UserVideosComponent,
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,

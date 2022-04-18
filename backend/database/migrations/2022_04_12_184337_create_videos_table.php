@@ -17,6 +17,7 @@ class CreateVideosTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('video_url');
+            $table->string('thumbnail_url');
             $table->mediumText('description');
             $table->integer('clicks');
             $table->integer('likes');

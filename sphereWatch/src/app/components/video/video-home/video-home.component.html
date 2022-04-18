@@ -2,7 +2,7 @@
 <div >
     
     <div class="card col-sm" style="width: 18rem;" *ngFor="let video of VideoList">
-        <img class="card-img-top" src="" alt="Card image cap">
+        <img class="card-img-top" src="http://127.0.0.1:8000/{{video.thumbnail_url}}" alt="Card image cap">
         <div class="card-body">
         <h5 class="card-title">{{video.title}}</h5>
         <p class="card-text">{{video.description}}</p>

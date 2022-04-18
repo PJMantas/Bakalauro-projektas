@@ -48,13 +48,24 @@ class AuthController extends Controller
             'age' => 'nullable|numeric',
             'country' => 'nullable|string',
             'city' => 'nullable|string',
+            'avatar_url' => 'file|mimes:jpg,png,jpeg,gif,svg|max:5120',
         ]);
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
         }
+
+        if ($request->hasFile('avatar_url'))
+        {
+            $path = $request->file('avatar_url')->store('users', ['disk' => 'users']);
+        }
+        else{
+            $path = "users/default_profile.jpg";
+        }
+
         $user = User::create(array_merge(
                     $validator->validated(),
-                    ['password' => bcrypt($request->password)]
+                    ['password' => bcrypt($request->password),
+                    'avatar_url' => $path]
                 ));
         return response()->json([
             'message' => 'User successfully registered',

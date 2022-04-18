@@ -1,6 +1,6 @@
 <div class="container card">
-    <h3 class="card-header">Redaguokite esamą naudotoją</h3>
-    <form class="card-body" [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <h3 class="card-header">Redaguokite savo profilį</h3>
+    <form class="card-body" [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
 
         <div *ngIf="error?.username" class="alert alert-danger mt-3">
             {{ error?.username }}
@@ -30,8 +30,6 @@
                 <div *ngIf="f['username'].errors['required']">Slapyvardis yra privalomas</div>
             </div>
         </div>
-
-      
 
         <div class="form-group">
 
@@ -73,20 +71,20 @@
                 <div *ngIf="f['city'].errors['required']">Miestas yra privalomas</div>
             </div>
         </div>
-
+        <br>
         <div class="form-group">
-            <label for="group_id">Leidimų grupės nr.</label>
-            <input type="text" formControlName="group_id" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['group_id'].errors }" />
-            <div *ngIf="submitted && f['group_id'].errors" class="invalid-feedback">
-                <div *ngIf="f['group_id'].errors['required']">Leidimų grupės nr. yra privalomas</div>
-            </div>
-        </div>
+            <img src= 'http://127.0.0.1:8000/{{profileImage}}' width="200" height="200">
+            <br>
+            <label for="avatar_url">Profilio nuotrauka</label>
 
+            <br>
+            <input formControlName="avatar_url" type="file" id="avatar_url" (change)="onFileChange($event)">
+          </div>
         
         <br>
-        <button class="btn btn-dark btn-xs " type="submit">Pridėti</button>
-        <button class="btn btn-dark btn-xs " type="button" [routerLink]="['/admin']">Grįžti</button>
+        <button class="btn btn-dark btn-xs " type="submit">Atnaujinti</button>
+        <button class="btn btn-dark btn-xs " type="button" [routerLink]="['/profile']">Grįžti</button>
         
         <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
     </form>
-</div>
+</div> 

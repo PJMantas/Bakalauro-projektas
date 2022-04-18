@@ -14,6 +14,13 @@
         </video>
       </vg-player>
       <div class="card-body">
+        <h1>
+          Peržiūros
+          {{Video.clicks}}  
+          Reakcijos 
+          <button type="button" class="btn btn-success btn-xs" (click)="onLike()">{{Video.likes}}</button> :
+          <button type="button" class="btn btn-danger btn-xs" (click)="onDislike()">{{Video.dislikes}}</button>
+        </h1>
         <p>{{Video.description}}</p>
         <p>{{Video.genre}}</p>
         

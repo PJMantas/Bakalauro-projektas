@@ -9,5 +9,6 @@ export class User {
     country!: string;
     city!: string;
     group_id!: number;
+    avatar_url!: string;
     access_token?: string;
 }

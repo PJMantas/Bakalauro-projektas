@@ -12,6 +12,7 @@ import { VideoHomeComponent } from './components/video/video-home/video-home.com
 import { EditVideoComponent } from './components/video/edit-video/edit-video.component';
 import { CreateVideoComponent } from './components/video/create-video/create-video.component';
 import { UserVideosComponent } from './components/video/user-videos/user-videos.component';
+import { EditProfileComponent } from './components/users/edit-profile/edit-profile.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'login', component: SigninComponent },
   { path: 'register', component: SignupComponent },
   { path: 'profile', component: UserProfileComponent },
+  { path: 'edit-profile', component: EditProfileComponent },
 
   { path: 'viewVideo/:id', component: VideoViewComponent },
   { path: 'videoHome', component: VideoHomeComponent },
