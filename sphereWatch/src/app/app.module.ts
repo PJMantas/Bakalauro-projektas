@@ -25,6 +25,7 @@ import { UserVideosComponent } from './components/video/user-videos/user-videos.
 import { EditProfileComponent } from './components/users/edit-profile/edit-profile.component';
 import { CommentsComponent } from './shared/comments/comments.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { ViewReportComponent } from './components/admin/view-report/view-report.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +45,7 @@ import { FooterComponent } from './shared/footer/footer.component';
     EditProfileComponent,
     CommentsComponent,
     FooterComponent,
+    ViewReportComponent,
   ],
   imports: [
     BrowserModule,

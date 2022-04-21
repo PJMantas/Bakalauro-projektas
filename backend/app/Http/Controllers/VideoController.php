@@ -47,8 +47,7 @@ class VideoController extends Controller
 
         $video->description = $request['description'];
         $video->genre = $request['genre'];
-        $video->creator_id = 1;
-        //$video->creator_id = $user->id;
+        $video->creator_id = $user->id;
         
         $video->save();
 

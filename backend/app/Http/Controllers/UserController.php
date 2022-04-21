@@ -53,7 +53,8 @@ class UserController extends Controller
         $user->country = $request['country'];
         $user->city = $request['city'];
         $user->group_id = $request['group_id'];
-
+        $oldPath = "";
+        
         if ($request->hasFile('avatar_url'))
         {
             

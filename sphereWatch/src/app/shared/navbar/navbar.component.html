@@ -32,6 +32,14 @@
                 <li class="nav-item" *ngIf="isSignedIn">
                     <a class="nav-link" [routerLink]="['/admin']" routerLinkActive="active">Admin</a>
                 </li>
+                <li  class="nav-item" *ngIf="isSignedIn" >
+                    <a class="navbar-brand" [routerLink]="['/profile']" routerLinkActive="active" class="nav-link" >
+                        <span >Sveiki, {{userName}}  </span>
+                        <img style="width: 60px; height: 50px; border-radius: 50%;" src="http://127.0.0.1:8000/{{profile_pic}}" >
+                        
+                    </a>
+                   
+                </li>
             </ul>
         </div>
     </div>

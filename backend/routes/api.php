@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,4 +79,11 @@ Route::group([
     Route::post('/delete-comment', [CommentController::class, 'deleteComment']);
     Route::post('/edit-comment', [CommentController::class, 'editComment']);
     
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'report'
+], function($router) {
+    Route::get('/get-system-report', [ReportController::class, 'getSystemReport']);
 });

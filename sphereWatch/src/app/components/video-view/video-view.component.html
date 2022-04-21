@@ -1,10 +1,10 @@
-<div *ngIf="filtersLoaded | async">
+<div class="container" *ngIf="filtersLoaded | async">
   <div class="video-player-wrapper card">
-      <h2>{{Video.title}}</h2>
+      <h2 class="card" style="size: auto;">{{Video.title}}</h2>
       <vg-player class="card-body"  style="text-align: center;">
         
         
-        <video [vgMedia]="$any(media)" #media id="singleVideo" preload="auto" controls class="card"  >
+        <video style="width: 100%    !important; height: auto   !important;" [vgMedia]="$any(media)" #media id="singleVideo" preload="auto" controls   >
           
           <source src= 'http://127.0.0.1:8000/{{Video.video_url}}' type="video/mp4">
           <vg-controls>
@@ -33,5 +33,3 @@
     <app-comments [videoId]="videoId"></app-comments>
   </div>
 </div>
-
-<app-footer></app-footer>

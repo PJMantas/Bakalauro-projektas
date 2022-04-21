@@ -13,6 +13,7 @@ import { EditVideoComponent } from './components/video/edit-video/edit-video.com
 import { CreateVideoComponent } from './components/video/create-video/create-video.component';
 import { UserVideosComponent } from './components/video/user-videos/user-videos.component';
 import { EditProfileComponent } from './components/users/edit-profile/edit-profile.component';
+import { ViewReportComponent } from './components/admin/view-report/view-report.component';
 
 
 const routes: Routes = [
@@ -33,6 +34,8 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent },
   { path: 'admin/add-user', component: AddUserComponent },
   { path: 'admin/edit-user/:id', component: EditUserComponent },
+
+  { path: 'admin/view_report', component: ViewReportComponent },
 
 ];
 @NgModule({
