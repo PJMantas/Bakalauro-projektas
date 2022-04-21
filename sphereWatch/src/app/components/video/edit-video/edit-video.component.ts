@@ -51,7 +51,6 @@ export class EditVideoComponent implements OnInit {
       this.editVideoForm = this.formBuilder.group({
         video_id: [this.video.id, Validators.required],
         title: [this.video.title, Validators.required],
-        video_url: [this.video.video_url, Validators.required],
         description: [this.video.description, Validators.required],
         //thumbnail: [this.video.thumbnail, Validators.required],
         creator_id: this.video.creator_id,

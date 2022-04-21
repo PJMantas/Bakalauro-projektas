@@ -64,7 +64,6 @@ class VideoController extends Controller
         $validator = Validator::make($request->all(), [
             'video_id' => 'required|numeric', 
             'title' => 'required|string|between:2,100',
-            'video_url' => 'required|string|max:100|unique:videos',
             'description' => 'required',
             'genre' => 'required|string|between:2,100',
             'thumbnail_url' => 'file|mimes:jpg,png,jpeg,gif,svg|max:5120',
@@ -77,7 +76,6 @@ class VideoController extends Controller
         $video = Video::find($request['video_id']);
 
         $video->title = $request['title'];
-        $video->video_url = $request['video_url'];
         $video->description = $request['description'];
         $video->genre = $request['genre'];
 

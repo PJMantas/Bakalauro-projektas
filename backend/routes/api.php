@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,5 +65,17 @@ Route::group([
     Route::post('/add-video-view', [VideoController::class, 'addVideoView']); 
     Route::post('/like-video', [VideoController::class, 'likeVideo']); 
     Route::post('/dislike-video', [VideoController::class, 'dislikeVideo']); 
+    
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'comment'
+], function($router) {
+    Route::post('/create-comment', [CommentController::class, 'createComment']);
+    Route::post('/create-comment-reply', [CommentController::class, 'createCommentReply']);
+    Route::get('/get-video-comments', [CommentController::class, 'getVideoComments']);
+    Route::post('/delete-comment', [CommentController::class, 'deleteComment']);
+    Route::post('/edit-comment', [CommentController::class, 'editComment']);
     
 });

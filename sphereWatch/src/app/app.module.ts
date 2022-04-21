@@ -23,6 +23,8 @@ import { EditVideoComponent } from './components/video/edit-video/edit-video.com
 import { CreateVideoComponent } from './components/video/create-video/create-video.component';
 import { UserVideosComponent } from './components/video/user-videos/user-videos.component';
 import { EditProfileComponent } from './components/users/edit-profile/edit-profile.component';
+import { CommentsComponent } from './shared/comments/comments.component';
+import { FooterComponent } from './shared/footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +42,8 @@ import { EditProfileComponent } from './components/users/edit-profile/edit-profi
     CreateVideoComponent,
     UserVideosComponent,
     EditProfileComponent,
+    CommentsComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
