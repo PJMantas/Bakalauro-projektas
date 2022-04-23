@@ -26,6 +26,8 @@ import { EditProfileComponent } from './components/users/edit-profile/edit-profi
 import { CommentsComponent } from './shared/comments/comments.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { ViewReportComponent } from './components/admin/view-report/view-report.component';
+import { ViewUserReportComponent } from './components/users/view-user-report/view-user-report.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +48,7 @@ import { ViewReportComponent } from './components/admin/view-report/view-report.
     CommentsComponent,
     FooterComponent,
     ViewReportComponent,
+    ViewUserReportComponent,
   ],
   imports: [
     BrowserModule,
