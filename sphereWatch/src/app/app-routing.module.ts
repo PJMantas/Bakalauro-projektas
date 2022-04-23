@@ -14,7 +14,7 @@ import { CreateVideoComponent } from './components/video/create-video/create-vid
 import { UserVideosComponent } from './components/video/user-videos/user-videos.component';
 import { EditProfileComponent } from './components/users/edit-profile/edit-profile.component';
 import { ViewReportComponent } from './components/admin/view-report/view-report.component';
-
+import { ViewUserReportComponent } from './components/users/view-user-report/view-user-report.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -22,19 +22,19 @@ const routes: Routes = [
   { path: 'register', component: SignupComponent },
   { path: 'profile', component: UserProfileComponent },
   { path: 'edit-profile', component: EditProfileComponent },
+  { path: 'viewUserReport', component: ViewUserReportComponent },
 
   { path: 'viewVideo/:id', component: VideoViewComponent },
   { path: 'videoHome', component: VideoHomeComponent },
   { path: 'video/editVideo/:id', component: EditVideoComponent },
   { path: 'video/createVideo', component: CreateVideoComponent },
   { path: 'video/userVideos', component: UserVideosComponent },
-
+  
   { path: 'home', component: HomeComponent },
 
   { path: 'admin', component: AdminComponent },
   { path: 'admin/add-user', component: AddUserComponent },
   { path: 'admin/edit-user/:id', component: EditUserComponent },
-
   { path: 'admin/view_report', component: ViewReportComponent },
 
 ];

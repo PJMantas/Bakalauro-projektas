@@ -7,16 +7,23 @@ import { ReportService } from 'src/app/services/report.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Video } from 'src/app/models/video';
 
+export class MostCommentedVideos {
+  video_id!: number;
+  title!: string;
+  comments!: number;
+}
+
 @Component({
   selector: 'app-view-report',
   templateUrl: './view-report.component.html',
   styleUrls: ['./view-report.component.css']
 })
 export class ViewReportComponent implements OnInit {
-
+  
   MostDislikedVideos:Video[] = [];
   MostLikedVideos:Video[] = [];
   MostViewedVideos:Video[] = [];
+  MostCommentedVideos:MostCommentedVideos[] = [];
   RegisteredUsers!: number;
   TotalVideoCount!: number;
   TotalVideoLikes!: number;
@@ -37,6 +44,7 @@ export class ViewReportComponent implements OnInit {
       this.MostDislikedVideos = result['MostDislikedVideos'];
       this.MostLikedVideos = result['MostLikedVideos'];
       this.MostViewedVideos = result['MostViewedVideos'];
+      this.MostCommentedVideos = result['MostCommentedVideos'];
       this.RegisteredUsers = result['RegisteredUsers'][0].count;
       this.TotalVideoCount = result['Videos'][0].count;
       this.TotalVideoLikes = result['VideoSums'][0].likes;

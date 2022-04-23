@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-expand-lg navbar-light bg-white  sticky-top">
     <div class="container py-3">
         <a class="navbar-brand" href="/home">
@@ -26,8 +27,11 @@
                 <li class="nav-item" *ngIf="isSignedIn">
                     <a class="nav-link" [routerLink]="['/videoHome']" routerLinkActive="active">Videos</a>
                 </li>
+                <div>
+                    
+                </div>
                 <li class="nav-item" *ngIf="isSignedIn">
-                    <button class="btn btn-primary" (click)="signOut()" >Log out</button>
+                    <button class="btn btn-outline-primary" (click)="signOut()" >Log out</button>
                 </li>
                 <li class="nav-item" *ngIf="isSignedIn">
                     <a class="nav-link" [routerLink]="['/admin']" routerLinkActive="active">Admin</a>
@@ -35,7 +39,7 @@
                 <li  class="nav-item" *ngIf="isSignedIn" >
                     <a class="navbar-brand" [routerLink]="['/profile']" routerLinkActive="active" class="nav-link" >
                         <span >Sveiki, {{userName}}  </span>
-                        <img style="width: 60px; height: 50px; border-radius: 50%;" src="http://127.0.0.1:8000/{{profile_pic}}" >
+                        <img src="http://127.0.0.1:8000/{{profile_pic}}" >
                         
                     </a>
                    
@@ -44,3 +48,4 @@
         </div>
     </div>
 </nav>
+

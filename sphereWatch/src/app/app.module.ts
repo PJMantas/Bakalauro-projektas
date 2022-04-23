@@ -48,7 +48,6 @@ import { ViewUserReportComponent } from './components/users/view-user-report/vie
     CommentsComponent,
     FooterComponent,
     ViewReportComponent,
-    ViewUserReportComponent,
   ],
   imports: [
     BrowserModule,

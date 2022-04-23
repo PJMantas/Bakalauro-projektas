@@ -10,4 +10,8 @@ export class ReportService {
   getSystemReport() {
     return this.http.get<any>(`http://127.0.0.1:8000/api/report/get-system-report/`);
   }
+
+  getUserReport() {
+    return this.http.get<any>(`http://127.0.0.1:8000/api/report/get-user-report/`);
+  }
 }

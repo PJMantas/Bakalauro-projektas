@@ -86,4 +86,5 @@ Route::group([
     'prefix' => 'report'
 ], function($router) {
     Route::get('/get-system-report', [ReportController::class, 'getSystemReport']);
+    Route::get('/get-user-report', [ReportController::class, 'getUserReport']);
 });

@@ -77,4 +77,51 @@ class ReportController extends Controller
 
         ], 201);
     }
+
+    public function getUserReport(){
+        //$videos = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos');
+        $user = auth()->user();
+        //$userid = $user->id;
+        $userid = 1;
+
+        $userVideoCount = DB::select('select count(*) as count from videos where creator_id = ?', [$userid]);
+
+        $userVideoSums = DB::select('select sum(clicks) as clicks, sum(likes) as likes, sum(dislikes) as dislikes from videos where creator_id = ?', [$userid]);
+     
+        $mostCommentedVideos = DB::select('select videos.id as video_id, videos.title as title, count(comments.id) as comments from videos
+                                            inner join comments on videos.id = comments.video_id 
+                                                where videos.creator_id = ?
+                                                group by videos.id, videos.title
+                                                order by comments desc limit 3', [$userid]);
+
+        $mostLikedVideos = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where creator_id = ? order by likes desc limit 3', [$userid]);
+
+        $mostLikedVideosByDate = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where creator_id = ? order by created_at desc', [$userid]);
+
+        $mostViewedVideos = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where creator_id = ? order by clicks desc limit 3', [$userid]);
+        
+        $mostDislikedVideos = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where creator_id = ? order by dislikes desc limit 3', [$userid]);
+
+        $mostDislikedVideosByDate = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where creator_id = ? order by created_at desc', [$userid]);
+        
+        $userVideoCommentCount = DB::select('select count(comments.id) as commentCount from videos
+                                            inner join comments on videos.id = comments.video_id 
+                                                where videos.creator_id = ? ', [$userid]);
+
+        return response()->json([
+            'message' => 'Retrieved UserReport',
+            'VideoCount' => $userVideoCount,
+            'MostCommentedVideos' => $mostCommentedVideos,
+            'MostLikedVideos' => $mostLikedVideos,
+            'MostViewedVideos' => $mostViewedVideos,
+            'VideoSums' => $userVideoSums,
+            'MostDislikedVideos' => $mostDislikedVideos,
+            'CommentCount' => $userVideoCommentCount,
+            'MostLikedVideosByDate' => $mostLikedVideosByDate,
+            'MostDislikedVideosByDate' => $mostDislikedVideosByDate
+           
+        ], 201);
+    }
+
+    
 }

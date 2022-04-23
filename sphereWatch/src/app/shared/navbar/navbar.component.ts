@@ -13,6 +13,7 @@ export class NavbarComponent implements OnInit {
   isSignedIn!: boolean;
   profile_pic!: string;
   userName!: string;
+  isCollapsed = false;
   constructor(
     private auth: AuthStateService,
     public router: Router,
