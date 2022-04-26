@@ -25,4 +25,16 @@ export class VideoHomeComponent implements OnInit {
     }
     )};
 
+  searchVideo(event: any) {
+    const searchTerm = event.target.value;
+    this.VideoService.searchVideo(searchTerm.trim()).subscribe(result => {
+      console.log(result);
+      this.VideoList = result['videos'];
+    }
+  )};
+
+  //searchVideo(event: any) {
+  //  console.log(event.target.value);
+  //}
+
 }

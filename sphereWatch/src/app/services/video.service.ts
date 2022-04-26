@@ -37,5 +37,9 @@ export class VideoService {
     return this.http.post<Video>(`http://127.0.0.1:8000/api/video/dislike-video/`, formBody);
   }
 
+  searchVideo(search: string) {
+    return this.http.get<Video>(`http://127.0.0.1:8000/api/video/search-video/`, {params: {search}})
+  };
+
 }
 

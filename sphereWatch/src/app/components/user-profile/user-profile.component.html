@@ -1,16 +1,19 @@
 <div class="container">
     <div class="card inner-main">
       <div class="card-header">
-        User Profile
+        Mano paskyra
       </div>
       <div class="card-body" style="padding-left: 10%; padding-right: 10%;">
         <img src= 'http://127.0.0.1:8000/{{UserProfile?.avatar_url}}' width="500" height="333">
-        <p class="card-text">Slapyvardis: <strong>{{UserProfile?.username}}</strong></p>
-        <p class="card-text">E-paštas: <strong>{{UserProfile?.email}}</strong></p>
-        <p class="card-text">Vardas: <strong>{{UserProfile?.first_name}}</strong></p>
-        <p class="card-text">Pavardė: <strong>{{UserProfile?.last_name}}</strong></p>
-        <p class="card-text">Amžius: <strong>{{UserProfile?.age}}</strong></p>
-        <p class="card-text">Šalis: <strong>{{UserProfile?.country}}</strong></p>
+        <div class="container card">
+          <p class="card-text">Slapyvardis: <strong>{{UserProfile?.username}}</strong></p>
+          <p class="card-text">E-paštas: <strong>{{UserProfile?.email}}</strong></p>
+          <p class="card-text">Vardas: <strong>{{UserProfile?.first_name}}</strong></p>
+          <p class="card-text">Pavardė: <strong>{{UserProfile?.last_name}}</strong></p>
+          <p class="card-text">Amžius: <strong>{{UserProfile?.age}}</strong></p>
+          <p class="card-text">Šalis: <strong>{{UserProfile?.country}}</strong></p>
+        </div>
+        
       </div>
       <p class="btn btn-dark btn-xs " type="button" [routerLink]="['/edit-profile']">Redaguoti profilį</p>
       <button class="btn btn-primary btn-xs " type="button" [routerLink]="['/video/createVideo']">Kurti naują vaizdo įrašą</button>

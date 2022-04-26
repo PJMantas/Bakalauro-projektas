@@ -15,6 +15,9 @@ import { UserVideosComponent } from './components/video/user-videos/user-videos.
 import { EditProfileComponent } from './components/users/edit-profile/edit-profile.component';
 import { ViewReportComponent } from './components/admin/view-report/view-report.component';
 import { ViewUserReportComponent } from './components/users/view-user-report/view-user-report.component';
+import { ViewPermissionsComponent } from './components/admin/permissions/view-permissions/view-permissions.component';
+import { AddPermissionComponent } from './components/admin/permissions/add-permission/add-permission.component';
+import { EditPermissionComponent } from './components/admin/permissions/edit-permission/edit-permission.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -35,7 +38,10 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent },
   { path: 'admin/add-user', component: AddUserComponent },
   { path: 'admin/edit-user/:id', component: EditUserComponent },
-  { path: 'admin/view_report', component: ViewReportComponent },
+  { path: 'admin/view-report', component: ViewReportComponent },
+  { path: 'admin/view-permissions', component: ViewPermissionsComponent },
+  { path: 'admin/add-permission', component: AddPermissionComponent },
+  { path: 'admin/edit-permission/:id', component: EditPermissionComponent },
 
 ];
 @NgModule({

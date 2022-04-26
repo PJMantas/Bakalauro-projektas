@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\PermissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,12 @@ Route::group([
     Route::post('/add-user', [AdminController::class, 'addUser']);
     Route::post('/delete-user', [AdminController::class, 'deleteUser']);
     Route::post('/admin-update-user', [AdminController::class, 'adminUpdateUser']);
+
+    Route::get('/permissions-list', [PermissionController::class, 'getPermissionsList']);
+    Route::post('/add-permission', [PermissionController::class, 'addPermission']);
+    Route::post('/delete-permission', [PermissionController::class, 'deletePermission']);
+    Route::post('/update-permission', [PermissionController::class, 'updatePermission']);
+    Route::get('/get-permission', [PermissionController::class, 'getPermission']);
 });
 
 Route::group([
@@ -50,6 +57,7 @@ Route::group([
 ], function ($router) {
     Route::get('/get-user', [UserController::class, 'getUserById']); 
     Route::post('/update-profile', [UserController::class, 'updateProfile']);
+    Route::get('/get-user-permissions', [PermissionController::class, 'getAuthUserPermissions']);
     
 });
 
@@ -66,6 +74,7 @@ Route::group([
     Route::post('/add-video-view', [VideoController::class, 'addVideoView']); 
     Route::post('/like-video', [VideoController::class, 'likeVideo']); 
     Route::post('/dislike-video', [VideoController::class, 'dislikeVideo']); 
+    Route::get('search-video', [VideoController::class, 'searchVideos']);
     
 });
 

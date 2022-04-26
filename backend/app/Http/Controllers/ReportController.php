@@ -96,13 +96,13 @@ class ReportController extends Controller
 
         $mostLikedVideos = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where creator_id = ? order by likes desc limit 3', [$userid]);
 
-        $mostLikedVideosByDate = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where creator_id = ? order by created_at desc', [$userid]);
+        $mostLikedVideosByDate = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where creator_id = ? order by created_at', [$userid]);
 
         $mostViewedVideos = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where creator_id = ? order by clicks desc limit 3', [$userid]);
         
         $mostDislikedVideos = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where creator_id = ? order by dislikes desc limit 3', [$userid]);
 
-        $mostDislikedVideosByDate = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where creator_id = ? order by created_at desc', [$userid]);
+        $mostDislikedVideosByDate = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where creator_id = ? order by created_at', [$userid]);
         
         $userVideoCommentCount = DB::select('select count(comments.id) as commentCount from videos
                                             inner join comments on videos.id = comments.video_id 

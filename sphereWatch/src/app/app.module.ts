@@ -27,6 +27,9 @@ import { CommentsComponent } from './shared/comments/comments.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { ViewReportComponent } from './components/admin/view-report/view-report.component';
 import { ViewUserReportComponent } from './components/users/view-user-report/view-user-report.component';
+import { ViewPermissionsComponent } from './components/admin/permissions/view-permissions/view-permissions.component';
+import { AddPermissionComponent } from './components/admin/permissions/add-permission/add-permission.component';
+import { EditPermissionComponent } from './components/admin/permissions/edit-permission/edit-permission.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +51,10 @@ import { ViewUserReportComponent } from './components/users/view-user-report/vie
     CommentsComponent,
     FooterComponent,
     ViewReportComponent,
+    ViewUserReportComponent,
+    ViewPermissionsComponent,
+    AddPermissionComponent,
+    EditPermissionComponent
   ],
   imports: [
     BrowserModule,

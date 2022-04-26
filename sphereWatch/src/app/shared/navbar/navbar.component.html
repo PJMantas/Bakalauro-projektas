@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white  sticky-top">
     <div class="container py-3">
         <a class="navbar-brand" href="/home">
-            <img src="https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTE4MDAzNDEwNzg5ODI4MTEw/barack-obama-12782369-1-402.jpg" width="30" height="30" class="d-inline-block align-top"/>
+            <img src="https://image.shutterstock.com/image-vector/s-w-sw-initial-logo-600w-1707762913.jpg" width="30" height="40" class="d-inline-block align-top"/>
             <span class="ml-3">SphereWatch</span>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -13,28 +13,28 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item" >
-                    <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active">Home</a>
+                    <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active">Pagrindinis</a>
                 </li>
                 <li class="nav-item" *ngIf="!isSignedIn">
-                    <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active">Login</a>
+                    <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active">Prisijungti</a>
                 </li>
                 <li class="nav-item" *ngIf="!isSignedIn">
-                    <a class="nav-link" [routerLink]="['/register']" routerLinkActive="active">Register</a>
+                    <a class="nav-link" [routerLink]="['/register']" routerLinkActive="active">Registruotis</a>
                 </li>
                 <li class="nav-item" *ngIf="isSignedIn">
-                    <a class="nav-link" [routerLink]="['/profile']" routerLinkActive="active">Profile</a>
+                    <a class="nav-link" [routerLink]="['/profile']" routerLinkActive="active">Mano profilis</a>
                 </li>
                 <li class="nav-item" *ngIf="isSignedIn">
-                    <a class="nav-link" [routerLink]="['/videoHome']" routerLinkActive="active">Videos</a>
+                    <a class="nav-link" [routerLink]="['/videoHome']" routerLinkActive="active">Vaizdo įrašai</a>
                 </li>
                 <div>
                     
                 </div>
                 <li class="nav-item" *ngIf="isSignedIn">
-                    <button class="btn btn-outline-primary" (click)="signOut()" >Log out</button>
+                    <button class="btn btn-outline-primary" (click)="signOut()" >Atsijungti</button>
                 </li>
                 <li class="nav-item" *ngIf="isSignedIn">
-                    <a class="nav-link" [routerLink]="['/admin']" routerLinkActive="active">Admin</a>
+                    <a class="nav-link" [routerLink]="['/admin']" routerLinkActive="active">Administratorius</a>
                 </li>
                 <li  class="nav-item" *ngIf="isSignedIn" >
                     <a class="navbar-brand" [routerLink]="['/profile']" routerLinkActive="active" class="nav-link" >

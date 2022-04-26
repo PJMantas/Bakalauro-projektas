@@ -1,0 +1,101 @@
+<div class="container card">
+    <h3 class="card-header">Sukurkite naują teisių grupę</h3>
+    <form class="card-body" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+        
+        <div class="form-group">
+            <label for="group_name">Pavadinimas</label>
+            <input type="text" formControlName="group_name" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f['group_name'].errors }" />
+            <div *ngIf="submitted && f['group_name'].errors" class="invalid-feedback">
+                <div *ngIf="f['group_name'].errors['required']">Pavadinimas yra privalomas</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <label for="video_create">Kurti vaizdo įrašus</label>
+            <input class="form-check-input" type="checkbox" formControlName="video_create" [ngClass]="{ 'is-invalid': submitted && f['video_create'].errors }" />
+            <div *ngIf="submitted && f['video_create'].errors" class="invalid-feedback">
+                <div *ngIf="f['video_create'].errors['required']">Kurti vaizdo įrašus teisė yra privaloma</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="video_edit">Redaguoti vaizdo įrašus</label>
+            <input class="form-check-input" type="checkbox" formControlName="video_edit" [ngClass]="{ 'is-invalid': submitted && f['video_edit'].errors }" />
+            <div *ngIf="submitted && f['video_edit'].errors" class="invalid-feedback">
+                <div *ngIf="f['video_edit'].errors['required']">Redaguoti vaizdo įrašus teisė yra privaloma</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="video_delete">Trinti vaizdo įrašus</label>
+            <input class="form-check-input" type="checkbox" formControlName="video_delete"  [ngClass]="{ 'is-invalid': submitted && f['video_delete'].errors }" />
+            <div *ngIf="submitted && f['video_delete'].errors" class="invalid-feedback">
+                <div *ngIf="f['video_delete'].errors['required']">Trinti vaizdo įrašus teisė yra privaloma</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="reaction_create">Reaguoti</label>
+            <input class="form-check-input" type="checkbox" formControlName="reaction_create" [ngClass]="{ 'is-invalid': submitted && f['reaction_create'].errors }" />
+            <div *ngIf="submitted && f['reaction_create'].errors" class="invalid-feedback">
+                <div *ngIf="f['reaction_create'].errors['required']">Reaguoti į vaizdo įrašus teisė yra privaloma</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="comment_create">Kurti komentarus</label>
+            <input class="form-check-input" type="checkbox" formControlName="comment_create" [ngClass]="{ 'is-invalid': submitted && f['comment_create'].errors }" />
+            <div *ngIf="submitted && f['comment_create'].errors" class="invalid-feedback">
+                <div *ngIf="f['comment_create'].errors['required']">Kurti komentarus teisė yra privaloma</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="comment_edit">Redaguoti komentarus</label>
+            <input class="form-check-input" formControlName="comment_edit" [ngClass]="{ 'is-invalid': submitted && f['comment_edit'].errors }" />
+            <div *ngIf="submitted && f['comment_edit'].errors" class="invalid-feedback">
+                <div *ngIf="f['comment_edit'].errors['required']">Redaguoti komentarus teisė yra privaloma</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="comment_delete">Trinti komentarus</label>
+            <input class="form-check-input" formControlName="comment_delete" [ngClass]="{ 'is-invalid': submitted && f['comment_delete'].errors }" />
+            <div *ngIf="submitted && f['comment_delete'].errors" class="invalid-feedback">
+                <div *ngIf="f['comment_delete'].errors['required']">Trinti komentarus teisė yra privaloma</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="is_admin">Sistemos administratorius</label>
+            <input class="form-check-input" formControlName="is_admin" [ngClass]="{ 'is-invalid': submitted && f['is_admin'].errors }" />
+            <div *ngIf="submitted && f['is_admin'].errors" class="invalid-feedback">
+                <div *ngIf="f['is_admin'].errors['required']">Ar administratorius teisė yra privaloma</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="user_create">Kurti naudotoją</label>
+            <input class="form-check-input" formControlName="user_create" [ngClass]="{ 'is-invalid': submitted && f['user_create'].errors }" />
+            <div *ngIf="submitted && f['user_create'].errors" class="invalid-feedback">
+                <div *ngIf="f['user_create'].errors['required']">Kurti naują naudotoją teisė yra privaloma</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="user_edit">Redaguoti naudotoją</label>
+            <input class="form-check-input" formControlName="user_edit" [ngClass]="{ 'is-invalid': submitted && f['user_edit'].errors }" />
+            <div *ngIf="submitted && f['user_edit'].errors" class="invalid-feedback">
+                <div *ngIf="f['user_edit'].errors['required']">Redaguoti naudotoją teisė yra privaloma</div>
+            </div>
+        </div>
+
+        
+        <br>
+        <button class="btn btn-dark btn-xs " type="submit">Sukurti</button>
+        <button class="btn btn-dark btn-xs " type="button" [routerLink]="['/admin/view-permissions']">Grįžti</button>
+        
+        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+    </form>
+</div>

@@ -1,0 +1,12 @@
+.search-box {
+  position: relative;
+  display: block;
+  margin: auto;
+  font-family: 'Popins', sans-serif;
+  font-size: 20px;
+
+  max-width: 600px;
+  text-align: center;
+  
+  width: 50%;
+}

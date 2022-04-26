@@ -1,3 +1,10 @@
+.navbar {
+  overflow: hidden;
+  background-color: darkblue;
+  font-family: Arial, Helvetica, sans-serif;
+  border-bottom: 1px solid #bbb;
+  border-color: black;
+}
 .navbar a {
     color: black;
     text-align: center;

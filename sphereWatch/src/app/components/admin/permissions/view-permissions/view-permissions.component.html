@@ -1,0 +1,53 @@
+<div class="container">
+    <h3>Naudotojų grupių sąrašas</h3>
+    
+    <button class="btn btn-dark btn-xs" [routerLink] = "'/admin/add-permission'">Pridėti naują grupę</button>
+        
+    <div class="card">
+      <table class="table table-striped mb-0">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Pavadinimas</th>
+            <th scope="col">Vaizdo įrašus kurti</th>
+            <th scope="col">Redaguoti</th>
+            <th scope="col">Trinti</th>
+            <th scope="col">Reaguoti</th>
+            <th scope="col">Komentarus kurti</th>
+            <th scope="col">Redaguoti</th>
+            <th scope="col">Trinti</th>
+            <th scope="col">Administratorius</th>
+            <th scope="col">Kurti naudtotoją</th>
+            <th scope="col">Redaguoti</th>
+            <th scope="col" style="width: 1%; white-space: nowrap;"></th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr *ngFor="let permission of permissionsList">
+            <th scope="row">{{permission.id}}</th>
+            <td>{{permission.group_name}}</td>
+            <td>{{permission.video_create}}</td>
+            <td>{{permission.video_edit}}</td>
+            <td>{{permission.video_delete}}</td>
+            <td>{{permission.reaction_create}}</td>
+            <td>{{permission.comment_create}}</td>
+            <td>{{permission.comment_edit}}</td>
+            <td>{{permission.comment_delete}}</td>
+            <td>{{permission.is_admin}}</td>
+            <td>{{permission.user_create}}</td>
+            <td>{{permission.user_edit}}</td>
+            <td class="btn-group" style="width: 1%; white-space: nowrap;">
+                
+              <button type="button" class="btn btn-primary btn-xs" [routerLink] = "'/admin/edit-permission/' + permission.id">Redaguoti</button>
+              <button type="button" class="btn btn-danger btn-xs" (click)="onDelete(permission.id)">Trinti</button>
+              
+            </td>
+            <!-- <td><button class="btn btn-danger btn-xs" [routerLink] = "'/admin/ ">Delete</button></td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+  </div>
+ 
