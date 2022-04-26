@@ -198,13 +198,30 @@ class VideoController extends Controller
         return response()->json([
             'message' => 'Retrieved Video List',
             'videos' => $videos
-        ], 201);
+        ], 200);
     }
 
     public function getUserVideosList(){
         $videos = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where creator_id=' . auth()->user()->id);
         //$videos = DB::select('select id, title, video_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where creator_id= 1');
         
+        return response()->json([
+            'message' => 'Retrieved Video List',
+            'videos' => $videos
+        ], 200);
+    }
+
+    public function searchVideos(Request $request){
+        $validator = Validator::make($request->all(), [
+            'search' => 'between:0,100'
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors(), 400);
+        }
+
+        $videos = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where title like "%' . $request['search'] . '%"');
+
         return response()->json([
             'message' => 'Retrieved Video List',
             'videos' => $videos
