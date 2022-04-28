@@ -18,6 +18,10 @@ import { ViewUserReportComponent } from './components/users/view-user-report/vie
 import { ViewPermissionsComponent } from './components/admin/permissions/view-permissions/view-permissions.component';
 import { AddPermissionComponent } from './components/admin/permissions/add-permission/add-permission.component';
 import { EditPermissionComponent } from './components/admin/permissions/edit-permission/edit-permission.component';
+import { GenreComponent } from './components/admin/genre/genre.component';
+import { GenreRequestComponent } from './components/admin/genre-request/genre-request.component';
+import { RequestGenreComponent } from './components/users/request-genre/request-genre.component';
+import { UserGenreRequestsComponent } from './components/users/user-genre-requests/user-genre-requests.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -26,6 +30,8 @@ const routes: Routes = [
   { path: 'profile', component: UserProfileComponent },
   { path: 'edit-profile', component: EditProfileComponent },
   { path: 'viewUserReport', component: ViewUserReportComponent },
+  { path: 'request-genre', component: RequestGenreComponent },
+  { path: 'user-genre-requests', component: UserGenreRequestsComponent },
 
   { path: 'viewVideo/:id', component: VideoViewComponent },
   { path: 'videoHome', component: VideoHomeComponent },
@@ -42,6 +48,8 @@ const routes: Routes = [
   { path: 'admin/view-permissions', component: ViewPermissionsComponent },
   { path: 'admin/add-permission', component: AddPermissionComponent },
   { path: 'admin/edit-permission/:id', component: EditPermissionComponent },
+  { path: 'admin/genre', component: GenreComponent },
+  { path: 'admin/genre-requests', component: GenreRequestComponent },
 
 ];
 @NgModule({

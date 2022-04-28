@@ -1,15 +1,18 @@
 <div class="container">
     
-    <div class="card col-sm" style="width: 30rem;" *ngFor="let video of userVideos">
-        <img class="card-img-top" src="http://127.0.0.1:8000/{{video.thumbnail_url}}" alt="Card image cap">
-        <div class="card-body">
-        <h5 class="card-title">{{video.title}}</h5>
-        <p class="card-text">{{video.description}}</p>
-        <button class="btn btn-primary btn-xs" [routerLink] = "'/viewVideo/' + video.id">Žiūrėti</button>
-        <button class="btn btn-primary btn-xs" [routerLink] = "'/video/editVideo/' + video.id">Redaguoti vaizdo įrašą</button>
-        <button type="button" class="btn btn-danger btn-xs" (click)="onDelete(video.id)">Trinti</button>
+    <div class="row">
+        <div class="card col-md-1 my-6" style="width: 40rem; padding-top: 10px; margin-left: 5px; margin-bottom: 5px;" *ngFor="let video of userVideos">
+        
+            <img class="card-img-top" src="http://127.0.0.1:8000/{{video.thumbnail_url}}" alt="Card image cap">
+            <div class="card-body">
+            <h5 class="card-title">{{video.title}}</h5>
+            <p class="card-text">{{video.description}}</p>
+
+            <button class="btn btn-primary btn-xs" [routerLink] = "'/viewVideo/' + video.id">Žiūrėti</button>
+            <button class="btn btn-primary btn-xs" [routerLink] = "'/video/editVideo/' + video.id">Redaguoti vaizdo įrašą</button>
+            <button type="button" class="btn btn-danger btn-xs" (click)="onDelete(video.id)">Trinti</button>
+            </div>
         </div>
     </div>
-
-    
+  
 </div>

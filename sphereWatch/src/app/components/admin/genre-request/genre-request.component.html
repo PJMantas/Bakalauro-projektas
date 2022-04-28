@@ -1,0 +1,40 @@
+<div class="container">
+    <h3>Naujų video žanrų prašymai</h3>
+        
+    <div class="card">
+      <table class="table table-striped mb-0">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Pavadinimas</th>
+            <th scope="col">Priežastis</th>
+            <th scope="col">Naudotojas</th>
+            <th scope="col">Statusas</th>
+            <th scope="col">Pateikimo data</th>
+            <th scope="col" style="width: 1%; white-space: nowrap;"></th>
+          </tr>
+        </thead>
+        <tbody>
+            
+          <tr *ngFor="let request of GenreRequests">
+            <th scope="row">{{request.id}}</th>
+            <td>{{request.title}}</td>
+            <td>{{request.description}}</td>
+            <td>{{request.username}}</td>
+            <td>{{request.status}}</td>
+            <td>{{request.created_at}}</td>
+            <td class="btn-group" style="width: 1%; white-space: nowrap;">
+              
+            <button type="button" class="btn btn-success btn-xs" (click)="onAccept(request.id, request.title)">Priimti</button>
+            <button type="button" class="btn btn-secondary btn-xs" (click)="onReject(request.id)">Atmesti</button>
+            <button type="button" class="btn btn-danger btn-xs" (click)="onDelete(request.id)">Trinti</button>
+              
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+  </div>
+ 

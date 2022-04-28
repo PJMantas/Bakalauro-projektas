@@ -1,0 +1,47 @@
+<div class="container">
+    <h3>Naujų video žanrų prašymai</h3>
+    <button type="button" class="btn btn-success btn-xs" (click)="onCreate()">Sukurti naują</button>
+    <div *ngIf="showCreate">
+        <input type="text" #genreName name="genreName" value="" class="search-box">
+        <button type="button" class="btn btn-success btn-xs" (click)="createGenre(genreName.value)">Sukurti</button>
+        <button type="button" class="btn btn-danger btn-xs" (click)="cancelCreate()">Atšaukti</button>
+    </div>
+    
+    
+    <div class="card">
+      <table class="table table-striped mb-0">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Pavadinimas</th>
+            <th scope="col">Sukūrimo data</th>
+            <th scope="col">Modifikavimo data</th>
+            <th scope="col" style="width: 1%; white-space: nowrap;"></th>
+          </tr>
+        </thead>
+        <tbody>
+            
+          <tr *ngFor="let genre of GenreList; let i = index">
+            <th scope="row">{{genre.id}}</th>
+            <td>{{genre.name}}</td>
+            <td>{{genre.created_at}}</td>
+            <td>{{genre.updated_at}}</td>
+            <td class="btn-group" style="width: 1%; white-space: nowrap;">
+            <div *ngIf="showEdit && clickedIndex === i">
+                <input type="text" #genreName name="genreName" value="{{genre.name}}" class="search-box">
+                <button  type="button" class="btn btn-success btn-xs" (click)="updateGenre(genre.id, genreName.value)">Atnaujinti</button>
+                <button  type="button" class="btn btn-danger btn-xs" (click)="cancelEdit()">Atšaukti</button>
+            </div>
+              
+            <button *ngIf="showEdit === false" type="button" class="btn btn-secondary btn-xs" (click)="onEdit(); clickedIndex = i">Redaguoti</button>
+            <button *ngIf="showEdit === false" type="button" class="btn btn-danger btn-xs" (click)="onDelete(genre.id)">Trinti</button>
+              
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+  </div>
+ 

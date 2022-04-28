@@ -7,6 +7,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\GenreController;
+use App\Http\Controllers\GenreRequestController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\PermissionController;
 
@@ -31,8 +33,6 @@ Route::group([
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']); 
     
-
-    
 });
 
 Route::group([
@@ -49,6 +49,11 @@ Route::group([
     Route::post('/delete-permission', [PermissionController::class, 'deletePermission']);
     Route::post('/update-permission', [PermissionController::class, 'updatePermission']);
     Route::get('/get-permission', [PermissionController::class, 'getPermission']);
+
+    Route::get('/genre-requests-list', [GenreRequestController::class, 'getGenreRequestsList']);
+    Route::post('/approve-genre-request', [GenreRequestController::class, 'approveGenreRequest']);
+    Route::post('/delete-genre-request', [GenreRequestController::class, 'deleteGenreRequest']);
+    Route::post('/reject-genre-request', [GenreRequestController::class, 'rejectGenreRequest']);
 });
 
 Route::group([
@@ -58,6 +63,8 @@ Route::group([
     Route::get('/get-user', [UserController::class, 'getUserById']); 
     Route::post('/update-profile', [UserController::class, 'updateProfile']);
     Route::get('/get-user-permissions', [PermissionController::class, 'getAuthUserPermissions']);
+    Route::post('/add-genre-request', [GenreRequestController::class, 'addGenreRequest']);
+    Route::get('/get-user-genre-requests-list', [GenreRequestController::class, 'getUserGenreRequestsList']);
     
 });
 
@@ -75,6 +82,8 @@ Route::group([
     Route::post('/like-video', [VideoController::class, 'likeVideo']); 
     Route::post('/dislike-video', [VideoController::class, 'dislikeVideo']); 
     Route::get('search-video', [VideoController::class, 'searchVideos']);
+    Route::get('get-videos-by-genre', [VideoController::class, 'getVideosByGenre']);
+    Route::get('get-ordered-videos-by-genre', [VideoController::class, 'getOrderedVideosByGenre']);
     
 });
 
@@ -96,4 +105,15 @@ Route::group([
 ], function($router) {
     Route::get('/get-system-report', [ReportController::class, 'getSystemReport']);
     Route::get('/get-user-report', [ReportController::class, 'getUserReport']);
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'genre'
+], function($router) {
+    Route::get('/get-genres-list', [GenreController::class, 'getGenresList']);
+    Route::get('/get-genre', [GenreController::class, 'getGenre']);
+    Route::post('/create-genre', [GenreController::class, 'createGenre']);
+    Route::post('/delete-genre', [GenreController::class, 'deleteGenre']);
+    Route::post('/update-genre', [GenreController::class, 'updateGenre']);
 });

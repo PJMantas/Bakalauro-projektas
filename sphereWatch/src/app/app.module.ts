@@ -30,6 +30,10 @@ import { ViewUserReportComponent } from './components/users/view-user-report/vie
 import { ViewPermissionsComponent } from './components/admin/permissions/view-permissions/view-permissions.component';
 import { AddPermissionComponent } from './components/admin/permissions/add-permission/add-permission.component';
 import { EditPermissionComponent } from './components/admin/permissions/edit-permission/edit-permission.component';
+import { RequestGenreComponent } from './components/users/request-genre/request-genre.component';
+import { UserGenreRequestsComponent } from './components/users/user-genre-requests/user-genre-requests.component';
+import { GenreComponent } from './components/admin/genre/genre.component';
+import { GenreRequestComponent } from './components/admin/genre-request/genre-request.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +58,11 @@ import { EditPermissionComponent } from './components/admin/permissions/edit-per
     ViewUserReportComponent,
     ViewPermissionsComponent,
     AddPermissionComponent,
-    EditPermissionComponent
+    EditPermissionComponent,
+    RequestGenreComponent,
+    UserGenreRequestsComponent,
+    GenreComponent,
+    GenreRequestComponent
   ],
   imports: [
     BrowserModule,

@@ -227,5 +227,41 @@ class VideoController extends Controller
             'videos' => $videos
         ], 201);
     }
+
+    public function getOrderedVideosByGenre(Request $request){
+        $validator = Validator::make($request->all(), [
+            'genre' => 'required|string|between:2,100',
+            'order' => 'required|string|between:2,100'
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors(), 400);
+        }
+
+        $videos = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where genre="' . $request['genre'] . '" order by ' . $request['order'] . ' desc');
+
+        return response()->json([
+            'message' => 'Retrieved Video List',
+            'videos' => $videos
+        ], 201);
+    }
+
+    public function getVideosByGenre(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'genre' => 'required|string|between:2,100'
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors(), 400);
+        }
+
+        $videos = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where genre="' . $request['genre'] . '"');
+
+        return response()->json([
+            'message' => 'Retrieved Video List',
+            'videos' => $videos
+        ], 201);
+    }
     
 }
