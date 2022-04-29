@@ -7,7 +7,7 @@ export class Video {
     clicks!: string;
     likes!: string;
     dislikes!: number;
-    genre!: string;
+    genre!: number;
     creator_id!: number;
     
 }

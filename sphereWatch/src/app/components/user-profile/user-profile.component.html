@@ -14,15 +14,24 @@
           <p class="card-text">Šalis: <strong>{{UserProfile?.country}}</strong></p>
         </div>
         
-      </div>
       <p class="btn btn-dark btn-xs " type="button" [routerLink]="['/edit-profile']">Redaguoti profilį</p>
-      <button class="btn btn-primary btn-xs " type="button" [routerLink]="['/video/createVideo']">Kurti naują vaizdo įrašą</button>
-      <button class="btn btn-primary btn-xs " type="button" [routerLink]="['/video/userVideos']">Mano vaizdo įrašai</button>
-      <br>
-      <button class="btn btn-primary btn-xs " type="button" [routerLink]="['/viewUserReport']">Mano statistika</button>
-      <br>
+
+      </div>
+    
+        <button class="btn btn-primary btn-xs " type="button" [routerLink]="['/video/createVideo']">Kurti naują vaizdo įrašą</button>
+        <br>
+        <button class="btn btn-primary btn-xs " type="button" [routerLink]="['/video/userVideos']">Mano vaizdo įrašai</button>
+        <br>
+  
+        <button class="btn btn-primary btn-xs " type="button" [routerLink]="['/viewUserReport']">Mano statistika</button>
+        <br>
+        <button class="btn btn-primary btn-xs " type="button" [routerLink]="['/user-genre-requests']">Mano prašymai</button>
+    
+        
       
-      <button class="btn btn-primary btn-xs " type="button" [routerLink]="['/user-genre-requests']">Mano prašymai</button>
+      
+      
+      
     </div>
     
   </div>

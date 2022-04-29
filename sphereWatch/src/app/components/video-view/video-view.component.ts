@@ -13,6 +13,7 @@ export class VideoViewComponent implements OnInit {
 
   Video:Video = new Video();
   videoId!: number;
+  genreId!: number;
   filtersLoaded!: Promise<boolean>;
 
   constructor(
@@ -28,12 +29,13 @@ export class VideoViewComponent implements OnInit {
     this.VideoService.getVideoById(this.videoId).subscribe(response => {
       console.log(response);
       this.Video = response['video'];
+      this.genreId = this.Video.genre;
       this.filtersLoaded = Promise.resolve(true);
     });
 
     const formData = new FormData();
     formData.append('video_id', this.videoId.toString());
-    formData.append('genre', this.Video.genre);
+    //formData.append('genre', this.genreId.toString());
     this.VideoService.addVideoView(formData).subscribe(response => {
       console.log(response);
     });
@@ -42,7 +44,7 @@ export class VideoViewComponent implements OnInit {
   onLike() {
     const formData = new FormData();
     formData.append('video_id', this.videoId.toString());
-    formData.append('genre', this.Video.genre);
+    //formData.append('genre', this.genreId.toString());
 
     this.VideoService.likeVideo(formData).subscribe(response => {
       console.log(response);
@@ -53,7 +55,7 @@ export class VideoViewComponent implements OnInit {
   onDislike() {
     const formData = new FormData();
     formData.append('video_id', this.videoId.toString());
-    formData.append('genre', this.Video.genre);
+    //formData.append('genre', this.genreId.toString());
     
     this.VideoService.dislikeVideo(formData).subscribe(response => {
       console.log(response);

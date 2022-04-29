@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { VgCoreModule } from '@videogular/ngx-videogular/core';
@@ -74,6 +75,7 @@ import { GenreRequestComponent } from './components/admin/genre-request/genre-re
     VgControlsModule,
     VgOverlayPlayModule,
     VgBufferingModule,
+    MatButtonToggleModule,
   ],
   providers: [
     {

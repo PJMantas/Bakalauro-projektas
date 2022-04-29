@@ -22,7 +22,7 @@ class CreateVideosTable extends Migration
             $table->integer('clicks');
             $table->integer('likes');
             $table->bigInteger('dislikes');
-            $table->string('genre');
+            $table->integer('genre')->constrained('genres');
             $table->integer('creator_id')->constrained('users');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();

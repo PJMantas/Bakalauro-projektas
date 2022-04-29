@@ -16,7 +16,7 @@ class VideoController extends Controller
             'title' => 'required|string|between:2,100',
             'video_url' => 'required|file|mimetypes:video/mp4',
             'description' => 'required',
-            'genre' => 'required|string|between:2,100',
+            'genre' => 'required|numeric',
             'thumbnail_url' => 'file|mimes:jpg,png,jpeg,gif,svg|max:5120',
             
         ]);
@@ -64,7 +64,7 @@ class VideoController extends Controller
             'video_id' => 'required|numeric', 
             'title' => 'required|string|between:2,100',
             'description' => 'required',
-            'genre' => 'required|string|between:2,100',
+            'genre' => 'required|numeric',
             'thumbnail_url' => 'file|mimes:jpg,png,jpeg,gif,svg|max:5120',
         ]);
 
@@ -95,7 +95,7 @@ class VideoController extends Controller
     public function addVideoView(Request $request){
         $validator = Validator::make($request->all(), [
             'video_id' => 'required|numeric', 
-            'genre' => 'required|string|between:2,100',
+            'genre' => 'numeric',
         ]);
 
         if($validator->fails()){
@@ -117,7 +117,7 @@ class VideoController extends Controller
     public function likeVideo(Request $request){
         $validator = Validator::make($request->all(), [
             'video_id' => 'required|numeric', 
-            'genre' => 'required|string|between:2,100',
+            'genre' => 'numeric',
         ]);
 
         if($validator->fails()){
@@ -139,7 +139,7 @@ class VideoController extends Controller
     public function dislikeVideo(Request $request){
         $validator = Validator::make($request->all(), [
             'video_id' => 'required|numeric', 
-            'genre' => 'required|string|between:2,100',
+            'genre' => 'numeric',
         ]);
 
         if($validator->fails()){
@@ -230,7 +230,7 @@ class VideoController extends Controller
 
     public function getOrderedVideosByGenre(Request $request){
         $validator = Validator::make($request->all(), [
-            'genre' => 'required|string|between:2,100',
+            'genre' => 'required|numeric',
             'order' => 'required|string|between:2,100'
         ]);
 
@@ -249,7 +249,7 @@ class VideoController extends Controller
     public function getVideosByGenre(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'genre' => 'required|string|between:2,100'
+            'genre' => 'required|numeric'
         ]);
 
         if($validator->fails()){

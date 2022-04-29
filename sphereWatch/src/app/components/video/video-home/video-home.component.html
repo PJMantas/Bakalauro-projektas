@@ -1,6 +1,15 @@
 
 <div class="container">
     <br>
+    <div class="row">
+        <div class="col-sm" *ngFor="let genre of GenreList">
+            <button class="btn btn-primary btn-lg" style="border-radius: 50%; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"
+                (click)="selectUnselect(genre.id)" 
+                [ngClass]="{'grey' : toggle, 'red': !toggle}">
+                {{genre.name}}
+            </button>
+        </div>
+    </div>
     <div>
         <h3 style="text-align: center;">Ieškokite norimo vaizdo įrašo</h3>
         <input type="text" name="search-box" class="search-box" (keyup)="searchVideo($event)">

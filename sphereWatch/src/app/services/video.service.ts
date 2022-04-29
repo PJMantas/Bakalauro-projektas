@@ -41,5 +41,9 @@ export class VideoService {
     return this.http.get<Video>(`http://127.0.0.1:8000/api/video/search-video/`, {params: {search}})
   };
 
+  getVideoByGenre(genre: number) {
+    return this.http.get<Video>(`http://127.0.0.1:8000/api/video/get-videos-by-genre/`, {params: {genre}});
+  }
+
 }
 

@@ -34,8 +34,14 @@
 
         <div class="form-group">
             <label for="genre">Žanras</label>
-            <input type="text" formControlName="genre" class="form-control" />
+
+            <select formControlName="genre" class="form-control" (change)="onGenreChange($event)">  
+                <option disabled>Pasirinkti žanrą</option>  
+                <option *ngFor="let genre of GenreList" [value]="genre.id">{{genre.name}}</option>  
+            </select>  
         </div>
+
+        
 
         <br>
         <button class="btn btn-dark btn-xs " type="submit">Sukurti</button>

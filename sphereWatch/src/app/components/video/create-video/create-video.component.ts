@@ -5,6 +5,8 @@ import { User } from '../../../models/user';
 import { VideoService } from '../../../services/video.service';
 import { AuthService } from '../../../shared/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Genre } from '../../../models/genre';
+import { GenreService } from 'src/app/services/genre.service';
 import { first } from 'rxjs/operators';
 
 @Component({
@@ -18,6 +20,7 @@ export class CreateVideoComponent implements OnInit {
   userId!: number;
   video: Video = new Video();
   currentUser: User = new User();
+  GenreList: Genre[] = [];
   loading = false;
   submitted = false;
   error: any;
@@ -27,6 +30,7 @@ export class CreateVideoComponent implements OnInit {
 
   constructor(
     private VideoService: VideoService,
+    private GenreService: GenreService,
     private route: ActivatedRoute,
     public authService: AuthService,
     private formBuilder: FormBuilder,
@@ -54,7 +58,10 @@ export class CreateVideoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.GenreService.getGenresList().subscribe(result => {
+      console.log(result);
+      this.GenreList = result['genres'];
+    });
   }
   
   onFileChange(event) {
@@ -72,6 +79,14 @@ export class CreateVideoComponent implements OnInit {
       
     }
   }
+
+  onGenreChange(event) {
+    this.addVideoForm.patchValue({
+      genre: event.target.value
+    });
+    
+  }
+
 
   onSubmit() {
     this.submitted = true;

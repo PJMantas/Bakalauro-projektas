@@ -27,16 +27,16 @@
           <tr *ngFor="let permission of permissionsList">
             <th scope="row">{{permission.id}}</th>
             <td>{{permission.group_name}}</td>
-            <td>{{permission.video_create}}</td>
-            <td>{{permission.video_edit}}</td>
-            <td>{{permission.video_delete}}</td>
-            <td>{{permission.reaction_create}}</td>
-            <td>{{permission.comment_create}}</td>
-            <td>{{permission.comment_edit}}</td>
-            <td>{{permission.comment_delete}}</td>
-            <td>{{permission.is_admin}}</td>
-            <td>{{permission.user_create}}</td>
-            <td>{{permission.user_edit}}</td>
+            <td>{{permission.video_create == true ? 'Taip' : 'Ne'}}</td>
+            <td>{{permission.video_edit == true ? 'Taip' : 'Ne'}}</td>
+            <td>{{permission.video_delete == true ? 'Taip' : 'Ne'}}</td>
+            <td>{{permission.reaction_create == true ? 'Taip' : 'Ne'}}</td>
+            <td>{{permission.comment_create == true ? 'Taip' : 'Ne'}}</td>
+            <td>{{permission.comment_edit == true ? 'Taip' : 'Ne'}}</td>
+            <td>{{permission.comment_delete == true ? 'Taip' : 'Ne'}}</td>
+            <td>{{permission.is_admin == true ? 'Taip' : 'Ne'}}</td>
+            <td>{{permission.user_create == true ? 'Taip' : 'Ne'}}</td>
+            <td>{{permission.user_edit == true ? 'Taip' : 'Ne'}}</td>
             <td class="btn-group" style="width: 1%; white-space: nowrap;">
                 
               <button type="button" class="btn btn-primary btn-xs" [routerLink] = "'/admin/edit-permission/' + permission.id">Redaguoti</button>
