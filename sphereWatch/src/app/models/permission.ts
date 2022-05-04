@@ -11,6 +11,8 @@ export class Permission {
 
     // admin-only permissions
     is_admin!: boolean;
-    user_create!: boolean;
-    user_edit!: boolean;
+    manage_users!: boolean;
+    manage_permissions!: boolean;
+    manage_genres!: boolean;
+
 }

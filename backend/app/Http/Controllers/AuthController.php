@@ -29,7 +29,7 @@ class AuthController extends Controller
             return response()->json($validator->errors(), 422);
         }
         if (! $token = auth()->attempt($validator->validated())) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['error' => 'Tokio naudotojo nėra, blogas E-pašas arba slaptažodis'], 401);
         }
         return $this->createNewToken($token);
     }
@@ -68,7 +68,7 @@ class AuthController extends Controller
                     'avatar_url' => $path]
                 ));
         return response()->json([
-            'message' => 'User successfully registered',
+            'message' => 'Naudotojas sėkmingai užregistruotas',
             'user' => $user
         ], 201);
     }
@@ -80,7 +80,7 @@ class AuthController extends Controller
      */
     public function logout() {
         auth()->logout();
-        return response()->json(['message' => 'User successfully signed out']);
+        return response()->json(['message' => 'Naudotojas sėkmingai atsijungtas'], 200);
     }
     /**
      * Refresh a token.

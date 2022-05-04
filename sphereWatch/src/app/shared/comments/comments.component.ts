@@ -22,6 +22,7 @@ export class CommentsComponent implements OnInit {
   currentUser: User = new User();
   CommentsList:Comment[] = [];
   CommentsList2:Comment[] = [];
+  userList: User[] = [];
   angular: any;
   loading = false;
   submitted = false;
@@ -42,8 +43,6 @@ export class CommentsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log('COMMENT COMPONENT');
-    console.log(this.videoId);
     this.addCommentForm = this.formBuilder.group({
       comment_text: ['', Validators.required],
       video_id: this.videoId,
@@ -57,25 +56,22 @@ export class CommentsComponent implements OnInit {
 
     });
 
+
+    this.getAllComments(this.videoId);
+
     this.editCommentForm = this.formBuilder.group({
       id: [''],
       comment_text: ['', Validators.required],
     });
-
-    this.getAllComments(this.videoId);
-    
-
-
   }
 
   getAllComments(video_id: number) {
-    console.log('COMMENT sarašas');
-    console.log(video_id);
+
     this.CommentService.getCommentsList(video_id).subscribe(result => {
-      console.log('pries');
+      console.log(result);
       this.CommentsList = result['comments'];
-      //this.test();
     });
+   
   }
 
   onCreateComment() {
@@ -84,8 +80,10 @@ export class CommentsComponent implements OnInit {
     this.CommentService.createComment(this.addCommentForm.value).subscribe(
       data => {
         this.submitted = false;
-        window.location.reload();
-        //this.router.navigate(['/video/' + this.comment.video_id]);
+        this.CommentService.getCommentsList(this.videoId).subscribe(result => {
+          this.CommentsList = result['comments'];
+        });
+        this.addCommentForm.reset();
       },
       error => {
         this.error = error;
@@ -103,7 +101,11 @@ export class CommentsComponent implements OnInit {
     this.CommentService.editComment(this.editCommentForm.value).subscribe(
       data => {
         this.submitted = false;
-        window.location.reload();
+        this.CommentService.getCommentsList(this.videoId).subscribe(result => {
+          this.CommentsList = result['comments'];
+        });
+        this.showEditForm = false;
+        this.editCommentForm.reset();
         //this.router.navigate(['/video/' + this.comment.video_id]);
       },
       error => {
@@ -126,8 +128,9 @@ export class CommentsComponent implements OnInit {
       data => {
         this.submitted = false;
 
-        window.location.reload();
-        //this.router.navigate(['/video/' + this.comment.video_id]);
+        this.CommentService.getCommentsList(this.videoId).subscribe(result => {
+          this.CommentsList = result['comments'];
+        });
       },
       error => {
         this.error = error;
@@ -138,8 +141,9 @@ export class CommentsComponent implements OnInit {
 
   onDeleteComment(commentId: number) {
     this.CommentService.deleteComment(commentId).subscribe(result => {
-      console.log(result);
-      window.location.reload();
+      this.CommentService.getCommentsList(this.videoId).subscribe(result => {
+        this.CommentsList = result['comments'];
+      });
     })
   }
 

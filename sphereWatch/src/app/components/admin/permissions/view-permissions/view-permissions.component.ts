@@ -19,15 +19,15 @@ export class ViewPermissionsComponent implements OnInit {
 
   ngOnInit(): void {
       this.PermissionService.getPermissionList().subscribe(result => {
-        //console.log(JSON.stringify(result));
         this.permissionsList = result['permissions'];
       });
   }
 
   onDelete(id: number) {
     this.PermissionService.deletePermission(id).subscribe(result => {
-      //this.router.navigate(['/admin/view-permissions']);
-      window.location.reload();
+    });
+    this.PermissionService.getPermissionList().subscribe(result => {
+      this.permissionsList = result['permissions'];
     });
   }
 

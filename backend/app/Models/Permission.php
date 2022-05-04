@@ -22,8 +22,10 @@ class Permission extends Model
 
         // admin-only permissions
         'is_admin',
-        'user_create',
-        'user_edit',
+        'manage_users',
+        'manage_permissions',
+        'manage_genres',
+        
     ];
 
     protected $casts = [

@@ -18,19 +18,22 @@ class CreatePermissionsTable extends Migration
             $table->id();
             $table->string('group_name');
             
-            $table->boolean('video_create')->default('1');
-            $table->boolean('video_edit')->default('1');
-            $table->boolean('video_delete')->default('1');
+            $table->boolean('video_create')->default('0');
+            $table->boolean('video_edit')->default('0');
+            $table->boolean('video_delete')->default('0');
 
-            $table->boolean('reaction_create')->default('1');
-            $table->boolean('comment_create')->default('1');
-            $table->boolean('comment_edit')->default('1');
-            $table->boolean('comment_delete')->default('1');
+            $table->boolean('reaction_create')->default('0');
+            $table->boolean('comment_create')->default('0');
+            $table->boolean('comment_edit')->default('0');
+            $table->boolean('comment_delete')->default('0');
 
             //admin permisions
             $table->boolean('is_admin')->default('0');
-            $table->boolean('user_create')->default('0');
+            $table->boolean('manage_users')->default('0');
             $table->boolean('user_edit')->default('0');
+            $table->boolean('manage_permissions')->default('0');
+            $table->boolean('manage_genres')->default('0');
+
             $table->timestamps();
         });
 
@@ -49,8 +52,9 @@ class CreatePermissionsTable extends Migration
 
                 // admin-only permissions
                 'is_admin' => '0',
-                'user_create' => '0',
-                'user_edit' => '0'
+                'manage_users' => '0',
+                'manage_permissions' => '0',
+                'manage_genres' => '0',
             )
           
         );
@@ -70,8 +74,9 @@ class CreatePermissionsTable extends Migration
 
                 // admin-only permissions
                 'is_admin' => '1',
-                'user_create' => '1',
-                'user_edit' => '1'
+                'manage_users' => '1',
+                'manage_permissions' => '1',
+                'manage_genres' => '1',
             )
           
         );
@@ -91,8 +96,9 @@ class CreatePermissionsTable extends Migration
 
                 // admin-only permissions
                 'is_admin' => '0',
-                'user_create' => '0',
-                'user_edit' => '0'
+                'manage_users' => '0',
+                'manage_permissions' => '0',
+                'manage_genres' => '0',
             )
           
         );

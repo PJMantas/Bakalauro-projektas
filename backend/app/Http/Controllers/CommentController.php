@@ -97,7 +97,7 @@ class CommentController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        $comments = DB::select('select id, user_id, video_id, comment_parent_id, comment_text, created_at, updated_at from comments where video_id = ?', [$request['video_id']]);
+        $comments = DB::select('select * from comments where video_id = ? order by created_at desc', [$request['video_id']]);
 
 
         return response()->json([

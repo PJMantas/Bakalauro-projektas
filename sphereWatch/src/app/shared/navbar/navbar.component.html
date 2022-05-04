@@ -9,12 +9,13 @@
                                                                                                                                         class="d-inline-block align-top"/>
             <span class="ml-3">SphereWatch</span>
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler btn btn-outline-primary" type="button" data-toggle="collapse"
+         data-target="#navbarSupportedContent"  aria-expanded="false" aria-label="Toggle navigation" (click)="isCollapsed = !isCollapsed"
+          [attr.aria-expanded]="!isCollapsed" aria-controls="navbarSupportedContent">
             <span class="navbar-toggler-icon"></span>
-        </button>
+          </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse text-center" id="navbarSupportedContent" [ngbCollapse]="isCollapsed">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item" >
                     <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active">Pagrindinis</a>
@@ -31,11 +32,8 @@
                 <li class="nav-item" *ngIf="isSignedIn">
                     <a class="nav-link" [routerLink]="['/videoHome']" routerLinkActive="active">Vaizdo įrašai</a>
                 </li>
-                <div>
-                    
-                </div>
                 <li class="nav-item" *ngIf="isSignedIn">
-                    <button class="btn btn-outline-primary" (click)="signOut()" >Atsijungti</button>
+                    <button class="btn btn-outline-primary"  (click)="signOut()" >Atsijungti</button>
                 </li>
                 <li class="nav-item" *ngIf="isSignedIn">
                     <a class="nav-link" [routerLink]="['/admin']" routerLinkActive="active">Administratorius</a>

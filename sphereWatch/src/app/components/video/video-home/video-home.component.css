@@ -11,3 +11,13 @@
   width: 50%;
 }
 
+.arrow {
+  transition: all .1s ease-in-out;
+}
+
+.arrow.revered {
+  transform: rotate(180deg);
+}
+
+
+

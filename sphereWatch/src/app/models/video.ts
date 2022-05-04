@@ -9,5 +9,7 @@ export class Video {
     dislikes!: number;
     genre!: number;
     creator_id!: number;
+    created_at!: string;
+    updated_at!: string;
     
 }

@@ -83,7 +83,7 @@ Route::group([
     Route::post('/dislike-video', [VideoController::class, 'dislikeVideo']); 
     Route::get('search-video', [VideoController::class, 'searchVideos']);
     Route::get('get-videos-by-genre', [VideoController::class, 'getVideosByGenre']);
-    Route::get('get-ordered-videos-by-genre', [VideoController::class, 'getOrderedVideosByGenre']);
+    Route::post('get-ordered-videos-by-genre', [VideoController::class, 'getOrderedVideosByGenre']);
     
 });
 

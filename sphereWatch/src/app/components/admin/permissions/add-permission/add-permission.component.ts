@@ -24,16 +24,17 @@ export class AddPermissionComponent implements OnInit {
   ) { 
     this.addForm = this.formBuilder.group({
       group_name: ['', Validators.required],
-      video_create: [''],
-      video_edit: [''],
-      video_delete: [''],
-      reaction_create: [''],
-      comment_create: [''],
-      comment_edit: [''],
-      comment_delete: [''],
-      is_admin: [''],
-      user_create: [''],
-      user_edit: [''],
+      video_create: [false ],
+      video_edit: [false],
+      video_delete: [false],
+      reaction_create: [false],
+      comment_create: [false],
+      comment_edit: [false],
+      comment_delete: [false],
+      is_admin: [false],
+      manage_users: [false],
+      manage_permissions: [false],
+      manage_genres: [false],
 
     });
   }
@@ -50,10 +51,27 @@ export class AddPermissionComponent implements OnInit {
     if (this.addForm.invalid) {
       return;
     }
+    
 
+  this.PermissionService.addPermission(this.addForm.value).subscribe(
+    (result) => {
+      console.log(result);
+    },
+    (error) => {
+      this.error = error.error;
+      console.log(this.error);
+    },
+    () => {
+      this.addForm.reset();
+      this.router.navigate(['/admin/view-permissions']);
+    }
+  );
+  /*
     this.PermissionService.addPermission(this.addForm.value).subscribe(response => {
       this.router.navigate(['/admin/view-permissions']);
-    });
+    }
+    
+    );*/
   }
 
 }

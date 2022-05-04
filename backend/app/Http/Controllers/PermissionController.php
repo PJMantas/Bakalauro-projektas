@@ -61,19 +61,21 @@ class PermissionController extends Controller
     public function addPermission(Request $request){
         $validator = Validator::make($request->all(), [
             'group_name' => 'required|string|between:2,100',
-            'video_create' => 'required|boolean',
-            'video_edit' => 'required|boolean',
-            'video_delete' => 'required|boolean',
+            'video_create' => 'boolean',
+            'video_edit' => 'boolean',
+            'video_delete' => 'boolean',
 
-            'reaction_create' => 'required|boolean',
-            'comment_create' => 'required|boolean',
-            'comment_edit' => 'required|boolean',
-            'comment_delete' => 'required|boolean',
+            'reaction_create' => 'boolean',
+            'comment_create' => 'boolean',
+            'comment_edit' => 'boolean',
+            'comment_delete' => 'boolean',
 
             // admin-only permissions
-            'is_admin' => 'required|boolean',
-            'user_create' => 'required|boolean',
-            'user_edit' => 'required|boolean',
+            'is_admin' => 'boolean',
+            'manage_users' => 'boolean',
+            'manage_permissions' => 'boolean',
+            'manage_genres' => 'boolean',
+
         ]);
 
         if ($validator->fails()) {
@@ -94,8 +96,9 @@ class PermissionController extends Controller
 
         // admin-only permissions
         $permission->is_admin = $request['is_admin'];
-        $permission->user_create = $request['user_create'];
-        $permission->user_edit = $request['user_edit'];
+        $permission->manage_users = $request['manage_users'];
+        $permission->manage_permissions = $request['manage_permissions'];
+        $permission->manage_genres = $request['manage_genres'];
 
         $permission->save();
 
@@ -110,19 +113,20 @@ class PermissionController extends Controller
         $validator = Validator::make($request->all(), [
             'id' => 'required|integer',
             'group_name' => 'required|string|between:2,100',
-            'video_create' => 'required|boolean',
-            'video_edit' => 'required|boolean',
-            'video_delete' => 'required|boolean',
+            'video_create' => 'boolean',
+            'video_edit' => 'boolean',
+            'video_delete' => 'boolean',
 
-            'reaction_create' => 'required|boolean',
-            'comment_create' => 'required|boolean',
-            'comment_edit' => 'required|boolean',
-            'comment_delete' => 'required|boolean',
+            'reaction_create' => 'boolean',
+            'comment_create' => 'boolean',
+            'comment_edit' => 'boolean',
+            'comment_delete' => 'boolean',
 
             // admin-only permissions
-            'is_admin' => 'required|boolean',
-            'user_create' => 'required|boolean',
-            'user_edit' => 'required|boolean',
+            'is_admin' => 'boolean',
+            'manage_users' => 'boolean',
+            'manage_permissions' => 'boolean',
+            'manage_genres' => 'boolean',
         ]);
 
         if ($validator->fails()) {
@@ -152,8 +156,9 @@ class PermissionController extends Controller
 
         // admin-only permissions
         $permission->is_admin = $request['is_admin'];
-        $permission->user_create = $request['user_create'];
-        $permission->user_edit = $request['user_edit'];
+        $permission->manage_users = $request['manage_users'];
+        $permission->manage_permissions = $request['manage_permissions'];
+        $permission->manage_genres = $request['manage_genres'];
 
         $permission->save();
 

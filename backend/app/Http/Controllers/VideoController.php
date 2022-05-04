@@ -193,7 +193,7 @@ class VideoController extends Controller
     }
 
     public function getVideosList(){
-        $videos = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos');
+        $videos = DB::select('select * from videos');
 
         return response()->json([
             'message' => 'Retrieved Video List',
@@ -202,7 +202,7 @@ class VideoController extends Controller
     }
 
     public function getUserVideosList(){
-        $videos = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where creator_id=' . auth()->user()->id);
+        $videos = DB::select('select * from videos where creator_id=' . auth()->user()->id);
         //$videos = DB::select('select id, title, video_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where creator_id= 1');
         
         return response()->json([
@@ -220,7 +220,7 @@ class VideoController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
-        $videos = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where title like "%' . $request['search'] . '%"');
+        $videos = DB::select('select * from videos where title like "%' . $request['search'] . '%"');
 
         return response()->json([
             'message' => 'Retrieved Video List',
@@ -231,14 +231,22 @@ class VideoController extends Controller
     public function getOrderedVideosByGenre(Request $request){
         $validator = Validator::make($request->all(), [
             'genre' => 'required|numeric',
-            'order' => 'required|string|between:2,100'
+            'orderField' => 'required|string|between:2,100',
+            'orderType' => 'required|string|between:2,100'
         ]);
 
         if($validator->fails()){
             return response()->json($validator->errors(), 400);
         }
 
-        $videos = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where genre="' . $request['genre'] . '" order by ' . $request['order'] . ' desc');
+        if ($request['genre'] != -1)
+        {
+            $videos = DB::select('select * from videos where genre=' . $request['genre'] . ' order by ' . $request['orderField'] . ' ' . $request['orderType']);
+        }
+        else
+        {
+            $videos = DB::select('select * from videos order by ' . $request['orderField'] . ' ' . $request['orderType']);
+        }
 
         return response()->json([
             'message' => 'Retrieved Video List',
@@ -256,7 +264,7 @@ class VideoController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
-        $videos = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where genre="' . $request['genre'] . '"');
+        $videos = DB::select('select * from videos where genre="' . $request['genre'] . '"');
 
         return response()->json([
             'message' => 'Retrieved Video List',

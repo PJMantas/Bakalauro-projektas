@@ -30,8 +30,9 @@ export class AdminComponent implements OnInit {
   onDelete(userId){
     
     this.AdminService.deleteUser(userId).subscribe(result => {
-      console.log(result);
-      window.location.reload();
+      this.AdminService.getUserList().subscribe(result => {
+        this.UsersList = result['users'];
+      });
     })
   }
 
