@@ -14,7 +14,6 @@
         
         <div *ngIf="!comment.comment_parent_id" class="card-body">
         <h5 class="card-title">{{comment.user_id}}</h5>
-        <p class="card-text">{{comment.comment_parent_id}}</p>
         <h5 class="card-text">{{comment.comment_text}}</h5>
         <p class="card-text">{{comment.created_at}}</p>
         <button *ngIf="showReplyForm === false && showEditForm === false;" class="btn btn-primary btn-xs" (click)="showReplyForm = true; clickedIndex = i">Reply</button>
@@ -35,10 +34,11 @@
 
         <form [formGroup]="editCommentForm" (ngSubmit)="onEditComment(comment.id)" *ngIf="showEditForm && !comment.comment_parent_id && clickedIndex === i">
             <div class="form-group mb-2">
-                <textarea formControlName="comment_text" class="form-control" placeholder="{{comment.comment_text}}"></textarea>
+                <textarea formControlName="comment_text" class="form-control" [(ngModel)]="comment.comment_text">{{comment.comment_text}}</textarea>
+                
             </div>
             <div class="text-right">
-                <button class="btn btn-primary btn-xs" type="submit">Išsaugoti</button>
+                <button class="btn btn-primary btn-xs" type="submit" >Išsaugoti</button>
                 <button class="btn btn-secondary btn-xs mr-2" type="button" (click)="showEditForm = false">Atšaukti</button>
             </div>
         </form>
