@@ -79,8 +79,7 @@ Route::group([
     Route::post('/update-video', [VideoController::class, 'updateVideo']); 
     Route::get('/get-user-videos-list', [VideoController::class, 'getUserVideosList']);
     Route::post('/add-video-view', [VideoController::class, 'addVideoView']); 
-    Route::post('/like-video', [VideoController::class, 'likeVideo']); 
-    Route::post('/dislike-video', [VideoController::class, 'dislikeVideo']); 
+    Route::post('/react-to-video', [VideoController::class, 'reactToVideo']); 
     Route::get('search-video', [VideoController::class, 'searchVideos']);
     Route::get('get-videos-by-genre', [VideoController::class, 'getVideosByGenre']);
     Route::post('get-ordered-videos-by-genre', [VideoController::class, 'getOrderedVideosByGenre']);

@@ -24,10 +24,10 @@ class CommentController extends Controller
         $user = auth()->user();
 
         $comment = new Comment();
-        //$comment->user_id = $user->id;
-        $comment->user_id = 1;
+        $comment->user_id = $user->id;
         $comment->video_id = $request['video_id'];
         $comment->comment_parent_id = $request['comment_parent_id'];
+        $comment->username = $user->username;
         $comment->comment_text = $request['comment_text'];
         $comment->save();
 
@@ -52,10 +52,10 @@ class CommentController extends Controller
         $user = auth()->user();
 
         $comment = new Comment();
-        //$comment->user_id = $user->id;
-        $comment->user_id = 1;
+        $comment->user_id = $user->id;
         $comment->video_id = $request['video_id'];
         $comment->comment_parent_id = $request['comment_parent_id'];
+        $comment->username = $user->username;
         $comment->comment_text = $request['comment_text'];
         $comment->save();
 

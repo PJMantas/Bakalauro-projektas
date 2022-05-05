@@ -30,8 +30,8 @@ export class VideoService {
   addVideoView(formBody) {
     return this.http.post<Video>(`http://127.0.0.1:8000/api/video/add-video-view/`, formBody);
   }
-  likeVideo(formBody) {
-    return this.http.post<Video>(`http://127.0.0.1:8000/api/video/like-video/`, formBody);
+  reactToVideo(formBody) {
+    return this.http.post<Video>(`http://127.0.0.1:8000/api/video/react-to-video/`, formBody);
   }
   dislikeVideo(formBody) {
     return this.http.post<Video>(`http://127.0.0.1:8000/api/video/dislike-video/`, formBody);

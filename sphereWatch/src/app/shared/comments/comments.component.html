@@ -13,7 +13,7 @@
     <div class="card col-sm" style="width: 30rem;" *ngFor="let comment of CommentsList; let i = index" >
         
         <div *ngIf="!comment.comment_parent_id" class="card-body">
-        <h5 class="card-title">{{comment.user_id}}</h5>
+        <h6 class="card-title">{{comment.username}}</h6>
         <h5 class="card-text">{{comment.comment_text}}</h5>
         <p class="card-text">{{comment.created_at}}</p>
         <button *ngIf="showReplyForm === false && showEditForm === false;" class="btn btn-primary btn-xs" (click)="showReplyForm = true; clickedIndex = i">Reply</button>
@@ -47,6 +47,7 @@
         <div *ngFor="let child of CommentsList" >
             <div style="width: 30rem; margin-left: 100px;">
                 <div *ngIf="child.comment_parent_id === comment.id" class="card-body">
+                <h6 class="card-title">{{child.username}}</h6>
                 <h5 class="card-text">{{child.comment_text}}</h5>
                 <p class="card-text">{{child.created_at}}</p>
                 <button *ngIf="showChildEditForm === false && showReplyForm === false;" class="btn btn-primary btn-xs" (click)="showChildEditForm = true; clickedIndex = child.id">Edit</button>

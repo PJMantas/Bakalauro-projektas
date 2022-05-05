@@ -1,3 +1,4 @@
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css'>
 <div class="container" *ngIf="filtersLoaded | async">
   <div class="video-player-wrapper card">
       <h2 class="card" style="size: auto;">{{Video.title}}</h2>
@@ -18,8 +19,13 @@
           Peržiūros
           {{Video.clicks}}  
           Reakcijos 
-          <button type="button" class="btn btn-success btn-xs" (click)="onLike()">{{Video.likes}}</button> :
-          <button type="button" class="btn btn-danger btn-xs" (click)="onDislike()">{{Video.dislikes}}</button>
+          <button type="button" class="btn btn-success btn-xs" (click)="onReaction(true)">
+            <i class="bi bi-hand-thumbs-up"></i> {{Video.likes}}
+          </button> :
+
+          <button type="button" class="btn btn-danger btn-xs" (click)="onReaction(false)">
+            <i class="bi bi-hand-thumbs-down"></i> {{Video.dislikes}}
+          </button>
         </h1>
         <p>{{Video.description}}</p>
         <p>{{Video.genre}}</p>

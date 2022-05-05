@@ -24,12 +24,13 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.auth.userAuthState.subscribe((val) => {
       this.isSignedIn = val;
+      this.authService.profileUser().subscribe((data: any) => {
+        this.profile_pic = data.avatar_url;
+        this.userName = data.first_name;
+        
+      });
     });
-    this.authService.profileUser().subscribe((data: any) => {
-      this.profile_pic = data.avatar_url;
-      this.userName = data.first_name;
-      
-    });
+    
     
     
   }

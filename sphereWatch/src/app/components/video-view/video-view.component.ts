@@ -31,33 +31,24 @@ export class VideoViewComponent implements OnInit {
       this.Video = response['video'];
       this.genreId = this.Video.genre;
       this.filtersLoaded = Promise.resolve(true);
+
+      const formData = new FormData();
+      formData.append('video_id', this.videoId.toString());
+      //formData.append('genre', this.genreId.toString());
+      this.VideoService.addVideoView(formData).subscribe(response => {
+        console.log(response);
+      });
     });
 
-    const formData = new FormData();
-    formData.append('video_id', this.videoId.toString());
-    //formData.append('genre', this.genreId.toString());
-    this.VideoService.addVideoView(formData).subscribe(response => {
-      console.log(response);
-    });
-  }
-
-  onLike() {
-    const formData = new FormData();
-    formData.append('video_id', this.videoId.toString());
-    //formData.append('genre', this.genreId.toString());
-
-    this.VideoService.likeVideo(formData).subscribe(response => {
-      console.log(response);
-      this.Video = response['video'];
-    });
-  }
-
-  onDislike() {
-    const formData = new FormData();
-    formData.append('video_id', this.videoId.toString());
-    //formData.append('genre', this.genreId.toString());
     
-    this.VideoService.dislikeVideo(formData).subscribe(response => {
+  }
+
+  onReaction(reactionType: boolean) {
+    const formData = new FormData();
+    formData.append('video_id', this.videoId.toString());
+    formData.append('reaction_type', reactionType.toString());
+
+    this.VideoService.reactToVideo(formData).subscribe(response => {
       console.log(response);
       this.Video = response['video'];
     });

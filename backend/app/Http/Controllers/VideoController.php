@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Video;
+use App\Models\Reaction;
+use App\Models\User;
 use Validator;
 use DB;
 use Illuminate\Support\Facades\Storage;
@@ -114,10 +116,10 @@ class VideoController extends Controller
             ], 201);
     }
 
-    public function likeVideo(Request $request){
+    public function reactToVideo(Request $request){
         $validator = Validator::make($request->all(), [
             'video_id' => 'required|numeric', 
-            'genre' => 'numeric',
+            'reaction_type' => 'required|string|in:true,false',
         ]);
 
         if($validator->fails()){
@@ -125,38 +127,72 @@ class VideoController extends Controller
         }
 
         $video = Video::find($request['video_id']);
+        $isLiked = $request['reaction_type'] === 'true';
+        $user = auth()->user();
 
-        $video->increment('likes');
+        $like = Reaction::where('user_id', $user->id)->where('video_id', $video->id)->first();
 
-        $video->save();
+        if($like){
+            if($like->reaction_type == $isLiked){
+                if ($isLiked) {           
+                    $like->delete();
+                    $video->decrement('likes');
+                } else {
+                    $video->decrement('dislikes');
+                    $like->delete();
+                }
+            } 
+            else {
+                if ($isLiked) {
+                    $like->reaction_type = $isLiked;
+                    $like->save();
+                    $video->increment('likes');
+                    $video->decrement('dislikes');
+                }
+                else {
+                    $like->reaction_type = $isLiked;
+                    $like->save();
+                    $video->increment('dislikes');
+                    $video->decrement('likes');
+                }
+            }
+        }
+        else
+        {
+            $reaction = new Reaction();
+            $reaction->user_id = $user->id;
+            $reaction->video_id = $video->id;
+            $reaction->reaction_type = $isLiked;
+            $reaction->save();
 
-        return response()->json([
-            'message' => 'Video liked',
-            'video' => $video
-            ], 201);
-    }
-
-    public function dislikeVideo(Request $request){
-        $validator = Validator::make($request->all(), [
-            'video_id' => 'required|numeric', 
-            'genre' => 'numeric',
-        ]);
-
-        if($validator->fails()){
-            return response()->json($validator->errors(), 400);
+            if ($isLiked)
+            {
+                $video->increment('likes');
+            }
+            else
+            {
+                $video->increment('dislikes');
+            }
         }
 
-        $video = Video::find($request['video_id']);
-
-        $video->increment('dislikes');
-
         $video->save();
 
-        return response()->json([
-            'message' => 'Video disliked',
-            'video' => $video
+        if ($isLiked) {
+            return response()->json([
+                'message' => 'Video liked',
+                'video' => $video
             ], 201);
+        }
+        else{
+            return response()->json([
+                'message' => 'Video disliked',
+                'video' => $video
+            ], 201);
+        }
+      
+        
     }
+
 
     public function getVideoById(Request $request){
     	$validator = Validator::make($request->all(), [

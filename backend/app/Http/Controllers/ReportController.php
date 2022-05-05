@@ -10,39 +10,6 @@ use DB;
 
 class ReportController extends Controller
 {
-    public function createmReport(Request $request){
-
-    	$validator = Validator::make($request->all(), [
-            'title' => 'required|string|between:2,100',
-            'video_url' => 'required|file|mimetypes:video/mp4',
-            'description' => 'required',
-            'genre' => 'required|string|between:2,100',
-            
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
-        
-        $user = auth()->user();
-
-        $video = new Video();
-
-
-        $video->description = $request['description'];
-        $video->genre = $request['genre'];
-        $video->creator_id = 1;
-        //$video->creator_id = $user->id;
-        
-        $video->save();
-
-
-        return response()->json([
-            'message' => 'Video successfully created',
-            'video' => $video
-        ], 201);
-    }
-
     public function getSystemReport(){
         //$videos = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos');
         $usersCount = DB::select('select count(*) as count from users');
@@ -81,8 +48,7 @@ class ReportController extends Controller
     public function getUserReport(){
         //$videos = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos');
         $user = auth()->user();
-        //$userid = $user->id;
-        $userid = 1;
+        $userid = $user->id;
 
         $userVideoCount = DB::select('select count(*) as count from videos where creator_id = ?', [$userid]);
 
