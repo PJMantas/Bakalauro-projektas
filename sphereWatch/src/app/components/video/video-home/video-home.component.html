@@ -13,37 +13,28 @@
     <div>
         <h3 style="text-align: center;">Ieškokite norimo vaizdo įrašo</h3>
             <div class="row">
-                <div ngbDropdown class="d-inline-block col-2" style="text-align: left;">
-                    <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Rūšiuoti pagal</button>
-                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                        <button ngbDropdownItem (click)="orderVideosBySelection(1)">Pagal datą</button>
-                        <button ngbDropdownItem (click)="orderVideosBySelection(2)">Pagal peržiūras</button>
-                    </div>
+                <div class="col-2">
+                    <select class="form-select col-1" aria-label="Rikiavimo tvarka" (change)="orderVideosBySelection($event)">
+                        <option selected value="1">Pagal datą</option>
+                        <option value="2">Pagal peržiūras</option>
+                    </select>
                 </div>
-                
-                
-                <div ngbDropdown class="d-inline-block col-1" style="text-align: left;">
-                    <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Rikiavimas</button>
-                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                        <button ngbDropdownItem (click)="changeOrderType(1)">Mažėjimo tvarka</button>  
-                        <button ngbDropdownItem (click)="changeOrderType(2)">Didėjimo tvarka</button>
-                    </div>
-                </div> 
+                <div class="col-2">
+                    <select class="form-select" aria-label="Rikiavimo tvarka" (change)="changeOrderType($event)">
+                        <option selected value="1">Mažėjimo tvarka</option>
+                        <option value="2">Didėjimo tvarka</option>
+                    </select>
+                </div>
                 
             <input type="text" name="search-box" class="search-box col-10" (keyup)="searchVideo($event)">
             </div>   
-            <div class="row">
-                <span class="col-sm-1 rounded border border-info" >{{orderField == 'clicks' ? 'Peržūras' : 'Datą'}}</span>
-                <span class="col-sm-1 " ></span>
-                <span class="col-sm-1 rounded border border-info" >{{orderType == 'desc' ? 'Mažėjimo' : 'Didėjimo'}}</span>
-            </div> 
             <br>
         
     </div>
     <div class="row">
         <div class="card col-md-1 my-6" style="width: 40rem; padding-top: 10px; margin-left: 5px; margin-bottom: 5px;" *ngFor="let video of VideoList">
         
-            <img class="card-img-top" src="http://127.0.0.1:8000/{{video.thumbnail_url}}" alt="Card image cap">
+            <img class="card-img-top" style="height: 25rem;" src="http://127.0.0.1:8000/{{video.thumbnail_url}}" alt="Card image cap">
             <div class="card-body">
             <h5 class="card-title" style="font-size:larger; font-weight: bolder;">{{video.title}}</h5>
             <p class="card-text">{{video.description}}</p>

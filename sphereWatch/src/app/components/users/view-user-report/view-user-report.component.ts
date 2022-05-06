@@ -23,6 +23,7 @@ export class ViewUserReportComponent implements OnInit {
   MostLikedVideos: Video[] = [];
   MostLikedVideosByDate: Video[] = [];
   MostViewedVideos: Video[] = [];
+  videoViews: string[] = [];
   MostCommentedVideos: MostCommentedVideos[] = [];
   TotalVideoCount!: number;
   TotalVideoLikes!: number;
@@ -75,11 +76,9 @@ export class ViewUserReportComponent implements OnInit {
       this.viewChart = new Chart('viewChart', {
         type: 'bar',
         data: {
-          //labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
           labels: this.MostLikedVideos.map(video => video.title),
           datasets: [{
             label: 'Peržiūrų skaičius',
-            //data: [12, 19, 3, 5, 2, 3],
             data: this.MostViewedVideos.map(video => video.clicks),
             borderColor: 
               '#3e95cd',
@@ -98,11 +97,10 @@ export class ViewUserReportComponent implements OnInit {
       this.commentsChart = new Chart('commentChart', {
         type: 'bar',
         data: {
-          //labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
           labels: this.MostCommentedVideos.map(video => video.title),
           datasets: [{
             label: 'Komentarų skaičius',
-            //data: [12, 19, 3, 5, 2, 3],
+
             data: this.MostCommentedVideos.map(video => video.comments),
             borderColor: 
               '#3e95cd',
@@ -119,6 +117,7 @@ export class ViewUserReportComponent implements OnInit {
       });
 
       this.mostLikedData = this.MostLikedVideosByDate.map(video => video.likes);
+      this.videoViews = this.MostLikedVideosByDate.map(video => video.clicks);
       this.mostDislikedData = this.MostDislikedVideosByDate.map(video => video.dislikes);
 
       this.ratingsChart = new Chart('ratingChart', {
@@ -126,18 +125,25 @@ export class ViewUserReportComponent implements OnInit {
         data: {
           labels: this.MostLikedVideosByDate.map(video => video.title),
           datasets: [{
-            label: 'Teigiami įvertinimai',
+            label: 'Peržiūros',
             type: 'line',
-            data: this.mostLikedData,
+            data: this.videoViews,
             borderColor: '#3e95cd',
             borderWidth: 5
           },{
             label: 'Neigiami įvertinimai',
-            type: 'line',
+            type: 'bar',
             data: this.mostDislikedData,
             borderColor: '#FF0000',
             borderWidth: 5
-          }]
+          },{
+            label: 'Teigiami įvertinimai',
+            type: 'bar',
+            data: this.mostLikedData,
+            borderColor: '#5cb85c',
+            borderWidth: 5
+          }
+        ]
         },
         options: {
           scales: {

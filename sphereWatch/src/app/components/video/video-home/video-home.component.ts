@@ -77,8 +77,9 @@ export class VideoHomeComponent implements OnInit {
     
   }
 
-  changeOrderType(orderButton: any) {
-    if (orderButton === 1) {
+  changeOrderType(event: any) {
+    
+    if (event.target.value === "1") {
       this.orderType = 'desc';
     } else {
       this.orderType = 'asc';
@@ -86,14 +87,14 @@ export class VideoHomeComponent implements OnInit {
     
     this.getFilteredList();
   }
-  orderVideosBySelection(orderButton: any) {
-    if (orderButton === 1) 
+  orderVideosBySelection(event: any) {
+    if (event.target.value === "1") 
     {
       this.orderField = 'created_at';
       this.getFilteredList();
      
     }
-    else if (orderButton === 2)
+    else if (event.target.value === "2")
     {
       this.orderField = 'clicks';
       this.getFilteredList();

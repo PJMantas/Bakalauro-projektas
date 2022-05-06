@@ -1,35 +1,65 @@
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css'>
+<br>
 <div class="container">
     <div class="card inner-main">
       <div class="card-header">
         Mano paskyra
       </div>
-      <div class="card-body" style="padding-left: 10%; padding-right: 10%;">
-        <img src= 'http://127.0.0.1:8000/{{UserProfile?.avatar_url}}' width="500" height="333">
-        <div class="container card">
-          <p class="card-text">Slapyvardis: <strong>{{UserProfile?.username}}</strong></p>
-          <p class="card-text">E-paštas: <strong>{{UserProfile?.email}}</strong></p>
-          <p class="card-text">Vardas: <strong>{{UserProfile?.first_name}}</strong></p>
-          <p class="card-text">Pavardė: <strong>{{UserProfile?.last_name}}</strong></p>
-          <p class="card-text">Amžius: <strong>{{UserProfile?.age}}</strong></p>
-          <p class="card-text">Šalis: <strong>{{UserProfile?.country}}</strong></p>
+      <div class="card-body d-flex flex-column" style="padding-left: 10%; padding-right: 10%; font-size: large;">
+        <div>
+          <div class="row">
+            <div class="col-md-6">
+              <img src= 'http://127.0.0.1:8000/{{UserProfile?.avatar_url}}' max-width="500" max-height="333" class="img-fluid py-3">
+            </div>
+            <div class="container card col-sm border">
+              <div class="row">
+                <p class="card-text col-3">Slapyvardis:</p>
+                <strong class="col-sm">{{UserProfile?.username}}</strong>
+              </div>
+              <div class="row">
+                <p class="card-text col-3">E-paštas: </p>
+                <strong class="col-sm">{{UserProfile?.email}}</strong>
+              </div>
+              <div class="row">
+                <p class="card-text col-3">Vardas: </p>
+                <strong class="col-sm">{{UserProfile?.first_name}}</strong>
+              </div>
+              <div class="row">
+                <p class="card-text col-3">Pavardė: </p>
+                <strong class="col-sm">{{UserProfile?.last_name}}</strong>
+              </div>
+              <div class="row">
+                <p class="card-text col-3">Amžius: </p>
+                <strong class="col-sm">{{UserProfile?.age}}</strong>
+              </div>
+              <div class="row">
+                <p class="card-text col-3">Šalis:</p>
+                <strong class="col-sm">{{UserProfile?.country}}</strong>
+              </div>
+
+              <p class="btn btn-outline-dark btn-xs " type="button" [routerLink]="['/edit-profile']">Redaguoti profilį</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row btn-toolbar" style="font-weight: bolder;">
+          <div class="col-md-6">
+            <h2>Vaizdo įrašai</h2>
+            <button class="btn btn-outline-success btn-lg " type="button" [routerLink]="['/video/createVideo']" ><i class="bi bi-plus ps-1"></i> Kurti naują vaizdo įrašą </button>
+            <br>
+            <p class="col-md-6"></p>
+            <button class="btn btn-outline-primary btn-lg" type="button" [routerLink]="['/video/userVideos']"><i class="bi bi-camera-video ps-2"> </i>Mano vaizdo įrašai </button>
+            <br>
+          </div>
+          <div class="col-sm">
+            <h2>Kita</h2>
+            <button class="btn btn-outline-info btn-lg" type="button" [routerLink]="['/viewUserReport']"><i class="bi bi-graph-up ps-1"></i> Mano statistika </button>
+            <br>
+            <button class="btn btn-outline-warning btn-lg" type="button" [routerLink]="['/user-genre-requests']"><i class="bi bi-envelope ps-1"></i> Mano prašymai </button>
+          </div>
         </div>
         
-      <p class="btn btn-dark btn-xs " type="button" [routerLink]="['/edit-profile']">Redaguoti profilį</p>
-
       </div>
-    
-        <button class="btn btn-primary btn-xs " type="button" [routerLink]="['/video/createVideo']">Kurti naują vaizdo įrašą</button>
-        <br>
-        <button class="btn btn-primary btn-xs " type="button" [routerLink]="['/video/userVideos']">Mano vaizdo įrašai</button>
-        <br>
-  
-        <button class="btn btn-primary btn-xs " type="button" [routerLink]="['/viewUserReport']">Mano statistika</button>
-        <br>
-        <button class="btn btn-primary btn-xs " type="button" [routerLink]="['/user-genre-requests']">Mano prašymai</button>
-    
-        
-      
-      
       
       
     </div>

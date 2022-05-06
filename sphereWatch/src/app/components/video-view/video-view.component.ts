@@ -24,20 +24,19 @@ export class VideoViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.videoId = Number(this.route.snapshot.paramMap.get('id'));
-    //this.videoUrl = 'assets/videos/drip.mp4';
-    //console.log(this.videoUrl);
-    this.VideoService.getVideoById(this.videoId).subscribe(response => {
-      console.log(response);
-      this.Video = response['video'];
-      this.genreId = this.Video.genre;
-      this.filtersLoaded = Promise.resolve(true);
 
-      const formData = new FormData();
+    const formData = new FormData();
       formData.append('video_id', this.videoId.toString());
       //formData.append('genre', this.genreId.toString());
       this.VideoService.addVideoView(formData).subscribe(response => {
         console.log(response);
       });
+
+    this.VideoService.getVideoById(this.videoId).subscribe(response => {
+      console.log(response);
+      this.Video = response['video'];
+      this.genreId = this.Video.genre;
+      this.filtersLoaded = Promise.resolve(true);
     });
 
     

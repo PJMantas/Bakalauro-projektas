@@ -16,18 +16,18 @@
         <h6 class="card-title">{{comment.username}}</h6>
         <h5 class="card-text">{{comment.comment_text}}</h5>
         <p class="card-text">{{comment.created_at}}</p>
-        <button *ngIf="showReplyForm === false && showEditForm === false;" class="btn btn-primary btn-xs" (click)="showReplyForm = true; clickedIndex = i">Reply</button>
-        <button *ngIf="showEditForm === false && showReplyForm === false;" class="btn btn-primary btn-xs" (click)="showEditForm = true; clickedIndex = i">Edit</button>
+        <button *ngIf="showReplyForm === false && showEditForm === false;" class="btn btn-primary btn-xs" (click)="showReplyForm = true; clickedIndex = i">Atrašyti</button>
+        <button *ngIf="showEditForm === false && showReplyForm === false;" class="btn btn-primary btn-xs" (click)="showEditForm = true; clickedIndex = i">Redaguoti</button>
         <button class="btn btn-danger btn-xs" (click)="onDeleteComment(comment.id)">Delete</button>
         
         </div>
 
-        <form [formGroup]="addReplyForm" (ngSubmit)="onCreateReply(comment.id)" *ngIf="showReplyForm && !comment.comment_parent_id && clickedIndex === i">
+        <form [formGroup]="addReplyForm" (ngSubmit)="onCreateReply(comment.id); showReplyForm = false" *ngIf="showReplyForm && !comment.comment_parent_id && clickedIndex === i">
             <div class="form-group mb-2">
                 <textarea formControlName="comment_text" class="form-control" ></textarea>
             </div>
             <div class="text-right">
-                <button class="btn btn-primary btn-xs" type="submit">Atsakyti</button>
+                <button class="btn btn-primary btn-xs" type="submit" >Atsakyti</button>
                 <button class="btn btn-secondary btn-xs mr-2" type="button" (click)="showReplyForm = false">Atšaukti</button>
             </div>
         </form>

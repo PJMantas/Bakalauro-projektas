@@ -5,7 +5,7 @@
       <vg-player class="card-body"  style="text-align: center;">
         
         
-        <video style="width: 100%    !important; height: auto   !important;" [vgMedia]="$any(media)" #media id="singleVideo" preload="auto" controls   >
+        <video style="max-height: 70vh; width: 100%; height: auto; margin:0 auto" [vgMedia]="$any(media)" #media id="singleVideo" preload="auto" controls   >
           
           <source src= 'http://127.0.0.1:8000/{{Video.video_url}}' type="video/mp4">
           <vg-controls>
@@ -35,7 +35,6 @@
     <style>
 
     </style>
-<!--<app-comments [videoId]="videoId"></app-comments>-->
     <app-comments [videoId]="videoId"></app-comments>
   </div>
 </div>
