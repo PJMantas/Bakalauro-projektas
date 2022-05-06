@@ -49,5 +49,13 @@ export class VideoService {
     return this.http.post<Video>(`http://127.0.0.1:8000/api/video/get-ordered-videos-by-genre`, formBody);
   }
 
+  getVideoRecomendations(genre: number, videoId: number) {
+    return this.http.get<Video>(`http://127.0.0.1:8000/api/video/get-recomended-videos`, {params: {genre, videoId}});
+  }
+
+  getRecomendedGenreVideos() {
+    return this.http.get<Video>(`http://127.0.0.1:8000/api/video/get-most-viewed-genre-videos`);
+  }
+
 }
 

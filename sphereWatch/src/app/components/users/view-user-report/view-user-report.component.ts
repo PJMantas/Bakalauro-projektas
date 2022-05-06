@@ -43,7 +43,6 @@ export class ViewUserReportComponent implements OnInit {
   ) { }
 
   canvas: any;
-  ctx: any;
   viewChart: any;
   commentsChart: any;
   ratingsChart: any;
@@ -72,7 +71,7 @@ export class ViewUserReportComponent implements OnInit {
       console.log(this.TotalVideoLikes);
       console.log(this.TotalVideoDislikes);
       console.log(this.TotalVideoViews);
-
+      
       this.viewChart = new Chart('viewChart', {
         type: 'bar',
         data: {
@@ -93,6 +92,7 @@ export class ViewUserReportComponent implements OnInit {
           }
         }
       });
+      this.viewChart.render();
 
       this.commentsChart = new Chart('commentChart', {
         type: 'bar',
@@ -155,6 +155,8 @@ export class ViewUserReportComponent implements OnInit {
       });
 
     });
+
+    
   }
 
 }

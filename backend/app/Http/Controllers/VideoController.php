@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Video;
 use App\Models\Reaction;
 use App\Models\User;
+use Carbon\Carbon;
 use Validator;
 use DB;
 use Illuminate\Support\Facades\Storage;
@@ -307,5 +308,67 @@ class VideoController extends Controller
             'videos' => $videos
         ], 201);
     }
+
+    public function getRecomendedVideos(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'genre' => 'required',
+            'videoId' => 'required|numeric'
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors(), 400);
+        }
+
+        $videos = Video::where('genre', $request['genre'])
+            ->where('created_at', '>=', Carbon::now()->subDays(30))
+            ->where('id', '!=', $request['videoId'])
+            ->orderBy('clicks', 'desc')
+            ->orderBy('likes', 'desc')
+            ->take(5)
+            ->get();
+
+        return response()->json([
+            'message' => 'Retrieved Video Recomendation List',
+            'videos' => $videos
+        ], 201);
+
+    }
+
+    public function getMostPopularGanreRecomendedVideos(Request $request)
+    {
+
+
+        $popularGenres = DB::select('select sum(clicks) as totalViews, genre  from videos group by genre order by totalViews desc limit 3');
+        $videos1 = Video::where('genre', $popularGenres[0]->genre)
+            ->where('created_at', '>=', Carbon::now()->subDays(30))
+            ->orderBy('clicks', 'desc')
+            ->orderBy('likes', 'desc')
+            ->take(5)
+            ->get();
+
+        $videos2 = Video::where('genre', $popularGenres[1]->genre)
+            ->where('created_at', '>=', Carbon::now()->subDays(30))
+            ->orderBy('clicks', 'desc')
+            ->orderBy('likes', 'desc')
+            ->take(5)
+            ->get();
+        
+        $videos3 = Video::where('genre', $popularGenres[2]->genre)
+            ->where('created_at', '>=', Carbon::now()->subDays(30))
+            ->orderBy('clicks', 'desc')
+            ->orderBy('likes', 'desc')
+            ->take(5)
+            ->get();
+
+        return response()->json([
+            'message' => 'Retrieved Video Recomendation List',
+            'videos1' => $videos1,
+            'videos2' => $videos2,
+            'videos3' => $videos3
+        ], 201);
+    }
+
+
     
 }

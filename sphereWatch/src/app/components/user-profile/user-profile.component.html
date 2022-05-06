@@ -3,7 +3,7 @@
 <div class="container">
     <div class="card inner-main">
       <div class="card-header">
-        Mano paskyra
+        <h3 style="text-align: center;">Mano paskyra</h3> 
       </div>
       <div class="card-body d-flex flex-column" style="padding-left: 10%; padding-right: 10%; font-size: large;">
         <div>
@@ -43,19 +43,19 @@
         </div>
 
         <div class="row btn-toolbar" style="font-weight: bolder;">
-          <div class="col-md-6">
+          <div class="col-md-6 card">
             <h2>Vaizdo įrašai</h2>
-            <button class="btn btn-outline-success btn-lg " type="button" [routerLink]="['/video/createVideo']" ><i class="bi bi-plus ps-1"></i> Kurti naują vaizdo įrašą </button>
-            <br>
+        
+            <button class="btn btn-outline-success btn-lg " type="button" [routerLink]="['/video/createVideo']" ><i class="bi bi-plus fa-lg"></i> Kurti naują vaizdo įrašą </button>
             <p class="col-md-6"></p>
-            <button class="btn btn-outline-primary btn-lg" type="button" [routerLink]="['/video/userVideos']"><i class="bi bi-camera-video ps-2"> </i>Mano vaizdo įrašai </button>
-            <br>
+            <button class="btn btn-outline-primary btn-lg" type="button" [routerLink]="['/video/userVideos']"><i class="bi bi-camera-video fa-lg"> </i> Mano vaizdo įrašai </button>
+            
           </div>
-          <div class="col-sm">
+          <div class="col-sm card">
             <h2>Kita</h2>
-            <button class="btn btn-outline-info btn-lg" type="button" [routerLink]="['/viewUserReport']"><i class="bi bi-graph-up ps-1"></i> Mano statistika </button>
-            <br>
-            <button class="btn btn-outline-warning btn-lg" type="button" [routerLink]="['/user-genre-requests']"><i class="bi bi-envelope ps-1"></i> Mano prašymai </button>
+            <button class="btn btn-outline-info btn-lg" type="button" [routerLink]="['/viewUserReport']"><i class="bi bi-graph-up"></i> Mano statistika </button>
+            <p class="col-md-6"></p>
+            <button class="btn btn-outline-warning btn-lg" type="button" [routerLink]="['/user-genre-requests']"><i class="bi bi-envelope"></i> Mano prašymai </button>
           </div>
         </div>
         

@@ -1,54 +1,87 @@
 <div class="col-md-6 offset-md-3 mt-5">
   <div class="card">
     <form class="form-signin" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-      <h3 class="card-header h3 mb-3 font-weight-normal text-center">Registration</h3>
+      <h3 class="card-header h3 mb-3 font-weight-normal text-center">Registracija</h3>
+
       
-      <!-- Errors -->
-      <div *ngIf="errors?.username" class="alert alert-danger mt-3">
-        {{ errors?.username }}
-      </div>
-      <div *ngIf="errors?.email" class="alert alert-danger mt-3">
-        {{ errors?.email }}
-      </div>
-      <div *ngIf="errors?.password" class="alert alert-danger mt-3">
-        {{ errors?.password }}
-      </div>
-      <div *ngIf="errors?.password_confirmation" class="alert alert-danger mt-3">
-        {{ errors?.password_confirmation }}
-      </div>
       <!-- Signup form -->
       <div class="card-body ">
-        <div class="form-group card-text" >
-          <label>Username</label>
-          <input type="text" class="form-control" formControlName="username" />
+
+        <div class="form-group">
+          <label for="username">Slapyvardis</label>
+          <input type="username" formControlName="username" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" />
+          <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+            <div *ngIf="f['username'].errors['required']">Slapyvardis yra privalomas</div>
+          </div>
         </div>
-        <div class="form-group card-text">
-          <label>Email address</label>
-          <input type="email" class="form-control" formControlName="email" />
+
+        <div class="form-group">
+          <label for="email">E-paštas</label>
+          <input type="email" formControlName="email" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
+          <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+            <div *ngIf="f['email'].errors['required']">E-paštas yra privalomas</div>
+            <div *ngIf="f['email'].errors['email']">Turi būti E-paštas</div>
+          </div>
         </div>
-        <div class="form-group card-text">
-          <label>Password</label>
-          <input type="password" class="form-control" formControlName="password" />
+
+        <div class="form-group">
+          <label for="password">Slaptažodis</label>
+          <input type="password" formControlName="password" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" ngModel minlength="6" />
+          <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+            <div *ngIf="f['password'].errors['required']">Slaptažodis yra privalomas</div>
+            <div *ngIf="f['password'].errors['minlength']">Slaptažodis turi turėti bent 6 simbolius</div>
+          </div>
         </div>
+
+        <div class="form-group">
+          <label for="password">Patvirtinkite slaptažodį</label>
+          <input type="password" formControlName="password_confirmation" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['password_confirmation'].errors }" ngModel minlength="6" />
+          <div *ngIf="submitted && f['password_confirmation'].errors" class="invalid-feedback">
+            <div *ngIf="f['password_confirmation'].errors['required']">Slaptažodis yra privalomas</div>
+            <div *ngIf="f['password_confirmation'].errors['minlength']">Slaptažodis turi turėti bent 6 simbolius</div>
+          </div>
+        </div>
+
         <div class="form-group card-text">
-          <label>Confirm Password</label>
-          <input
-            type="password"
-            class="form-control"
-            formControlName="password_confirmation"
-          />
-        
-      </div>
-      <div class="form-group">
-        <label for="avatar_url">File</label>
+          <label>Patvirtinkite slaptažodį</label>
+          <input type="password" class="form-control" formControlName="password_confirmation" />
+
+        </div>
+        <div class="form-group">
+          <label for="avatar_url">Profilio nuotrauka</label>
+          <br>
+          <input formControlName="avatar_url" type="file" id="avatar_url" class="form-control" (change)="onFileChange($event)">
+        </div>
         <br>
-        <input formControlName="avatar_url" type="file" id="avatar_url" (change)="onFileChange($event)">
+
+        <div *ngIf="errors?.username" class="alert alert-danger mt-3">
+          {{ errors?.username }}
+        </div>
+        
+        <div *ngIf="errors?.email" class="alert alert-danger mt-3">
+          {{ errors?.email }}
+        </div>
+        
+        <div *ngIf="errors?.password" class="alert alert-danger mt-3">
+          {{ errors?.password }}
+        </div>
+        
+        <div *ngIf="errors?.password_confirmation" class="alert alert-danger mt-3">
+          {{ errors?.password_confirmation }}
+        </div>
+        
+        <div *ngIf="errors?.error" class="alert alert-danger mt-3">
+          {{ errors?.error }}
+        </div>
+
+        <button type="submit" class="btn btn-block btn-primary">
+          Registruotis
+        </button>
       </div>
-      <br>
-      <button type="submit" class="btn btn-block btn-primary">
-        Register User
-      </button>
-    </div>
     </form>
-    </div>
   </div>
+</div>

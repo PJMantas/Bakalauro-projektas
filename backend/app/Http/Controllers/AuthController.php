@@ -51,7 +51,7 @@ class AuthController extends Controller
             'avatar_url' => 'file|mimes:jpg,png,jpeg,gif,svg|max:5120',
         ]);
         if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
+            return response()->json($validator->errors(), 400);
         }
 
         if ($request->hasFile('avatar_url'))

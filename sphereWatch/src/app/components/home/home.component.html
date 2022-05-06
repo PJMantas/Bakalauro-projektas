@@ -1,0 +1,71 @@
+<h1 class="display-2">Sveiki atvyke į <span style="font-weight:normal;">SphereWatch</span></h1>
+<p class="lead"> 
+  Dalinkitės, žiūrėkite, reaguokite.
+</p> 
+<hr class="my-4"> 
+<p> 
+  Prisijunkite prie mūsų kūribingos bendruomenės !
+</p> 
+<p class="lead"> 
+  <a class="btn btn-outline-success" [routerLink]="['/register']" role="button">Registruotis</a> 
+</p> 
+<hr class="my-4"> 
+  <div class="row">
+    <div class="col-sm col-sm-4">
+      <div class="card-header">
+        <h2>
+          {{genreTitle1}}
+        </h2>
+        <div class="card " style=" height: fit-content; padding-top: 10px; margin-left: 5px; margin-bottom: 5px;"
+          *ngFor="let video of RecomendedVideos1">
+
+          <img class="card-img-top" style="height: auto;" src="http://127.0.0.1:8000/{{video.thumbnail_url}}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title" style="font-size:larger; font-weight: bolder;">{{video.title}}</h5>
+            <p style="font-size: large; font-weight: bold;" class="card-text">Peržiūros: {{video.clicks}}</p>
+            <button class="btn btn-primary btn-xs" [routerLink]="'/viewVideo/' + video.id">Žiūrėti</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm col-sm-4">
+      <div class="card-header">
+        <h2>
+          {{genreTitle2}}
+        </h2>
+        <div class="card " style=" height: fit-content; padding-top: 10px; margin-left: 5px; margin-bottom: 5px;"
+          *ngFor="let video of RecomendedVideos2">
+
+          <img class="card-img-top" style="height: auto;" src="http://127.0.0.1:8000/{{video.thumbnail_url}}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title" style="font-size:larger; font-weight: bolder;">{{video.title}}</h5>
+            <p style="font-size: large; font-weight: bold;" class="card-text">Peržiūros: {{video.clicks}}</p>
+            <button class="btn btn-primary btn-xs" [routerLink]="'/viewVideo/' + video.id">Žiūrėti</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm col-sm-4">
+      <div class="card-header">
+        <h2>
+          {{genreTitle3}}
+        </h2>
+        <div class="card " style=" height: fit-content; padding-top: 10px; margin-left: 5px; margin-bottom: 5px;"
+          *ngFor="let video of RecomendedVideos3">
+
+          <img class="card-img-top" style="height: auto; " src="http://127.0.0.1:8000/{{video.thumbnail_url}}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title" style="font-size:larger; font-weight: bolder;">{{video.title}}</h5>
+            <p style="font-size: large; font-weight: bold;" class="card-text">Peržiūros: {{video.clicks}}</p>
+            <button class="btn btn-primary btn-xs" [routerLink]="'/viewVideo/' + video.id">Žiūrėti</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+<hr class="my-4"> 
+ <p> 

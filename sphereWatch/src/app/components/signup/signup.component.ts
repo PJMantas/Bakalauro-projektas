@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './../../shared/auth.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -11,6 +11,7 @@ export class SignupComponent implements OnInit {
   registerForm: FormGroup;
   errors: any = null;
   file: any;
+  submitted = false;
 
   constructor(
     public router: Router,
@@ -18,10 +19,10 @@ export class SignupComponent implements OnInit {
     public authService: AuthService
   ) {
     this.registerForm = this.fb.group({
-      username: [''],
-      email: [''],
-      password: [''],
-      password_confirmation: [''],
+      username: ['' , Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      password_confirmation: ['', [Validators.required, Validators.minLength(6)]],
       avatar_url: [''],
     });
   }
@@ -34,7 +35,15 @@ export class SignupComponent implements OnInit {
       console.log(this.file);
     }
   }
+
+  get f() { return this.registerForm.controls; }
+
   onSubmit() {
+    this.submitted = true;
+
+    if (!this.registerForm.valid) {
+      return
+    }
 
     const formData = new FormData();
     formData.append('username', this.registerForm.controls['username'].value);
@@ -45,14 +54,15 @@ export class SignupComponent implements OnInit {
     {
       formData.append('avatar_url', this.file);
     }
-    console.log(formData);
 
     this.authService.register(formData).subscribe(
       (result) => {
         console.log(result);
       },
       (error) => {
+        console.log(error);
         this.errors = error.error;
+        console.log(this.errors.email);
       },
       () => {
         this.registerForm.reset();

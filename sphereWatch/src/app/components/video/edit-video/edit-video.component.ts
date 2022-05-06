@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Video } from '../../../models/video';
 import { User } from '../../../models/user';
+import { Genre } from 'src/app/models/genre';
 import { VideoService } from '../../../services/video.service';
+import { GenreService } from 'src/app/services/genre.service';
 import { AuthService } from '../../../shared/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
@@ -18,6 +20,7 @@ export class EditVideoComponent implements OnInit {
   userId!: number;
   videoId!: number;
   video: Video = new Video();
+  GenreList: Genre[] = [];
   currentUser: User = new User();
   loading = false;
   submitted = false;
@@ -26,6 +29,7 @@ export class EditVideoComponent implements OnInit {
 
   constructor(
     private VideoService: VideoService,
+    private GenreService: GenreService,
     private route: ActivatedRoute,
     public authService: AuthService,
     private formBuilder: FormBuilder,
@@ -71,6 +75,11 @@ export class EditVideoComponent implements OnInit {
       }
       });
 
+    this.GenreService.getGenresList().subscribe(result => {
+        console.log(result);
+        this.GenreList = result['genres'];
+      });
+
   }
 
   onSubmit() {
@@ -87,6 +96,13 @@ export class EditVideoComponent implements OnInit {
         this.router.navigate(['/video/userVideos']);
       }
     );
+  }
+
+  onGenreChange(event) {
+    this.editVideoForm.patchValue({
+      genre: event.target.value
+    });
+    
   }
 
 }

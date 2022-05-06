@@ -17,14 +17,15 @@
                 <label for="creator_id">Jusų id</label>
                 <input [readonly]="true" type="text" formControlName="creator_id" class="form-control" />
             </div>
+            <br>
     
-            <div class="form-group">
-                <label for="genre">Žanras</label>
-                <input type="text" formControlName="genre" class="form-control" />
-            </div>
+            <select formControlName="genre" class="form-control" (change)="onGenreChange($event)">  
+                <option disabled>Pasirinkti žanrą</option>  
+                <option *ngFor="let genre of GenreList" [value]="genre.id">{{genre.name}}</option>  
+            </select>  
     
             <br>
-            <button class="btn btn-dark btn-xs " type="submit">Sukurti</button>
+            <button class="btn btn-dark btn-xs " type="submit">Išsaugoti</button>
             <button class="btn btn-dark btn-xs " type="button" [routerLink]="['/profile']">Grįžti</button>
 
             <button type="button" class="btn btn-danger btn-xs" (click)="onDelete()">Trinti</button>

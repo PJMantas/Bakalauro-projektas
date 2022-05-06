@@ -83,6 +83,8 @@ Route::group([
     Route::get('search-video', [VideoController::class, 'searchVideos']);
     Route::get('get-videos-by-genre', [VideoController::class, 'getVideosByGenre']);
     Route::post('get-ordered-videos-by-genre', [VideoController::class, 'getOrderedVideosByGenre']);
+    Route::get('get-recomended-videos', [VideoController::class, 'getRecomendedVideos']);
+    Route::get('get-most-viewed-genre-videos', [VideoController::class, 'getMostPopularGanreRecomendedVideos']);
     
 });
 

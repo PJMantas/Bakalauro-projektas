@@ -32,9 +32,7 @@
                 <li class="nav-item" *ngIf="isSignedIn">
                     <a class="nav-link" [routerLink]="['/videoHome']" routerLinkActive="active">Vaizdo įrašai</a>
                 </li>
-                <li class="nav-item" *ngIf="isSignedIn">
-                    <button class="btn btn-outline-primary"  (click)="signOut()" >Atsijungti</button>
-                </li>
+                
                 <li class="nav-item" *ngIf="isSignedIn">
                     <a class="nav-link" [routerLink]="['/admin']" routerLinkActive="active">Administratorius</a>
                 </li>
@@ -45,6 +43,9 @@
                         
                     </a>
                    
+                </li>
+                <li class="nav-item" *ngIf="isSignedIn">
+                    <button class="btn btn-outline-primary"  (click)="signOut()" >Atsijungti</button>
                 </li>
             </ul>
         </div>
