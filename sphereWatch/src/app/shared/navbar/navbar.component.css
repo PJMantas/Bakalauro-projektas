@@ -1,9 +1,6 @@
 .navbar {
   overflow: hidden;
-  background-color: darkblue;
   font-family: Arial, Helvetica, sans-serif;
-  border-bottom: 1px solid #bbb;
-  border-color: black;
 }
 .navbar a {
     color: black;
@@ -13,10 +10,7 @@
     font-size: 20px;
   }
   .navbar img {
-    margin-left: 10px;
-    margin-top: -10px;
-    width: 50px;
-    height: 50px; 
+    
     border-radius: 50%;
     
   }

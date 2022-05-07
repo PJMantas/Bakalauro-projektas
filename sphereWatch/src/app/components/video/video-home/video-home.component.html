@@ -1,50 +1,71 @@
 <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css'>
-<div class="container">
-    <br>
-    <div class="row">
-        <div class="col-sm" *ngFor="let genre of GenreList">
-            <button class="btn btn-primary btn-lg" style="border-radius: 50%; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"
-                (click)="selectUnselect(genre.id)" 
-                [ngClass]="{'grey' : toggle, 'red': !toggle}">
+
+<div class="container py-3">
+    
+    <div class="flex-wrap d-flex gap-3 justify-content-center">
+        <div class="" *ngFor="let genre of GenreList">
+            <button class="btn btn-lg border-info"
+                style="border-radius: 20px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"
+                (click)="selectUnselect(genre.id)" [ngClass]="isGenreSelected(genre.id)? 'bg-info' : 'bg-light'">
                 {{genre.name}}
             </button>
         </div>
     </div>
-    <div>
+
+</div>
+<div class="bg-light mb-3">
+    <div class="container py-3">
         <h3 style="text-align: center;">Ieškokite norimo vaizdo įrašo</h3>
-            <div class="row">
-                <div class="col-2">
-                    <select class="form-select col-1" aria-label="Rikiavimo tvarka" (change)="orderVideosBySelection($event)">
-                        <option selected value="1">Pagal datą</option>
-                        <option value="2">Pagal peržiūras</option>
-                    </select>
+        <div class="row">
+            <div class="col-2">
+                <select class="form-select col-1" aria-label="Rikiavimo tvarka"
+                    (change)="orderVideosBySelection($event)">
+                    <option selected value="1">Pagal datą</option>
+                    <option value="2">Pagal peržiūras</option>
+                </select>
+            </div>
+            <div class="col-2">
+                <select class="form-select" aria-label="Rikiavimo tvarka" (change)="changeOrderType($event)">
+                    <option selected value="1">Mažėjimo tvarka</option>
+                    <option value="2">Didėjimo tvarka</option>
+                </select>
+            </div>
+
+            <div class="col-5">
+                <div class="form-outline">
+                    <input type="search" id="search-field" class="form-control " placeholder="Įveskite pavadinimą"
+                        (keyup)="searchVideo($event)" />
                 </div>
-                <div class="col-2">
-                    <select class="form-select" aria-label="Rikiavimo tvarka" (change)="changeOrderType($event)">
-                        <option selected value="1">Mažėjimo tvarka</option>
-                        <option value="2">Didėjimo tvarka</option>
-                    </select>
-                </div>
-                
-            <input type="text" name="search-box" class="search-box col-10" (keyup)="searchVideo($event)">
-            </div>   
-            <br>
-        
-    </div>
-    <div class="row">
-        <div class="card col-md-1 my-6" style="width: 40rem; padding-top: 10px; margin-left: 5px; margin-bottom: 5px;" *ngFor="let video of VideoList">
-        
-            <img class="card-img-top" style="height: 25rem;" src="http://127.0.0.1:8000/{{video.thumbnail_url}}" alt="Card image cap">
-            <div class="card-body">
-            <h5 class="card-title" style="font-size:larger; font-weight: bolder;">{{video.title}}</h5>
-            <p class="card-text">{{video.description}}</p>
-            <p style="font-size: large; font-weight: bold;" class="card-text">Peržiūros: {{video.clicks}}</p>
-            <p class="card-text">Įkėlimo data {{video.created_at}}</p>
-            <button class="btn btn-primary btn-xs" [routerLink] = "'/viewVideo/' + video.id">Žiūrėti</button>
             </div>
         </div>
-        
+       
+
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-lg-6 mb-4" *ngFor="let video of VideoList">
+            <a class="card my-6 text-decoration-none bg-dark text-light border-0"
+                [routerLink]="'/viewVideo/' + video.id">
+
+                <img class="card-img-top" style="height: 25rem;" src="http://127.0.0.1:8000/{{video.thumbnail_url}}"
+                    alt="Card image cap">
+                <div class="card-body p-5">
+                    <h4 class="card-title" style="font-weight: bolder;">{{video.title}}</h4>
+                    <p class="card-text description">{{video.description}}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex gap-3">
+                            <h5 class="card-text">Peržiūros: {{video.clicks}} </h5>           
+                            <span class="card-text">Įkelta {{video.created_at}}</span>
+                        </div>
+                        <button class="btn btn-primary btn-xs" [routerLink]="'/viewVideo/' + video.id">Žiūrėti</button>
+                    </div>
+                    
+                </div>
+            </a>
+        </div>
+
     </div>
 
-    
+
 </div>

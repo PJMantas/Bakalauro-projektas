@@ -11,12 +11,17 @@
   width: 50%;
 }
 
-.arrow {
-  transition: all .1s ease-in-out;
+
+.btn-primary:active{
+  background: #50b948;
+  border-color: #33912c;
 }
 
-.arrow.revered {
-  transform: rotate(180deg);
+.description {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: calc(100%);
+  overflow: hidden;
 }
 
 

@@ -17,7 +17,6 @@ export class VideoHomeComponent implements OnInit {
   VideoList:Video[] = [];
   GenreList: Genre[] = [];
   toggle = true;
-  status = 'Enable'; 
   genreId: number = -1;
   isSelected: boolean = false;
   orderType = 'asc';
@@ -37,6 +36,12 @@ export class VideoHomeComponent implements OnInit {
         orderType: ['']
       });
     }
+
+    
+
+  enableDisableRule(job) {
+    
+  }
 
   ngOnInit(): void {
     this.GenreService.getGenresList().subscribe(result => {
@@ -58,8 +63,20 @@ export class VideoHomeComponent implements OnInit {
     }
   )};
 
+  isGenreSelected(genreId: number) {
+    this.isSelected = true;
+    if(this.genreId === genreId)
+    {
+      this.isSelected = false;
+      return true;
+    } 
+    return false;
+  }
   selectUnselect(genreId: number) {
     console.log(genreId);
+
+    this.toggle = !this.toggle;
+
     if(this.genreId === genreId) 
     {
       this.genreId = -1;

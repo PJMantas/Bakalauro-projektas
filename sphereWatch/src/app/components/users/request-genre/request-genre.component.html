@@ -1,5 +1,5 @@
 <div class="container card">
-    <h3 class="card-header">Pateikti prašymą naujai žymai</h3>
+  <h3 class="card-header bg-dark text-light">Pateikti prašymą naujai žymai</h3>
     <form class="card-body" [formGroup]="requestForm" (ngSubmit)="onSubmit()">
 
         <div *ngIf="error?.username" class="alert alert-danger mt-3">

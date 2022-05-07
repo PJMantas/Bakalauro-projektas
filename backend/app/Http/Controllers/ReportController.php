@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Video;
+use App\Models\User;
+use Illuminate\Support\Carbon;
 use Validator;
 use DB;
 
@@ -29,7 +31,31 @@ class ReportController extends Controller
         $mostCommentedVideos = DB::select('select videos.id as video_id, videos.title as title, count(comments.id) as comments from videos
                                         inner join comments on videos.id = comments.video_id 
                                             group by videos.id, videos.title
-                                            order by comments desc limit 3');
+                                            order by comments desc limit 5');
+
+        $userCountPerMonth = DB::select('select count(*) as count, MONTH(created_at) as month from users group by MONTH(created_at)');
+
+        $users = User::select('id', 'created_at')
+        ->get()
+        ->groupBy(function($date) {
+            //return Carbon::parse($date->created_at)->format('Y'); // grouping by years
+            return Carbon::parse($date->created_at)->format('m'); // grouping by months
+        });
+
+        $usermcount = [];
+        $userArr = [];
+
+        foreach ($users as $key => $value) {
+            $usermcount[(int)$key] = count($value);
+        }
+
+        for($i = 1; $i <= 12; $i++){
+            if(!empty($usermcount[$i])){
+                $userArr[$i] = $usermcount[$i];    
+            }else{
+                $userArr[$i] = 0;    
+            }
+        }
 
         return response()->json([
             'message' => 'Retrieved SystemReportValues',
@@ -40,7 +66,8 @@ class ReportController extends Controller
             'MostDislikedVideos' => $mostDislikedVideos,
             'MostViewedVideos' => $mostViewedVideos,
             'MostCommentedVideos' => $mostCommentedVideos,
-            'Comments' => $commentCount
+            'Comments' => $commentCount,
+            'UserCountPerMonth' => $userArr
 
         ], 201);
     }

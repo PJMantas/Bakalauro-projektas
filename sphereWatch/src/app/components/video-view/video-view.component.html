@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-9 col-sm-12">
       <div class="video-player-wrapper card">
-        <h2 class="card" style="size: auto;">{{Video.title}}</h2>
+        
         <vg-player class="card-body" style="text-align: center;">
           <video style="max-height: 70vh; width: 100%; height: auto; margin:0 auto" [vgMedia]="$any(media)" #media
             id="singleVideo" preload="auto" controls>
@@ -15,26 +15,29 @@
 
           </video>
         </vg-player>
+        
         <div class="card-body">
-          <h1>
-            Peržiūros
-            {{Video.clicks}}
-            Reakcijos
-            <button type="button" class="btn btn-success btn-xs" (click)="onReaction(true)">
-              <i class="bi bi-hand-thumbs-up"></i> {{Video.likes}}
-            </button> :
-
-            <button type="button" class="btn btn-danger btn-xs" (click)="onReaction(false)">
-              <i class="bi bi-hand-thumbs-down"></i> {{Video.dislikes}}
-            </button>
-          </h1>
+          <h2>{{Video.title}}</h2>
+          <hr>
+          <h3 class="d-flex justify-content-between"> 
+            <span>Peržiūros{{Video.clicks}}</span>
+            <div>
+              <button type="button" class="btn btn-success btn-xs" (click)="onReaction(true)">
+                <i class="bi bi-hand-thumbs-up"></i> {{Video.likes}}
+              </button> :
+  
+              <button type="button" class="btn btn-danger btn-xs" (click)="onReaction(false)">
+                <i class="bi bi-hand-thumbs-down"></i> {{Video.dislikes}}
+              </button>
+            </div>
+          </h3>
 
           
 
           <p>{{Video.description}}</p>
           <p>{{Video.genre}}</p>
 
-          <button class="btn btn-primary btn-xs" [routerLink]="'/video/editVideo/' + videoId">Edit video</button>
+          <button class="btn btn-primary btn-xs" [routerLink]="'/video/editVideo/' + videoId">Redaguoti vaizdo įrašą</button>
 
         </div>
         <style>

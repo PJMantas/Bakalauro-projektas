@@ -1,5 +1,5 @@
 <div class="container card">
-    <h3 class="card-header">Redaguokite teisių grupę</h3>
+    <h3 class="card-header bg-dark text-light">Redaguokite teisių grupę</h3>
     <form class="card-body" [formGroup]="editForm" (ngSubmit)="onSubmit()">
 
         <div class="form-group">
@@ -18,61 +18,72 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group d-flex gap-3">
+            
+            <input class="form-check-input" type="checkbox" formControlName="video_create"/>
             <label for="video_create">Kurti vaizdo įrašus</label>
-            <input class="form-check-input" type="checkbox" formControlName="video_create" [ngClass]="{ 'is-invalid': submitted && f['video_create'].errors }" />
         </div>
 
-        <div class="form-group">
+        <div class="form-group d-flex gap-3">
+            
+            <input class="form-check-input" type="checkbox" formControlName="video_edit"/>
             <label for="video_edit">Redaguoti vaizdo įrašus</label>
-            <input class="form-check-input" type="checkbox" formControlName="video_edit" [ngClass]="{ 'is-invalid': submitted && f['video_edit'].errors }" />
         </div>
 
-        <div class="form-group">
+        <div class="form-group d-flex gap-3">
+            
+            <input class="form-check-input" type="checkbox" formControlName="video_delete"/>
             <label for="video_delete">Trinti vaizdo įrašus</label>
-            <input class="form-check-input" type="checkbox" formControlName="video_delete" [ngClass]="{ 'is-invalid': submitted && f['video_delete'].errors }" />
         </div>
 
-        <div class="form-group">
+        <div class="form-group d-flex gap-3">
+            
+            <input class="form-check-input" type="checkbox" formControlName="reaction_create"/>
             <label for="reaction_create">Reaguoti</label>
-            <input class="form-check-input" type="checkbox" formControlName="reaction_create" [ngClass]="{ 'is-invalid': submitted && f['reaction_create'].errors }" />
         </div>
 
-        <div class="form-group">
+        <div class="form-group d-flex gap-3">
+            
+            <input class="form-check-input" type="checkbox" formControlName="comment_create"/>
             <label for="comment_create">Kurti komentarus</label>
-            <input class="form-check-input" type="checkbox" formControlName="comment_create" [ngClass]="{ 'is-invalid': submitted && f['comment_create'].errors }" />
         </div>
 
-        <div class="form-group">
+        <div class="form-group d-flex gap-3">
+            
+            <input class="form-check-input" type="checkbox" formControlName="comment_edit"/>
             <label for="comment_edit">Redaguoti komentarus</label>
-            <input class="form-check-input" type="checkbox" formControlName="comment_edit" [ngClass]="{ 'is-invalid': submitted && f['comment_edit'].errors }" />
         </div>
 
-        <div class="form-group">
+        <div class="form-group d-flex gap-3">
+            
+            <input class="form-check-input" type="checkbox" formControlName="comment_delete"/>
             <label for="comment_delete">Trinti komentarus</label>
-            <input class="form-check-input" type="checkbox" formControlName="comment_delete" [ngClass]="{ 'is-invalid': submitted && f['comment_delete'].errors }" />
         </div>
 
         <h5>Administratoriaus teisės</h5>
 
-        <div class="form-group">
+        <div class="form-group d-flex gap-3">
+            
+            <input class="form-check-input" type="checkbox" formControlName="is_admin"/>
             <label for="is_admin">Sistemos administratorius</label>
-            <input class="form-check-input" type="checkbox" formControlName="is_admin" [ngClass]="{ 'is-invalid': submitted && f['is_admin'].errors }" />
         </div>
 
-        <div class="form-group">
+        <div class="form-group d-flex gap-3">
+            
+            <input class="form-check-input" type="checkbox" formControlName="manage_users" />
             <label for="manage_users">Valdyti naudotojus</label>
-            <input class="form-check-input" type="checkbox" formControlName="manage_users" [ngClass]="{ 'is-invalid': submitted && f['manage_users'].errors }" />
         </div>
 
-        <div class="form-group">
+        <div class="form-group d-flex gap-3">
+            
+            <input class="form-check-input" type="checkbox" formControlName="manage_permissions" />
             <label for="manage_permissions">Valdyti teisių grupes</label>
-            <input class="form-check-input" type="checkbox" formControlName="manage_permissions" [ngClass]="{ 'is-invalid': submitted && f['manage_permissions'].errors }" />
         </div>
 
-        <div class="form-group">
+        <div class="form-group d-flex gap-3">
+            
+            <input class="form-check-input" type="checkbox" formControlName="manage_genres"/>
             <label for="manage_genres">Valdyti žymas</label>
-            <input class="form-check-input" type="checkbox" formControlName="manage_genres" [ngClass]="{ 'is-invalid': submitted && f['manage_genres'].errors }" />
         </div>
 
         

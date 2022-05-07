@@ -1,13 +1,12 @@
-
-<nav class="navbar navbar-expand-lg navbar-light bg-white  sticky-top">
+<nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top border-bottom">
     <div class="container py-3">
-        <a class="navbar-brand" href="/home">
-            <img src="https://image.shutterstock.com/image-vector/s-w-sw-initial-logo-600w-1707762913.jpg" width="30" height="40" style="border-width: 3px; 
+        <a class="navbar-brand d-flex align-items-center gap-3" href="/home">
+            <img src="https://image.shutterstock.com/image-vector/s-w-sw-initial-logo-600w-1707762913.jpg" width="50" height="50" style="border-width: 3px; 
                                                                                                                                         border-bottom: 5px solid #bbb;
                                                                                                                                         border-right: 5px solid #bbb;
                                                                                                                                         border-color: black;" 
                                                                                                                                         class="d-inline-block align-top"/>
-            <span class="ml-3">SphereWatch</span>
+            <span class="">SphereWatch</span>
         </a>
         <button class="navbar-toggler btn btn-outline-primary" type="button" data-toggle="collapse"
          data-target="#navbarSupportedContent"  aria-expanded="false" aria-label="Toggle navigation" (click)="isCollapsed = !isCollapsed"
@@ -16,7 +15,7 @@
           </button>
 
         <div class="collapse navbar-collapse text-center" id="navbarSupportedContent" [ngbCollapse]="isCollapsed">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav align-items-center">
                 <li class="nav-item" >
                     <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active">Pagrindinis</a>
                 </li>
@@ -36,16 +35,21 @@
                 <li class="nav-item" *ngIf="isSignedIn">
                     <a class="nav-link" [routerLink]="['/admin']" routerLinkActive="active">Administratorius</a>
                 </li>
-                <li  class="nav-item" *ngIf="isSignedIn" >
+
+                <li class="nav-item" *ngIf="isSignedIn">
+                    <a class="navbar-brand" [routerLink]="['/profile']" routerLinkActive="active" class="nav-link" >Sveiki, {{userName}}</a>
+                </li>
+
+                <li  class="nav-item align-items-center" *ngIf="isSignedIn" >
                     <a class="navbar-brand" [routerLink]="['/profile']" routerLinkActive="active" class="nav-link" >
-                        <span >Sveiki, {{userName}}  </span>
-                        <img src="http://127.0.0.1:8000/{{profile_pic}}" >
+                        
+                        <img src="http://127.0.0.1:8000/{{profile_pic}}" width="60" height="50" style="align-self: auto;">
                         
                     </a>
                    
                 </li>
-                <li class="nav-item" *ngIf="isSignedIn">
-                    <button class="btn btn-outline-primary"  (click)="signOut()" >Atsijungti</button>
+                <li class="nav-item " *ngIf="isSignedIn">
+                    <button class="btn btn-outline-danger" (click)="signOut()" >Atsijungti</button>
                 </li>
             </ul>
         </div>

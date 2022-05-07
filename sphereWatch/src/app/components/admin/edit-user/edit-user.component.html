@@ -1,5 +1,5 @@
 <div class="container card">
-    <h3 class="card-header">Redaguokite esamą naudotoją</h3>
+    <h3 class="card-header bg-dark text-light">Redaguokite esamą naudotoją</h3>
     <form class="card-body" [formGroup]="editForm" (ngSubmit)="onSubmit()">
 
         <div *ngIf="error?.username" class="alert alert-danger mt-3">

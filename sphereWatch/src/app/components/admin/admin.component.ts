@@ -13,7 +13,6 @@ export class AdminComponent implements OnInit {
 
   UsersList:User[] = [];
   
-  
   constructor(
     private AdminService: AdminService,
     private router: Router,

@@ -1,5 +1,5 @@
 <div class="container card">
-    <h3 class="card-header">Redaguokite savo profilį</h3>
+    <h3 class="card-header bg-dark text-light"> Redaguokite savo profilį</h3>
     <form class="card-body" [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
 
         <div *ngIf="error?.username" class="alert alert-danger mt-3">
@@ -76,7 +76,7 @@
             <label for="avatar_url">Profilio nuotrauka</label>
             <br>
             <br>
-            <img src= 'http://127.0.0.1:8000/{{profileImage}}' style="max-width: 50vh; max-height: 30vh;" class="img-fluid" >
+            <img src= 'http://127.0.0.1:8000/{{profileImage}}' style="max-width: 50vh; max-height: 30vh; border-radius: 10px; outline: auto;" class="img-fluid" >
             <br>
             <br>
             <input formControlName="avatar_url" type="file" id="avatar_url" class="form-control" (change)="onFileChange($event)">

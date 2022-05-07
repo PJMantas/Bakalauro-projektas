@@ -1,8 +1,5 @@
 <div class="container">
-    <h2>SphereWatch sistemos informacija</h2>
-        
-
-        <br>
+    <h2 class="card-header">SphereWatch sistemos informacija</h2>
         
         <div class="row">
             <div class="card col-sm">
@@ -13,38 +10,21 @@
                 <br>
                 <h4>Sistemos vaizdo įrašų teigiamų įvertinimų : {{TotalVideoLikes}}</h4>
                 <h4>Sistemos vaizdo įrašų neigiamų įvertinimų : {{TotalVideoDislikes}}</h4>
-                <h4>Sistemos vaizdo įrašų komentarų skaičius : {{TotalCommentCount}}</h4>
+                <h4 class="border-bottom">Sistemos vaizdo įrašų komentarų skaičius : {{TotalCommentCount}}</h4>
+
                 
             </div>
-            <br>
+        
             <div class="card col-sm">
-                <h3>Daugiausia peržiūrų turintys vaizdo įrašai</h3>
-                <table class="table table-striped mb-0">
-                    <thead>
-                      <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Pavadinimas</th>
-                        <th scope="col">Peržiūros</th>
-                        <th scope="col">Teigiami įvertinimai</th>
-                        <th scope="col">Neigiami įvertinimai</th>
-                        <th scope="col" style="width: 1%; white-space: nowrap;"></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        
-                      <tr *ngFor="let video of MostViewedVideos">
-                        <th scope="row">{{video.id}}</th>
-                        <td>{{video.title}}</td>
-                        <td>{{video.clicks}}</td>
-                        <td>{{video.likes}}</td>
-                        <td>{{video.dislikes}}</td>
-                        <td class="btn-group" style="width: 1%; white-space: nowrap;">  
-                            <button class="btn btn-primary btn-xs" [routerLink] = "'/viewVideo/' + video.id">Peržiūrėti</button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+              
 
+              
+              <div class="col-sm card-body" id="divChart" style=" text-align: center;">
+                <h3>Sistemos bendri įvertinimai</h3>
+                <canvas style="max-height: 20vh;" id="ratingsChart"></canvas>
+              </div>
+           
+                  
 
             </div>
             
@@ -115,7 +95,7 @@
             
         </div>
         <br>
-
+        <div class="row">
         <div class="card col-sm">
           <h3>Daugiausia komentarų turintys vaizdo įrašai</h3>
           <table class="table table-striped mb-0">
@@ -139,12 +119,45 @@
                 </tr>
               </tbody>
             </table>
-
-
+          </div>
+          <div class="card col-sm">
+            
+            <h3>Daugiausia peržiūrų turintys vaizdo įrašai</h3>
+                <table class="table table-striped mb-0">
+                    <thead>
+                      <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Pavadinimas</th>
+                        <th scope="col">Peržiūros</th>
+                        <th scope="col">Teigiami įvertinimai</th>
+                        <th scope="col">Neigiami įvertinimai</th>
+                        <th scope="col" style="width: 1%; white-space: nowrap;"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        
+                      <tr *ngFor="let video of MostViewedVideos">
+                        <th scope="row">{{video.id}}</th>
+                        <td>{{video.title}}</td>
+                        <td>{{video.clicks}}</td>
+                        <td>{{video.likes}}</td>
+                        <td>{{video.dislikes}}</td>
+                        <td class="btn-group" style="width: 1%; white-space: nowrap;">  
+                            <button class="btn btn-primary btn-xs" [routerLink] = "'/viewVideo/' + video.id">Peržiūrėti</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+          </div>
+      </div>
+      <div style="height: fit-content; text-align: center;">
+        <h3>Užsiregistravusių naudotojų skaičius pagal mėnesį</h3>
+        <canvas id="usersByMonth"></canvas>
       </div>
 
-        <br>
+      
 
-  
-</div>
+        
+
 
