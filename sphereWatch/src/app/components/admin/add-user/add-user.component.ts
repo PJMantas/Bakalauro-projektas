@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../../models/user';
+import { Permission } from 'src/app/models/permission';
 import { AdminService } from '../../../services/admin.service';
+import { PermissionService } from 'src/app/services/permission.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 
@@ -15,12 +17,15 @@ export class AddUserComponent implements OnInit {
   addForm: FormGroup;
   userId!: number;
   user: User = new User();
+  UserPermissions!: Permission;
+  manageUsers = false;
   loading = false;
   submitted = false;
   error: any;
 
   constructor(
     private AdminService: AdminService,
+    private PermissionService: PermissionService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private router: Router,
@@ -41,6 +46,17 @@ export class AddUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.PermissionService.getAuthUserPermissions().subscribe(result => {
+      this.UserPermissions = result['permissions'];
+
+      if (!this.UserPermissions.is_admin || !this.UserPermissions.manage_users) {
+        this.router.navigate(['/home']);
+      } else {
+        this.manageUsers = true;
+      }},
+      error => {
+        this.router.navigate(['/home']);
+    });
   }
 
   get f() {return this.addForm.controls; }

@@ -29,4 +29,8 @@ export class PermissionService {
     return this.http.get<Permission>('http://127.0.0.1:8000/api/admin/get-permission/', {params: {id}});
   }
 
+  getAuthUserPermissions(){
+    return this.http.get<Permission>('http://127.0.0.1:8000/api/user/get-auth-user-permissions/');
+  }
+
 }

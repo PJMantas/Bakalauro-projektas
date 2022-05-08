@@ -12,9 +12,11 @@ import { Permission } from '../../../../models/permission';
 export class EditPermissionComponent implements OnInit {
   $permisionId!: number;
   $permission: Permission = new Permission();
+  UserPermissions!: Permission;
   editForm: FormGroup;
   error: any;
   submitted = false;
+  showWindow = false;
 
   constructor(
     private PermissionService: PermissionService,
@@ -34,13 +36,26 @@ export class EditPermissionComponent implements OnInit {
         comment_edit: [''],
         comment_delete: [''],
         is_admin: [''],
-        user_create: [''],
-        user_edit: [''],
+        manage_users: [''],
+        manage_permissions: [''],
+        manage_genres: [''],
 
       });
   }
 
   ngOnInit(): void {
+    this.PermissionService.getAuthUserPermissions().subscribe(result => {
+      this.UserPermissions = result['permissions'];
+
+      if (!this.UserPermissions.is_admin || !this.UserPermissions.manage_permissions) {
+        this.router.navigate(['/home']);
+      } else {
+        this.showWindow = true;
+      }},
+      error => {
+        this.router.navigate(['/home']);
+    });
+
     this.$permisionId = Number(this.route.snapshot.paramMap.get('id'));
 
     this.PermissionService.getPermission(this.$permisionId).subscribe(response => {

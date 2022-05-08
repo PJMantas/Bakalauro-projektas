@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../models/user';
+import { Permission } from 'src/app/models/permission';
 import { Comment } from '../../models/comment';
 import { AuthService } from '../../shared/auth.service';
+import { PermissionService } from 'src/app/services/permission.service';
 import { CommentService } from '../../services/comment.service';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 
@@ -20,8 +22,8 @@ export class CommentsComponent implements OnInit {
   
   comment: Comment = new Comment();
   currentUser: User = new User();
+  UserPermissions!: Permission;
   CommentsList:Comment[] = [];
-  CommentsList2:Comment[] = [];
   userList: User[] = [];
   angular: any;
   loading = false;
@@ -33,9 +35,14 @@ export class CommentsComponent implements OnInit {
   showChildEditForm: boolean = false;
   clickedIndex!: number;
   someSubscription: any;
+  allowComment: boolean = false;
+  allowEditComment: boolean = false;
+  allowDeleteComment: boolean = false;
+  commentsCount: number = 7;
 
   constructor(
     private CommentService: CommentService,
+    private PermissionService: PermissionService,
     private route: ActivatedRoute,
     public authService: AuthService,
     private formBuilder: FormBuilder,
@@ -43,6 +50,20 @@ export class CommentsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.PermissionService.getAuthUserPermissions().subscribe(result => {
+      this.UserPermissions = result['permissions'];
+      if (this.UserPermissions.comment_create) {
+        this.allowComment = true;
+      } 
+      if (this.UserPermissions.comment_edit) {
+        this.allowEditComment = true;
+      }
+      if (this.UserPermissions.comment_delete) {
+        this.allowDeleteComment = true;
+      }
+    });
+
+
     this.addCommentForm = this.formBuilder.group({
       comment_text: ['', Validators.required],
       video_id: this.videoId,
@@ -67,8 +88,7 @@ export class CommentsComponent implements OnInit {
 
   getAllComments(video_id: number) {
 
-    this.CommentService.getCommentsList(video_id).subscribe(result => {
-      console.log(result);
+    this.CommentService.getCommentsList(video_id, this.commentsCount).subscribe(result => {
       this.CommentsList = result['comments'];
     });
    
@@ -80,7 +100,7 @@ export class CommentsComponent implements OnInit {
     this.CommentService.createComment(this.addCommentForm.value).subscribe(
       data => {
         this.submitted = false;
-        this.CommentService.getCommentsList(this.videoId).subscribe(result => {
+        this.CommentService.getCommentsList(this.videoId, this.commentsCount).subscribe(result => {
           this.CommentsList = result['comments'];
         });
         this.addCommentForm.reset();
@@ -101,7 +121,7 @@ export class CommentsComponent implements OnInit {
     this.CommentService.editComment(this.editCommentForm.value).subscribe(
       data => {
         this.submitted = false;
-        this.CommentService.getCommentsList(this.videoId).subscribe(result => {
+        this.CommentService.getCommentsList(this.videoId, this.commentsCount).subscribe(result => {
           this.CommentsList = result['comments'];
         });
         this.showEditForm = false;
@@ -128,7 +148,7 @@ export class CommentsComponent implements OnInit {
       data => {
         this.submitted = false;
 
-        this.CommentService.getCommentsList(this.videoId).subscribe(result => {
+        this.CommentService.getCommentsList(this.videoId, this.commentsCount).subscribe(result => {
           this.CommentsList = result['comments'];
         });
       },
@@ -141,7 +161,7 @@ export class CommentsComponent implements OnInit {
 
   onDeleteComment(commentId: number) {
     this.CommentService.deleteComment(commentId).subscribe(result => {
-      this.CommentService.getCommentsList(this.videoId).subscribe(result => {
+      this.CommentService.getCommentsList(this.videoId, this.commentsCount).subscribe(result => {
         this.CommentsList = result['comments'];
       });
     })
@@ -151,4 +171,8 @@ export class CommentsComponent implements OnInit {
     return this.CommentsList.find(x => x.id === id);
   }
 
+  onLoadMoreComments() {
+    this.commentsCount += 7;
+    this.getAllComments(this.videoId);
+  }
 }

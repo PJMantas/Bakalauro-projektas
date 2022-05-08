@@ -17,8 +17,8 @@ export class CommentService {
     return this.http.post<Comment>(`http://127.0.0.1:8000/api/comment/create-comment-reply/`, formBody );
   };
 
-  getCommentsList(video_id: number) {
-    return this.http.get<Comment>(`http://127.0.0.1:8000/api/comment/get-video-comments/`, {params: {video_id}});
+  getCommentsList(video_id: number, count: number) {
+    return this.http.get<Comment>(`http://127.0.0.1:8000/api/comment/get-video-comments/`, {params: {video_id, count}});
   };
 
   deleteComment(id: number) {

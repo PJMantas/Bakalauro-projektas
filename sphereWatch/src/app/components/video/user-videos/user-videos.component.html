@@ -10,7 +10,7 @@
 
             <button class="btn btn-primary btn-xs" [routerLink] = "'/viewVideo/' + video.id">Žiūrėti</button>
             <button class="btn btn-primary btn-xs" [routerLink] = "'/video/editVideo/' + video.id">Redaguoti vaizdo įrašą</button>
-            <button type="button" class="btn btn-danger btn-xs" (click)="onDelete(video.id)">Trinti</button>
+            <button *ngIf="allowDelete" type="button" class="btn btn-danger btn-xs" (click)="onDelete(video.id)">Trinti</button>
             </div>
         </div>
     </div>

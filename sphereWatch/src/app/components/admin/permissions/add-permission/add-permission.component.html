@@ -1,4 +1,4 @@
-<div class="container card">
+<div *ngIf="showWindow" class="container card">
     <h3 class="card-header bg-dark text-light">Sukurkite naują teisių grupę</h3>
     <form class="card-body" [formGroup]="addForm" (ngSubmit)="onSubmit()">
         

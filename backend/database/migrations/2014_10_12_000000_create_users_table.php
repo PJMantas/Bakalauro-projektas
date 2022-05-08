@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->integer('age')->nullable();
             $table->string('city')->nullable();
             $table->string('country')->nullable();
-            $table->integer('group_id')->default('2');
+            $table->integer('group_id')->default('1');
             $table->string('avatar_url')->nullable();
         });
     }

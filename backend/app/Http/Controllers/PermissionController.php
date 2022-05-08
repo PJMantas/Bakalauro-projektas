@@ -12,17 +12,16 @@ class PermissionController extends Controller
 {
     public function getAuthUserPermissions(){
         $user = auth()->user();
-        //$userGroup = $user->group_id;
         
         $permissions = new Permission();
 
-        $userGroup = 4;
+        $userGroup = $user->group_id;
 
         $permissions = DB::select('select * from permissions where id = ?', [$userGroup]);
 
         return response()->json([
             'message' => 'Permissions successfully fetched',
-            'permissions' => $permissions
+            'permissions' => $permissions[0]
         ], 200);
     }
 

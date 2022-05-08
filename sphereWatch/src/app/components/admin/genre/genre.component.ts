@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Genre } from '../../../models/genre';
+import { Permission } from 'src/app/models/permission';
+import { PermissionService } from 'src/app/services/permission.service';
 import { GenreService } from 'src/app/services/genre.service';
 import { AuthService } from '../../../shared/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -12,13 +14,16 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class GenreComponent implements OnInit {
   GenreList: Genre[] = [];
+  UserPermissions!: Permission;
   editGenreForm: FormGroup;
   clickedIndex!: number;
   showCreate = false;
   showEdit = false;
+  showWindow = false;
 
   constructor(
     private GenreService: GenreService,
+    private PermissionService: PermissionService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private router: Router,
@@ -31,6 +36,19 @@ export class GenreComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.PermissionService.getAuthUserPermissions().subscribe(result => {
+      this.UserPermissions = result['permissions'];
+
+      if (!this.UserPermissions.is_admin || !this.UserPermissions.manage_genres) {
+        this.router.navigate(['/home']);
+      } else {
+        this.showWindow = true;
+      }},
+      error => {
+        this.router.navigate(['/home']);
+    });
+
+
     this.GenreService.getGenresList().subscribe(result => {
       console.log(result);
       this.GenreList = result['genres'];
@@ -49,14 +67,17 @@ export class GenreComponent implements OnInit {
   onDelete(genreId) {
     this.GenreService.deleteGenre(genreId).subscribe(result => {
       console.log(result);
-      window.location.reload();
+      this.GenreList = this.GenreList.filter(genre => genre.id !== genreId);
+      
     });
   }
 
   createGenre(genreName) {
     this.GenreService.createGenre(genreName).subscribe(result => {
-      console.log(result);
-      window.location.reload();
+      this.GenreService.getGenresList().subscribe(result => {
+        this.GenreList = result['genres'];
+      });
+      this.showCreate = false;
     });
   }
 
@@ -66,8 +87,10 @@ export class GenreComponent implements OnInit {
       name: genreName
     });
     this.GenreService.updateGenre(this.editGenreForm.value).subscribe(result => {
-      console.log(result);
-      window.location.reload();
+      this.showEdit = false;
+      this.GenreService.getGenresList().subscribe(result => {
+        this.GenreList = result['genres'];
+      });  
     });
   }
 

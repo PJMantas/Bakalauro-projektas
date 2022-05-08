@@ -1,4 +1,4 @@
-<div class="container card">
+<div *ngIf="manageUsers" class="container card">
     <h3 class="card-header bg-dark text-light">Redaguokite esamą naudotoją</h3>
     <form class="card-body" [formGroup]="editForm" (ngSubmit)="onSubmit()">
 
@@ -84,7 +84,7 @@
 
         
         <br>
-        <button class="btn btn-dark btn-xs " type="submit">Pridėti</button>
+        <button class="btn btn-dark btn-xs " type="submit">Išsaugoti</button>
         <button class="btn btn-dark btn-xs " type="button" [routerLink]="['/admin']">Grįžti</button>
         
         <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>

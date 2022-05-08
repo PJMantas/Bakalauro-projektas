@@ -48,7 +48,7 @@ class AuthController extends Controller
             'age' => 'nullable|numeric',
             'country' => 'nullable|string',
             'city' => 'nullable|string',
-            'avatar_url' => 'file|mimes:jpg,png,jpeg,gif,svg|max:5120',
+            'avatar_url' => 'file|mimes:jpg,png,jpeg,gif|max:5120',
         ]);
         if($validator->fails()){
             return response()->json($validator->errors(), 400);

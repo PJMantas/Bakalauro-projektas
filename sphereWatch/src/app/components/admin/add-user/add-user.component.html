@@ -1,5 +1,5 @@
-<div class="container card">
-    <h3 class="card-header bg-dark text-light">Pridėti naują vartotoją</h3>
+<div *ngIf="manageUsers" class="container card">
+    <h3 class="card-header bg-dark text-light">Pridėti naują naudotoją</h3>
     <form class="card-body" [formGroup]="addForm" (ngSubmit)="onSubmit()">
 
         <div *ngIf="error?.username" class="alert alert-danger mt-3">

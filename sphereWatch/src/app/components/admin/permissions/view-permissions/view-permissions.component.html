@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="showWindow" class="container">
     <h3 class="card-header bg-dark text-light">Naudotojų grupių sąrašas</h3>
     
     <button class="btn btn-success btn-xs" [routerLink] = "'/admin/add-permission'">Pridėti naują grupę</button>

@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Video } from '../../../models/video';
 import { User } from '../../../models/user';
+import { Permission } from 'src/app/models/permission';
 import { VideoService } from '../../../services/video.service';
+import { PermissionService } from 'src/app/services/permission.service';
 import { AuthService } from '../../../shared/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Genre } from '../../../models/genre';
@@ -27,10 +29,13 @@ export class CreateVideoComponent implements OnInit {
   isLoaded:boolean = false;
   file: any;
   thumbnail: any;
+  UserPermissions!: Permission;
+  showWindow = false;
 
   constructor(
     private VideoService: VideoService,
     private GenreService: GenreService,
+    private PermissionService: PermissionService,
     private route: ActivatedRoute,
     public authService: AuthService,
     private formBuilder: FormBuilder,
@@ -58,6 +63,16 @@ export class CreateVideoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.PermissionService.getAuthUserPermissions().subscribe(result => {
+      this.UserPermissions = result['permissions'];
+
+      if (!this.UserPermissions.video_create) {
+        this.router.navigate(['/video/userVideos']);
+      } else {
+        this.showWindow = true;
+      }
+    });
+
     this.GenreService.getGenresList().subscribe(result => {
       console.log(result);
       this.GenreList = result['genres'];

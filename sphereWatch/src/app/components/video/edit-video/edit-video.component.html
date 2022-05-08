@@ -1,6 +1,6 @@
-<div>
+<div *ngIf="showWindow">
     <div class="container card">
-        <h3 class="card-header">Redaguokite video</h3>
+        <h3 class="card-header bg-dark text-light">Redaguokite video</h3>
         <form class="card-body" [formGroup]="editVideoForm"  (ngSubmit)="onSubmit()">
     
             <div class="form-group">
@@ -13,10 +13,6 @@
                 <input type="text" formControlName="description" class="form-control" />
             </div>
     
-            <div class="form-group">
-                <label for="creator_id">Jusų id</label>
-                <input [readonly]="true" type="text" formControlName="creator_id" class="form-control" />
-            </div>
             <br>
     
             <select formControlName="genre" class="form-control" (change)="onGenreChange($event)">  
@@ -25,10 +21,10 @@
             </select>  
     
             <br>
-            <button class="btn btn-dark btn-xs " type="submit">Išsaugoti</button>
+            <button class="btn btn-success btn-xs " type="submit">Išsaugoti</button>
             <button class="btn btn-dark btn-xs " type="button" [routerLink]="['/profile']">Grįžti</button>
 
-            <button type="button" class="btn btn-danger btn-xs" (click)="onDelete()">Trinti</button>
+            <button *ngIf="allowDelete" type="button" class="btn btn-danger btn-xs" (click)="onDelete()">Trinti</button>
             
             <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
         </form>

@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="showWindow" class="container">
     <h3 class="card-header bg-dark text-light">Sistemos žanrų sąrašas</h3>
     <button type="button" class="btn btn-success btn-xs" (click)="onCreate()">Sukurti naują</button>
     <div *ngIf="showCreate">

@@ -1,12 +1,12 @@
 
 <div class="pt-4">
     <h5>Komentarai</h5>
-    <form [formGroup]="addCommentForm"  (ngSubmit)="onCreateComment()">
+    <form *ngIf="allowComment" [formGroup]="addCommentForm"  (ngSubmit)="onCreateComment()">
         <div class="form-group mb-2">
             <textarea formControlName="comment_text" class="form-control" placeholder="sukurkite atsiliepimą"></textarea>
         </div>
-        <div class="text-right">
-            <button class="btn btn-primary btn-sm" type="submit">Sukurti komentarą</button>
+        <div  class="text-right">
+            <button [disabled]="!allowComment" class="btn btn-primary btn-sm" type="submit">Sukurti komentarą</button>
         </div>
     </form>
 
@@ -16,9 +16,9 @@
         <h6 class="card-title">{{comment.username}}</h6>
         <h5 class="card-text">{{comment.comment_text}}</h5>
         <p class="card-text">{{comment.created_at}}</p>
-        <button *ngIf="showReplyForm === false && showEditForm === false;" class="btn btn-primary btn-xs" (click)="showReplyForm = true; clickedIndex = i">Atrašyti</button>
-        <button *ngIf="showEditForm === false && showReplyForm === false;" class="btn btn-primary btn-xs" (click)="showEditForm = true; clickedIndex = i">Redaguoti</button>
-        <button class="btn btn-danger btn-xs" (click)="onDeleteComment(comment.id)">Delete</button>
+        <button *ngIf="showReplyForm === false && showEditForm === false && allowComment === true;" class="btn btn-primary btn-xs" (click)="showReplyForm = true; clickedIndex = i">Atrašyti</button>
+        <button *ngIf="showEditForm === false && showReplyForm === false && allowEditComment === true;" class="btn btn-primary btn-xs" (click)="showEditForm = true; clickedIndex = i">Redaguoti</button>
+        <button *ngIf="allowDeleteComment" class="btn btn-danger btn-xs" (click)="onDeleteComment(comment.id)">Delete</button>
         
         </div>
 
@@ -50,8 +50,8 @@
                 <h6 class="card-title">{{child.username}}</h6>
                 <h5 class="card-text">{{child.comment_text}}</h5>
                 <p class="card-text">{{child.created_at}}</p>
-                <button *ngIf="showChildEditForm === false && showReplyForm === false;" class="btn btn-primary btn-xs" (click)="showChildEditForm = true; clickedIndex = child.id">Edit</button>
-                <button class="btn btn-danger btn-xs" (click)="onDeleteComment(child.id)">Delete</button>
+                <button *ngIf="showChildEditForm === false && showReplyForm === false && allowEditComment === true;" class="btn btn-primary btn-xs" (click)="showChildEditForm = true; clickedIndex = child.id">Edit</button>
+                <button *ngIf="allowDeleteComment" class="btn btn-danger btn-xs" (click)="onDeleteComment(child.id)">Delete</button>
                 
                 <form [formGroup]="editCommentForm" (ngSubmit)="onEditComment(child.id)" *ngIf="showChildEditForm && clickedIndex === child.id">
                     <div class="form-group mb-2">
@@ -71,6 +71,6 @@
     </div>
    
     <div class="text-center">
-        <button  class="btn btn-xs btn-pill btn-outline-primary" type="button">Daugiau komentarų</button>
+        <button  class="btn btn-xs btn-pill btn-outline-primary" (click)="onLoadMoreComments()" type="button">Daugiau komentarų</button>
     </div>
 </div>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Video } from '../../../models/video';
+import { Permission } from 'src/app/models/permission';
+import { PermissionService } from 'src/app/services/permission.service';
 import { VideoService } from '../../../services/video.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -10,13 +12,24 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class UserVideosComponent implements OnInit {
   userVideos: Video[] = [];
+  allowDelete = false;
+  UserPermissions!: Permission;
 
   constructor(
     private VideoService: VideoService,
+    private PermissionService: PermissionService,
     private router: Router,
   ) { }
 
   ngOnInit(): void {
+    this.PermissionService.getAuthUserPermissions().subscribe(result => {
+      this.UserPermissions = result['permissions'];
+
+      if (!this.UserPermissions.video_delete) {
+        this.allowDelete = true;
+      }   
+    });
+
     this.VideoService.getUserVideosList().subscribe(result => {
       console.log(result);
       this.userVideos = result['videos'];

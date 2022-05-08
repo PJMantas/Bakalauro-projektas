@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../../models/user';
+import { Permission } from 'src/app/models/permission';
 import { AdminService } from '../../../services/admin.service';
+import { PermissionService } from 'src/app/services/permission.service';
 import { UserService } from '../../../services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
@@ -15,6 +17,8 @@ export class EditUserComponent implements OnInit {
   editForm: FormGroup;
   userId!: number;
   user: User = new User();
+  UserPermissions!: Permission;
+  manageUsers = false;
   loading = false;
   submitted = false;
   error: any;
@@ -22,6 +26,7 @@ export class EditUserComponent implements OnInit {
   constructor(
     private AdminService: AdminService,
     private UserService: UserService,
+    private PermissionService: PermissionService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private router: Router,
@@ -43,7 +48,18 @@ export class EditUserComponent implements OnInit {
   ngOnInit(): void {
 
     this.userId = Number(this.route.snapshot.paramMap.get('id'));
-    console.log(this.userId);
+    
+    this.PermissionService.getAuthUserPermissions().subscribe(result => {
+      this.UserPermissions = result['permissions'];
+
+      if (!this.UserPermissions.is_admin || !this.UserPermissions.manage_users) {
+        this.router.navigate(['/home']);
+      } else {
+        this.manageUsers = true;
+      }},
+        error => {
+          this.router.navigate(['/home']);
+      });
 
     this.UserService.getUser(this.userId).subscribe(response => {
       this.user = response['user'];

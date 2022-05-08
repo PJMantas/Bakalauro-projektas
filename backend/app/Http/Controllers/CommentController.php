@@ -91,13 +91,18 @@ class CommentController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'video_id' => 'required|numeric',
+            'count' => 'nullable|numeric',
         ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
 
-        $comments = DB::select('select * from comments where video_id = ? order by created_at desc', [$request['video_id']]);
+        $comments = DB::select('select * from comments where video_id = ? order by created_at desc LIMIT ?', [$request['video_id'], $request['count']]);
+        //$comments = Comment::where('video_id', $request['video_id'])
+        //                ->orderBy('created_at', 'desc')
+        //                ->take($request['count'])
+        //                ->get();
 
 
         return response()->json([

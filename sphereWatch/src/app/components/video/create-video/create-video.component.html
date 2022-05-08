@@ -1,6 +1,6 @@
-<div *ngIf="isLoaded">
+<div *ngIf="showWindow">
 <div class="container card">
-    <h3 class="card-header">Sukurkite naują video</h3>
+    <h3 class="card-header bg-dark text-light">Sukurkite naują vaizdo įrašą</h3>
     <form class="card-body" [formGroup]="addVideoForm"  (ngSubmit)="onSubmit()">
 
         <div class="form-group">
@@ -9,16 +9,16 @@
         </div>
         
         <div class="form-group">
-            <label for="video_url">Vaizdo įrašo failas</label>
+            <label for="video_url">Pasirinkite vaizdo įrašo failą</label>
             <br>
-            <input formControlName="video_url" type="file" id="video_url" class="form-control" (change)="onFileChange($event)">
+            <input formControlName="video_url" type="file" accept=".mp4,.mkv" id="video_url" class="form-control" (change)="onFileChange($event)">
             
         </div>
 
         <div class="form-group">
-            <label for="thumbnail_url">Nuotraukos failas</label>
+            <label for="thumbnail_url">Pasirinkite miniatiūros failą</label>
             <br>
-            <input formControlName="thumbnail_url" type="file" id="thumbnail_url" class="form-control" (change)="onThumbnailChange($event)">
+            <input formControlName="thumbnail_url" type="file" accept=".jpg,.gif,.jpeg,.png" id="thumbnail_url" class="form-control" (change)="onThumbnailChange($event)">
             
         </div>
 

@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Video } from '../../../models/video';
 import { User } from '../../../models/user';
 import { Genre } from 'src/app/models/genre';
+import { Permission } from 'src/app/models/permission';
+import { PermissionService } from 'src/app/services/permission.service';
 import { VideoService } from '../../../services/video.service';
 import { GenreService } from 'src/app/services/genre.service';
 import { AuthService } from '../../../shared/auth.service';
@@ -22,14 +24,18 @@ export class EditVideoComponent implements OnInit {
   video: Video = new Video();
   GenreList: Genre[] = [];
   currentUser: User = new User();
+  UserPermissions!: Permission;
   loading = false;
   submitted = false;
   error: any;
   isLoaded:boolean = false;
+  showWindow: boolean = false;
+  allowDelete: boolean = false;
 
   constructor(
     private VideoService: VideoService,
     private GenreService: GenreService,
+    private PermissionService: PermissionService,
     private route: ActivatedRoute,
     public authService: AuthService,
     private formBuilder: FormBuilder,
@@ -47,6 +53,17 @@ export class EditVideoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.PermissionService.getAuthUserPermissions().subscribe(result => {
+      this.UserPermissions = result['permissions'];
+
+      if (!this.UserPermissions.video_edit) {
+        this.router.navigate(['/video/userVideos']);
+      }
+      if (this.UserPermissions.video_delete) {
+        this.allowDelete = true;
+      }
+    });
+
     this.videoId = Number(this.route.snapshot.paramMap.get('id'));
 
     this.VideoService.getVideoById(this.videoId).subscribe(response => {
@@ -67,11 +84,10 @@ export class EditVideoComponent implements OnInit {
     this.authService.profileUser().subscribe((data: any) => {
       this.currentUser = data;
       this.userId = this.currentUser.id;
-      console.log(this.userId);
-      console.log(this.video.creator_id);
-      if (this.video.creator_id != this.userId)
-      {
+      if (this.video.creator_id != this.userId) {
         this.router.navigate(['/profile']);
+      } else {
+        this.showWindow = true;
       }
       });
 

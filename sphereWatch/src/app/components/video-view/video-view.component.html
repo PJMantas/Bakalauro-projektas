@@ -20,13 +20,13 @@
           <h2>{{Video.title}}</h2>
           <hr>
           <h3 class="d-flex justify-content-between"> 
-            <span>Peržiūros{{Video.clicks}}</span>
+            <span>Peržiūros {{Video.clicks}}</span>
             <div>
-              <button type="button" class="btn btn-success btn-xs" (click)="onReaction(true)">
+              <button [disabled]="!allowReact" type="button" class="btn btn-success btn-xs" (click)="onReaction(true)">
                 <i class="bi bi-hand-thumbs-up"></i> {{Video.likes}}
               </button> :
   
-              <button type="button" class="btn btn-danger btn-xs" (click)="onReaction(false)">
+              <button [disabled]="!allowReact" type="button" class="btn btn-danger btn-xs" (click)="onReaction(false)">
                 <i class="bi bi-hand-thumbs-down"></i> {{Video.dislikes}}
               </button>
             </div>
@@ -35,7 +35,6 @@
           
 
           <p>{{Video.description}}</p>
-          <p>{{Video.genre}}</p>
 
           <button class="btn btn-primary btn-xs" [routerLink]="'/video/editVideo/' + videoId">Redaguoti vaizdo įrašą</button>
 

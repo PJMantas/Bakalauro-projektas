@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../../models/user';
+import { Permission } from 'src/app/models/permission';
 import { FormGroup } from '@angular/forms';
 import { AdminService } from '../../../services/admin.service';
 import { VideoService } from 'src/app/services/video.service';
 import { ReportService } from 'src/app/services/report.service';
+import { PermissionService } from 'src/app/services/permission.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Video } from 'src/app/models/video';
 import Chart  from 'chart.js/auto';
@@ -41,16 +43,33 @@ export class ViewReportComponent implements OnInit {
   ratingsChart: any;
   usersByMonth: any;
   userMonthCount: any;
+  UserPermissions!: Permission;
+  showWindow = false;
 
 
   constructor(
     private AdminService: AdminService,
     private VideoService: VideoService,
     private ReportSerivce: ReportService,
+    private PermissionService: PermissionService,
     private router: Router,
   ) { }
 
   ngOnInit(): void {
+
+    this.PermissionService.getAuthUserPermissions().subscribe(result => {
+      this.UserPermissions = result['permissions'];
+
+      if (!this.UserPermissions.is_admin) {
+        this.router.navigate(['/home']);
+      } else {
+        this.showWindow = true;
+      }},
+      error => {
+        this.router.navigate(['/home']);
+    });
+
+
     this.ReportSerivce.getSystemReport().subscribe(result => {
       console.log(result);
       this.MostDislikedVideos = result['MostDislikedVideos'];

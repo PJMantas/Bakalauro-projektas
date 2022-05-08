@@ -38,7 +38,7 @@
                 <strong class="col-sm">{{UserProfile?.country}}</strong>
               </div>
 
-              <p class="btn btn-outline-dark btn-xs " type="button" [routerLink]="['/edit-profile']">Redaguoti profilį</p>
+              <p class="btn btn-outline-dark btn-xs " type="button" [routerLink]="['/edit-profile']"><i class="bi bi-pencil-square"></i> Redaguoti profilį</p>
             </div>
           </div>
         </div>
@@ -47,7 +47,7 @@
           <div class="col-md-6 card">
             <h2>Vaizdo įrašai</h2>
         
-            <button class="btn btn-outline-success btn-lg " type="button" [routerLink]="['/video/createVideo']" ><i class="bi bi-plus fa-lg"></i> Kurti naują vaizdo įrašą </button>
+            <button class="btn btn-outline-success btn-lg " type="button" [disabled]="!enableButton" [routerLink]="['/video/createVideo']" ><i class="bi bi-plus fa-lg"></i> Kurti naują vaizdo įrašą </button>
             <p class="col-md-6"></p>
             <button class="btn btn-outline-primary btn-lg" type="button" [routerLink]="['/video/userVideos']"><i class="bi bi-camera-video fa-lg"> </i> Mano vaizdo įrašai </button>
             

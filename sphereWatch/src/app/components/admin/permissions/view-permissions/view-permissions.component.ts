@@ -11,6 +11,8 @@ import { Permission } from '../../../../models/permission';
 export class ViewPermissionsComponent implements OnInit {
 
   permissionsList: Permission[] = [];
+  UserPermissions!: Permission;
+  showWindow = false;
 
   constructor(
     private PermissionService: PermissionService,
@@ -18,9 +20,21 @@ export class ViewPermissionsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-      this.PermissionService.getPermissionList().subscribe(result => {
-        this.permissionsList = result['permissions'];
-      });
+    this.PermissionService.getAuthUserPermissions().subscribe(result => {
+      this.UserPermissions = result['permissions'];
+
+      if (!this.UserPermissions.is_admin || !this.UserPermissions.manage_permissions) {
+        this.router.navigate(['/home']);
+      } else {
+        this.showWindow = true;
+      }},
+      error => {
+        this.router.navigate(['/home']);
+    });
+
+    this.PermissionService.getPermissionList().subscribe(result => {
+      this.permissionsList = result['permissions'];
+    });
   }
 
   onDelete(id: number) {

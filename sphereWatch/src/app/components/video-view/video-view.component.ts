@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Video } from '../../models/video';
+import { Permission } from 'src/app/models/permission';
+import { PermissionService } from 'src/app/services/permission.service';
 import { VideoService } from '../../services/video.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import Chart  from 'chart.js/auto';
@@ -14,18 +16,28 @@ export class VideoViewComponent implements OnInit {
 
   Video:Video = new Video();
   RecomendedVideoList:Video[] = [];
+  UserPermissions!:Permission;
   videoId!: number;
   genreId!: number;
   filtersLoaded!: Promise<boolean>;
   ratioChart: any;
+  allowReact: boolean = false;
 
   constructor(
     private VideoService: VideoService,
+    private PermissionService: PermissionService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
 
   ngOnInit(): void {
+    this.PermissionService.getAuthUserPermissions().subscribe(result => {
+      this.UserPermissions = result['permissions'];
+      if (this.UserPermissions.reaction_create) {
+        this.allowReact = true;
+      } 
+    });
+
     this.videoId = Number(this.route.snapshot.paramMap.get('id'));
     this.router.routeReuseStrategy.shouldReuseRoute = function() {
       return false;
