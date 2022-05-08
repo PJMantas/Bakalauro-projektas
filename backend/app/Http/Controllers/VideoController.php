@@ -20,7 +20,7 @@ class VideoController extends Controller
             'video_url' => 'required|file|mimetypes:video/mp4',
             'description' => 'required',
             'genre' => 'required|numeric',
-            'thumbnail_url' => 'file|mimes:jpg,png,jpeg,gif,svg|max:5120',
+            'thumbnail_url' => 'file|mimes:jpg,png,jpeg,gif|max:5120',
             
         ]);
 
@@ -28,7 +28,6 @@ class VideoController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        //$video = Video::create(array_merge($validator->validated()));
         
         $user = auth()->user();
 
@@ -278,11 +277,13 @@ class VideoController extends Controller
 
         if ($request['genre'] != -1)
         {
-            $videos = DB::select('select * from videos where genre=' . $request['genre'] . ' order by ' . $request['orderField'] . ' ' . $request['orderType']);
+            //$videos = DB::select('select * from videos where genre=' . $request['genre'] . ' order by ' . $request['orderField'] . ' ' . $request['orderType']);
+            $videos = Video::Where('genre', $request['genre'])->orderBy($request['orderField'], $request['orderType'])->get();
         }
         else
         {
-            $videos = DB::select('select * from videos order by ' . $request['orderField'] . ' ' . $request['orderType']);
+            //$videos = DB::select('select * from videos order by ' . $request['orderField'] . ' ' . $request['orderType']);
+            $videos = Video::orderBy($request['orderField'], $request['orderType'])->get();
         }
 
         return response()->json([
