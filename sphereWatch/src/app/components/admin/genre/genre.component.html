@@ -1,9 +1,9 @@
 <div *ngIf="showWindow" class="container">
     <h3 class="card-header bg-dark text-light">Sistemos žanrų sąrašas</h3>
-    <button type="button" class="btn btn-success btn-xs" (click)="onCreate()">Sukurti naują</button>
+    <button type="button" class="btn btn-success btn-xs" (click)="onCreate()"><i class="bi bi-plus-square"></i> Sukurti naują</button>
     <div *ngIf="showCreate">
         <input type="text" #genreName name="genreName" value="" class="search-box">
-        <button type="button" class="btn btn-success btn-xs" (click)="createGenre(genreName.value)">Sukurti</button>
+        <button type="button" class="btn btn-success btn-xs" (click)="createGenre(genreName.value)"> Sukurti</button>
         <button type="button" class="btn btn-danger btn-xs" (click)="cancelCreate()">Atšaukti</button>
     </div>
     
@@ -33,8 +33,8 @@
                 <button  type="button" class="btn btn-danger btn-xs" (click)="cancelEdit()">Atšaukti</button>
             </div>
               
-            <button *ngIf="showEdit === false" type="button" class="btn btn-secondary btn-xs" (click)="onEdit(); clickedIndex = i">Redaguoti</button>
-            <button *ngIf="showEdit === false" type="button" class="btn btn-danger btn-xs" (click)="onDelete(genre.id)">Trinti</button>
+            <button *ngIf="showEdit === false" type="button" class="btn btn-secondary btn-xs" (click)="onEdit(); clickedIndex = i"><i class="bi bi-pencil"></i> Redaguoti</button>
+            <button *ngIf="showEdit === false" type="button" class="btn btn-danger btn-xs" (click)="onDelete(genre.id)"><i class="bi bi-file-x"></i> Trinti</button>
               
             </td>
 

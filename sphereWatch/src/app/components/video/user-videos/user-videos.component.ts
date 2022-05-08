@@ -31,7 +31,6 @@ export class UserVideosComponent implements OnInit {
     });
 
     this.VideoService.getUserVideosList().subscribe(result => {
-      console.log(result);
       this.userVideos = result['videos'];
     });
   }
@@ -40,7 +39,9 @@ export class UserVideosComponent implements OnInit {
     this.VideoService.deleteVideo(videoId).subscribe(
       data => {
         this.router.navigate(['/video/userVideos']);
-        window.location.reload();
+        this.VideoService.getUserVideosList().subscribe(result => {
+          this.userVideos = this.userVideos.filter(video => video.id !== videoId);
+        });
       }
     );
   }

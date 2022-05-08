@@ -256,7 +256,7 @@ class VideoController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
-        $videos = DB::select('select * from videos where title like "%' . $request['search'] . '%"');
+        $videos = Video::where('title', 'like', '%' . $request['search'] . '%')->get();
 
         return response()->json([
             'message' => 'Retrieved Video List',

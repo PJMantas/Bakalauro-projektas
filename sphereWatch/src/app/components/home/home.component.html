@@ -4,67 +4,82 @@
     Dalinkitės, žiūrėkite, reaguokite.
   </p>
   <hr class="my-4">
-  <p>
-    Prisijunkite prie mūsų kūribingos bendruomenės !
-  </p>
-  <p class="lead">
-    <a class="btn btn-outline-success" [routerLink]="['/register']" role="button">Registruotis</a>
+  <div class="h3">
+    <p>
+      Prisijunkite prie mūsų kūribingos bendruomenės !
+    </p>
+    <p class="lead">
+      <a class="btn btn-outline-success" [routerLink]="['/register']" role="button">Registruotis</a>
+    </p>
+  </div>
+  <hr class="my-4">
+  <p class="display-4">
+    Populiariausi sistemos vaizdo įrašai!
   </p>
   <hr class="my-4">
   <div class="row">
     <div class="col-sm col-sm-4">
       <div class="card-header">
-        <h2>
-          {{genreTitle1}}
-        </h2>
-        <div class="card " style=" height: fit-content; padding-top: 10px; margin-left: 5px; margin-bottom: 5px;"
-          *ngFor="let video of RecomendedVideos1">
+        <h2> {{genreTitle1}} </h2>
+        <div class="card pb-3" *ngFor="let video of RecomendedVideos1">
+          <a class="card my-6 text-decoration-none bg-dark text-light border-0" [routerLink]="'/viewVideo/' + video.id">
+            <img class="card-img-top" style="height: 16rem;" src="http://127.0.0.1:8000/{{video.thumbnail_url}}"
+              alt="Card image cap">
+            <div class="card-body p-5">
+              <h4 class="card-title" style="font-weight: bolder;">{{video.title}}</h4>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex gap-3">
+                  <h5 class="card-text">Peržiūros: {{video.clicks}} </h5>
+                </div>
+                <button class="btn btn-primary btn-xs" [routerLink]="'/viewVideo/' + video.id">Žiūrėti</button>
+              </div>
 
-          <img class="card-img-top" style="height: auto;" src="http://127.0.0.1:8000/{{video.thumbnail_url}}"
-            alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title" style="font-size:larger; font-weight: bolder;">{{video.title}}</h5>
-            <p style="font-size: large; font-weight: bold;" class="card-text">Peržiūros: {{video.clicks}}</p>
-            <button class="btn btn-primary btn-xs" [routerLink]="'/viewVideo/' + video.id">Žiūrėti</button>
-          </div>
+            </div>
+          </a>
         </div>
       </div>
     </div>
 
     <div class="col-sm col-sm-4">
       <div class="card-header">
-        <h2>
-          {{genreTitle2}}
-        </h2>
-        <div class="card " style=" height: fit-content; padding-top: 10px; margin-left: 5px; margin-bottom: 5px;"
-          *ngFor="let video of RecomendedVideos2">
+        <h2> {{genreTitle2}} </h2>
+        <div class="card pb-3" *ngFor="let video of RecomendedVideos2">
+          <a class="card my-6 text-decoration-none bg-dark text-light border-0" [routerLink]="'/viewVideo/' + video.id">
+            <img class="card-img-top" style="height: 16rem;" src="http://127.0.0.1:8000/{{video.thumbnail_url}}"
+              alt="Card image cap">
+            <div class="card-body p-5">
+              <h4 class="card-title" style="font-weight: bolder;">{{video.title}}</h4>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex gap-3">
+                  <h5 class="card-text">Peržiūros: {{video.clicks}} </h5>
+                </div>
+                <button class="btn btn-primary btn-xs" [routerLink]="'/viewVideo/' + video.id">Žiūrėti</button>
+              </div>
 
-          <img class="card-img-top" style="height: auto;" src="http://127.0.0.1:8000/{{video.thumbnail_url}}"
-            alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title" style="font-size:larger; font-weight: bolder;">{{video.title}}</h5>
-            <p style="font-size: large; font-weight: bold;" class="card-text">Peržiūros: {{video.clicks}}</p>
-            <button class="btn btn-primary btn-xs" [routerLink]="'/viewVideo/' + video.id">Žiūrėti</button>
-          </div>
+            </div>
+          </a>
         </div>
       </div>
     </div>
 
     <div class="col-sm col-sm-4">
       <div class="card-header">
-        <h2>
-          {{genreTitle3}}
-        </h2>
-        <div class="card " style=" height: fit-content; padding-top: 10px; margin-left: 5px; margin-bottom: 5px;"
-          *ngFor="let video of RecomendedVideos3">
+        <h2> {{genreTitle3}} </h2>
+        <div class="card pb-3" *ngFor="let video of RecomendedVideos3">
+          <a class="card my-6 text-decoration-none bg-dark text-light border-0" [routerLink]="'/viewVideo/' + video.id">
+            <img class="card-img-top" style="height: 16rem;" src="http://127.0.0.1:8000/{{video.thumbnail_url}}"
+              alt="Card image cap">
+            <div class="card-body p-5">
+              <h4 class="card-title" style="font-weight: bolder;">{{video.title}}</h4>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex gap-3">
+                  <h5 class="card-text">Peržiūros: {{video.clicks}} </h5>
+                </div>
+                <button class="btn btn-primary btn-xs" [routerLink]="'/viewVideo/' + video.id">Žiūrėti</button>
+              </div>
 
-          <img class="card-img-top" style="height: auto; " src="http://127.0.0.1:8000/{{video.thumbnail_url}}"
-            alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title" style="font-size:larger; font-weight: bolder;">{{video.title}}</h5>
-            <p style="font-size: large; font-weight: bold;" class="card-text">Peržiūros: {{video.clicks}}</p>
-            <button class="btn btn-primary btn-xs" [routerLink]="'/viewVideo/' + video.id">Žiūrėti</button>
-          </div>
+            </div>
+          </a>
         </div>
       </div>
     </div>

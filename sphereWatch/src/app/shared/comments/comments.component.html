@@ -17,8 +17,8 @@
         <h5 class="card-text">{{comment.comment_text}}</h5>
         <p class="card-text">{{comment.created_at}}</p>
         <button *ngIf="showReplyForm === false && showEditForm === false && allowComment === true;" class="btn btn-primary btn-xs" (click)="showReplyForm = true; clickedIndex = i">Atrašyti</button>
-        <button *ngIf="showEditForm === false && showReplyForm === false && allowEditComment === true;" class="btn btn-primary btn-xs" (click)="showEditForm = true; clickedIndex = i">Redaguoti</button>
-        <button *ngIf="allowDeleteComment" class="btn btn-danger btn-xs" (click)="onDeleteComment(comment.id)">Delete</button>
+        <button *ngIf="showEditForm === false && showReplyForm === false && allowEditComment === true;" class="btn btn-primary btn-xs" (click)="showEditForm = true; clickedIndex = i"><i class="bi bi-pencil"></i> Redaguoti</button>
+        <button *ngIf="allowDeleteComment" class="btn btn-danger btn-xs" (click)="onDeleteComment(comment.id)"><i class="bi bi-file-x"></i> Trinti</button>
         
         </div>
 
@@ -50,8 +50,8 @@
                 <h6 class="card-title">{{child.username}}</h6>
                 <h5 class="card-text">{{child.comment_text}}</h5>
                 <p class="card-text">{{child.created_at}}</p>
-                <button *ngIf="showChildEditForm === false && showReplyForm === false && allowEditComment === true;" class="btn btn-primary btn-xs" (click)="showChildEditForm = true; clickedIndex = child.id">Edit</button>
-                <button *ngIf="allowDeleteComment" class="btn btn-danger btn-xs" (click)="onDeleteComment(child.id)">Delete</button>
+                <button *ngIf="showChildEditForm === false && showReplyForm === false && allowEditComment === true;" class="btn btn-primary btn-xs" (click)="showChildEditForm = true; clickedIndex = child.id"><i class="bi bi-pencil"></i> Redaguoti</button>
+                <button *ngIf="allowDeleteComment" class="btn btn-danger btn-xs" (click)="onDeleteComment(child.id)"><i class="bi bi-file-x"></i> Trinti</button>
                 
                 <form [formGroup]="editCommentForm" (ngSubmit)="onEditComment(child.id)" *ngIf="showChildEditForm && clickedIndex === child.id">
                     <div class="form-group mb-2">

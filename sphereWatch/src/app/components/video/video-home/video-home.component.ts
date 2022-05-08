@@ -56,6 +56,7 @@ export class VideoHomeComponent implements OnInit {
     )};
 
   searchVideo(event: any) {
+    
     const searchTerm = event.target.value;
     this.VideoService.searchVideo(searchTerm.trim()).subscribe(result => {
       console.log(result);

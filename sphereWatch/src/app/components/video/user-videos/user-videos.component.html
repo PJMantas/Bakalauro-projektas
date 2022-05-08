@@ -1,18 +1,26 @@
 <div class="container">
-    
     <div class="row">
-        <div class="card col-md-1 my-6" style="width: 40rem; padding-top: 10px; margin-left: 5px; margin-bottom: 5px;" *ngFor="let video of userVideos">
-        
-            <img class="card-img-top" src="http://127.0.0.1:8000/{{video.thumbnail_url}}" alt="Card image cap">
-            <div class="card-body">
-            <h5 class="card-title">{{video.title}}</h5>
-            <p class="card-text">{{video.description}}</p>
+        <div class="col-12 col-lg-6 mb-4" *ngFor="let video of userVideos">
+            <a class="card my-6 text-decoration-none bg-dark text-light border-0"
+                [routerLink]="'/viewVideo/' + video.id">
 
-            <button class="btn btn-primary btn-xs" [routerLink] = "'/viewVideo/' + video.id">Žiūrėti</button>
-            <button class="btn btn-primary btn-xs" [routerLink] = "'/video/editVideo/' + video.id">Redaguoti vaizdo įrašą</button>
-            <button *ngIf="allowDelete" type="button" class="btn btn-danger btn-xs" (click)="onDelete(video.id)">Trinti</button>
-            </div>
+                <img class="card-img-top" style="height: 25rem;" src="http://127.0.0.1:8000/{{video.thumbnail_url}}"
+                    alt="Card image cap">
+                <div class="card-body p-5">
+                    <h4 class="card-title" style="font-weight: bolder;">{{video.title}}</h4>
+                    <p class="card-text description">{{video.description}}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex gap-3">
+                            <h5 class="card-text">Peržiūros: {{video.clicks}} </h5>           
+                            <span class="card-text">Įkelta {{video.created_at}}</span>
+                        </div>
+                        <button class="btn btn-success btn-xs" [routerLink]="'/viewVideo/' + video.id">Žiūrėti</button>
+                        <button class="btn btn-primary btn-xs" [routerLink]="'/video/editVideo/' + video.id"><i class="bi bi-pencil"></i> Redaguoti</button>
+                        <button *ngIf="!allowDelete" type="button" class="btn btn-danger btn-xs" (click)="onDelete(video.id)"><i class="bi bi-file-x"></i> Trinti</button>
+                    </div>
+                    
+                </div>
+            </a>
         </div>
     </div>
-  
 </div>

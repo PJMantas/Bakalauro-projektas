@@ -29,6 +29,21 @@ class CreateUsersTable extends Migration
             $table->integer('group_id')->default('1');
             $table->string('avatar_url')->nullable();
         });
+
+        //Admin default user
+        DB::table('users')->insert(
+            array(
+                'username' => 'admin',
+                'email' => 'admin123@gmail.com',
+                'password' => bcrypt('admin123'),
+                'first_name' => 'Admin',
+                'last_name' => 'Admin',
+                'age' => '0',
+                'city' => 'Kaunas',
+                'country' => 'Lietuva',
+                'group_id' => '2',
+            )
+        );
     }
 
     /**

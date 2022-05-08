@@ -2,14 +2,14 @@
     <h3>Vartotojų sąrašas</h3>
     <div class="row">
       <div class="col-sm">
-        <button *ngIf="manageUsers" class="btn btn-dark btn-xs" [routerLink] = "'/admin/add-user'">Pridėti naudotoją</button>
-        <button class="btn btn-dark btn-xs" [routerLink] = "'/admin/view-report'">Stebėti sistemos statistiką</button>
-        <button *ngIf="managePermissions" class="btn btn-dark btn-xs" [routerLink] = "'/admin/view-permissions'">Peržiūrėti grupių teises</button>
+        <button *ngIf="manageUsers" class="btn btn-success btn-xs" [routerLink] = "'/admin/add-user'"><i class="bi bi-plus-square"></i> Pridėti naudotoją</button>
+        <button class="btn btn-dark btn-xs" [routerLink] = "'/admin/view-report'"><i class="bi bi-graph-up"></i> Stebėti sistemos statistiką</button>
+        <button *ngIf="managePermissions" class="btn btn-dark btn-xs" [routerLink] = "'/admin/view-permissions'"><i class="bi bi-file-ruled"></i> Peržiūrėti grupių teises</button>
       </div>
       
       <div class="col-sm d-flex justify-content-end">
-        <button class="btn btn-dark btn-xs" [routerLink] = "'/admin/genre-requests'">Peržiūrėti žymų prašymus</button>
-        <button *ngIf="manageGenres" class="btn btn-dark btn-xs" [routerLink] = "'/admin/genre'">Peržiūrėti žymų sąrašą</button>
+        <button class="btn btn-dark btn-xs" [routerLink] = "'/admin/genre-requests'"><i class="bi bi-envelope-exclamation"></i> Peržiūrėti žymų prašymus</button>
+        <button *ngIf="manageGenres" class="btn btn-dark btn-xs" [routerLink] = "'/admin/genre'"><i class="bi bi-hash"></i> Peržiūrėti žymų sąrašą</button>
       </div>
     </div>
     
@@ -36,8 +36,8 @@
             <td>{{user.group_id}}</td>
             <td class="btn-group" style="width: 1%; white-space: nowrap;">
                 
-              <button *ngIf="manageUsers" type="button" class="btn btn-primary btn-xs" [routerLink] = "'/admin/edit-user/' + user.id">Redaguoti</button>
-              <button *ngIf="manageUsers" class="btn btn-danger btn-xs" (click)="onDelete(user.id)">Trinti</button>
+              <button *ngIf="manageUsers" type="button" class="btn btn-primary btn-xs" [routerLink] = "'/admin/edit-user/' + user.id"><i class="bi bi-pencil"></i> Redaguoti</button>
+              <button *ngIf="manageUsers" class="btn btn-danger btn-xs" (click)="onDelete(user.id)"><i class="bi bi-file-x"></i> Trinti</button>
               
             </td>
             <!-- <td><button class="btn btn-danger btn-xs" [routerLink] = "'/admin/ ">Delete</button></td> -->

@@ -66,9 +66,7 @@ export class GenreComponent implements OnInit {
 
   onDelete(genreId) {
     this.GenreService.deleteGenre(genreId).subscribe(result => {
-      console.log(result);
       this.GenreList = this.GenreList.filter(genre => genre.id !== genreId);
-      
     });
   }
 

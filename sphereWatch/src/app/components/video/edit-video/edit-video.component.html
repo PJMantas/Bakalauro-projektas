@@ -24,7 +24,7 @@
             <button class="btn btn-success btn-xs " type="submit">Išsaugoti</button>
             <button class="btn btn-dark btn-xs " type="button" [routerLink]="['/profile']">Grįžti</button>
 
-            <button *ngIf="allowDelete" type="button" class="btn btn-danger btn-xs" (click)="onDelete()">Trinti</button>
+            <button *ngIf="allowDelete" type="button" class="btn btn-danger btn-xs" (click)="onDelete()"><i class="bi bi-file-x"></i> Trinti</button>
             
             <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
         </form>

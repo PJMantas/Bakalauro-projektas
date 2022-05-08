@@ -43,8 +43,8 @@
             <td>{{permission.manage_genres == true ? 'Taip' : 'Ne'}}</td>
             <td class="btn-group" style="width: 1%; white-space: nowrap;">
                 
-              <button type="button" class="btn btn-primary btn-xs" [routerLink] = "'/admin/edit-permission/' + permission.id">Redaguoti</button>
-              <button type="button" class="btn btn-danger btn-xs" (click)="onDelete(permission.id)">Trinti</button>
+              <button type="button" class="btn btn-primary btn-xs" [routerLink] = "'/admin/edit-permission/' + permission.id"><i class="bi bi-pencil"></i> Redaguoti</button>
+              <button type="button" class="btn btn-danger btn-xs" (click)="onDelete(permission.id)"><i class="bi bi-file-x"></i> Trinti</button>
               
             </td>
             <!-- <td><button class="btn btn-danger btn-xs" [routerLink] = "'/admin/ ">Delete</button></td> -->
