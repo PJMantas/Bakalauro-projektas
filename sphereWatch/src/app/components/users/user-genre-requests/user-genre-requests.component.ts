@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GenreRequest } from '../../../models/genreRequest';
 import { GenreRequestService } from '../../../services/genre-request.service';
+import { AuthStateService } from '../../../shared/auth-state.service';
 import { AuthService } from '../../../shared/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -13,14 +14,20 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class UserGenreRequestsComponent implements OnInit {
 
   UserGenreRequests: GenreRequest[] = [];
+  isSignedIn = false;
 
   constructor(
     private GenreRequestService: GenreRequestService,
-    private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
+    private AuthStateService: AuthStateService,
     private router: Router,
-    private authService: AuthService,
-  ) { }
+
+  ) { 
+    this.AuthStateService.userAuthState.subscribe((val) => {
+      this.isSignedIn = val;
+      if (!this.isSignedIn) {
+        this.router.navigate(['/home']);
+      }});
+  }
 
 
   ngOnInit(): void { 

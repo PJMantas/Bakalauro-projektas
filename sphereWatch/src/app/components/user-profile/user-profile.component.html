@@ -1,6 +1,5 @@
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css'>
 <br>
-<div class="container">
+<div *ngIf="isSignedIn" class="container">
     <div class="card inner-main">
       <h3 class="card-header bg-dark text-light" style="text-align: center;">Mano paskyra</h3> 
       <div class="card-header">
@@ -39,6 +38,8 @@
               </div>
 
               <p class="btn btn-outline-dark btn-xs " type="button" [routerLink]="['/edit-profile']"><i class="bi bi-pencil-square"></i> Redaguoti profilį</p>
+
+              <p class="btn btn-outline-danger btn-xs " type="button" (click)="onDeleteProfile()"><i class="bi bi-x-octagon"></i> Trinti profilį</p>
             </div>
           </div>
         </div>

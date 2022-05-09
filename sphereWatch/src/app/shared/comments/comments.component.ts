@@ -21,10 +21,8 @@ export class CommentsComponent implements OnInit {
   userId!: number;
   
   comment: Comment = new Comment();
-  currentUser: User = new User();
   UserPermissions!: Permission;
   CommentsList:Comment[] = [];
-  userList: User[] = [];
   angular: any;
   loading = false;
   submitted = false;
@@ -62,6 +60,13 @@ export class CommentsComponent implements OnInit {
         this.allowDeleteComment = true;
       }
     });
+
+    this.authService.profileUser().subscribe(result => {
+      this.userId = result.id;
+      console.log(this.userId);
+    });
+
+
 
 
     this.addCommentForm = this.formBuilder.group({
@@ -103,7 +108,9 @@ export class CommentsComponent implements OnInit {
         this.CommentService.getCommentsList(this.videoId, this.commentsCount).subscribe(result => {
           this.CommentsList = result['comments'];
         });
-        this.addCommentForm.reset();
+        this.addCommentForm.patchValue({
+          comment_text: ''
+        });
       },
       error => {
         this.error = error;

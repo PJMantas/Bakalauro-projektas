@@ -36,7 +36,7 @@
 
           <p>{{Video.description}}</p>
 
-          <button class="btn btn-primary btn-xs" [routerLink]="'/video/editVideo/' + videoId"><i class="bi bi-pencil"></i> Redaguoti vaizdo įrašą</button>
+          <button *ngIf="showEdit" class="btn btn-primary btn-xs" [routerLink]="'/video/editVideo/' + videoId"><i class="bi bi-pencil"></i> Redaguoti vaizdo įrašą</button>
 
         </div>
         <style>
@@ -49,7 +49,7 @@
     <div class="col-md-3 col-sm-12">
       <div class="card-header">
         <h2> Žiūrėkite toliau </h2>
-        <div class="card pb-3" *ngFor="let video of RecomendedVideoList">
+        <div class="card mt-3" *ngFor="let video of RecomendedVideoList">
           <a class="card my-6 text-decoration-none bg-dark text-light border-0" [routerLink]="'/viewVideo/' + video.id">
             <img class="card-img-top" src="http://127.0.0.1:8000/{{video.thumbnail_url}}"
               alt="Card image cap">
@@ -59,7 +59,7 @@
                 <div class="d-flex gap-3">
                   <h5 class="card-text">Peržiūros: {{video.clicks}} </h5>
                 </div>
-                <button class="btn btn-primary btn-xs" [routerLink]="'/viewVideo/' + video.id">Žiūrėti</button>
+                <button class="btn btn-primary btn-xs" [routerLink]="'/viewVideo/' + video.id"><i class="bi bi-play"></i>Žiūrėti</button>
               </div>
 
             </div>

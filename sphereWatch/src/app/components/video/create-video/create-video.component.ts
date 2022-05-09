@@ -26,7 +26,7 @@ export class CreateVideoComponent implements OnInit {
   loading = false;
   submitted = false;
   error: any;
-  isLoaded:boolean = false;
+  isLoaded: boolean = false;
   file: any;
   thumbnail: any;
   UserPermissions!: Permission;
@@ -40,26 +40,14 @@ export class CreateVideoComponent implements OnInit {
     public authService: AuthService,
     private formBuilder: FormBuilder,
     private router: Router
-  ) { 
-    
-    console.log(this.userId);
-    this.authService.profileUser().subscribe((data: any) => {
-      this.currentUser = data;
-      this.userId = this.currentUser.id;
-      
-      this.isLoaded = true;
-      this.addVideoForm = this.formBuilder.group({
-        title: ['', Validators.required],
-        video_url: [null, Validators.required],
-        description: ['', Validators.required],
-        thumbnail_url: [''],
-        creator_id: this.userId,
-        genre: ['', Validators.required],
-        
-      });
+  ) {
+    this.addVideoForm = this.formBuilder.group({
+      title: ['', Validators.required],
+      video_url: [null, Validators.required],
+      description: ['', Validators.required],
+      thumbnail_url: [''],
+      genre: ['', Validators.required],
     });
-
-    
   }
 
   ngOnInit(): void {
@@ -71,6 +59,9 @@ export class CreateVideoComponent implements OnInit {
       } else {
         this.showWindow = true;
       }
+
+    }, error => {
+      this.router.navigate(['/home']);
     });
 
     this.GenreService.getGenresList().subscribe(result => {
@@ -78,20 +69,20 @@ export class CreateVideoComponent implements OnInit {
       this.GenreList = result['genres'];
     });
   }
-  
+
   onFileChange(event) {
-  
+
     if (event.target.files.length > 0) {
       this.file = event.target.files[0];
-      
+
     }
   }
 
   onThumbnailChange(event) {
-  
+
     if (event.target.files.length > 0) {
       this.thumbnail = event.target.files[0];
-      
+
     }
   }
 
@@ -99,7 +90,7 @@ export class CreateVideoComponent implements OnInit {
     this.addVideoForm.patchValue({
       genre: event.target.value
     });
-    
+
   }
 
 
@@ -112,7 +103,7 @@ export class CreateVideoComponent implements OnInit {
     }
 
     const formData = new FormData();
-    
+
     formData.append("video_url", this.file);
     formData.append("title", this.addVideoForm.controls['title'].value);
     formData.append("description", this.addVideoForm.controls['description'].value);
@@ -123,16 +114,16 @@ export class CreateVideoComponent implements OnInit {
     }
 
     this.loading = true;
-    
+
     this.VideoService.createVideo(formData)
-            .subscribe(
-                data => {
-                  this.router.navigate(['/videoHome']);
-                },
-                error => {
-                    this.error = error;
-                    this.loading = false;
-                });
+      .subscribe(
+        data => {
+          this.router.navigate(['/videoHome']);
+        },
+        error => {
+          this.error = error;
+          this.loading = false;
+        });
   }
 
 }

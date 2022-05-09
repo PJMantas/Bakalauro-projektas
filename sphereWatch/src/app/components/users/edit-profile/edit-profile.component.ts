@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User} from '../../../models/user';
 import { UserService } from '../../../services/user.service';
+import { AuthStateService } from '../../../shared/auth-state.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../shared/auth.service';
 
@@ -19,14 +20,24 @@ export class EditProfileComponent implements OnInit {
   submitted = false;
   error: any;
   file: any;
+  isSignedIn = false;
 
   constructor(
     private UserService: UserService,
+    private AuthStateService: AuthStateService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthService,
   ) { 
+
+    this.AuthStateService.userAuthState.subscribe((val) => {
+      this.isSignedIn = val;
+      if (!this.isSignedIn) {
+        this.router.navigate(['/home']);
+      }
+    });
+
     this.editUserForm = this.formBuilder.group(
       {
         user_id: [''],

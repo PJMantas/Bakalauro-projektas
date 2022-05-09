@@ -21,7 +21,7 @@
     <div class="col-sm col-sm-4">
       <div class="card-header">
         <h2> {{genreTitle1}} </h2>
-        <div class="card pb-3" *ngFor="let video of RecomendedVideos1">
+        <div class="card mt-3" *ngFor="let video of RecomendedVideos1">
           <a class="card my-6 text-decoration-none bg-dark text-light border-0" [routerLink]="'/viewVideo/' + video.id">
             <img class="card-img-top" style="height: 16rem;" src="http://127.0.0.1:8000/{{video.thumbnail_url}}"
               alt="Card image cap">
@@ -31,7 +31,7 @@
                 <div class="d-flex gap-3">
                   <h5 class="card-text">Peržiūros: {{video.clicks}} </h5>
                 </div>
-                <button class="btn btn-primary btn-xs" [routerLink]="'/viewVideo/' + video.id">Žiūrėti</button>
+                <button class="btn btn-primary btn-xs" [routerLink]="'/viewVideo/' + video.id"><i class="bi bi-play"></i> Žiūrėti</button>
               </div>
 
             </div>
@@ -43,7 +43,7 @@
     <div class="col-sm col-sm-4">
       <div class="card-header">
         <h2> {{genreTitle2}} </h2>
-        <div class="card pb-3" *ngFor="let video of RecomendedVideos2">
+        <div class="card mt-3" *ngFor="let video of RecomendedVideos2">
           <a class="card my-6 text-decoration-none bg-dark text-light border-0" [routerLink]="'/viewVideo/' + video.id">
             <img class="card-img-top" style="height: 16rem;" src="http://127.0.0.1:8000/{{video.thumbnail_url}}"
               alt="Card image cap">
@@ -65,7 +65,7 @@
     <div class="col-sm col-sm-4">
       <div class="card-header">
         <h2> {{genreTitle3}} </h2>
-        <div class="card pb-3" *ngFor="let video of RecomendedVideos3">
+        <div class="card mt-3" *ngFor="let video of RecomendedVideos3">
           <a class="card my-6 text-decoration-none bg-dark text-light border-0" [routerLink]="'/viewVideo/' + video.id">
             <img class="card-img-top" style="height: 16rem;" src="http://127.0.0.1:8000/{{video.thumbnail_url}}"
               alt="Card image cap">

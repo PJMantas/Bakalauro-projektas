@@ -39,8 +39,8 @@
         
 
         <br>
-        <button class="btn btn-dark btn-xs " type="submit">Sukurti</button>
-        <button class="btn btn-dark btn-xs " type="button" [routerLink]="['/profile']">Grįžti</button>
+        <button class="btn btn-dark btn-xs " type="submit"><i class="bi bi-check-lg"></i> Sukurti</button>
+        <button class="btn btn-dark btn-xs " type="button" [routerLink]="['/profile']"><i class="bi bi-arrow-return-left"></i> Grįžti</button>
         
         <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
     </form>

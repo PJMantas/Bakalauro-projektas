@@ -3,8 +3,8 @@
     <button type="button" class="btn btn-success btn-xs" (click)="onCreate()"><i class="bi bi-plus-square"></i> Sukurti naują</button>
     <div *ngIf="showCreate">
         <input type="text" #genreName name="genreName" value="" class="search-box">
-        <button type="button" class="btn btn-success btn-xs" (click)="createGenre(genreName.value)"> Sukurti</button>
-        <button type="button" class="btn btn-danger btn-xs" (click)="cancelCreate()">Atšaukti</button>
+        <button type="button" class="btn btn-success btn-xs" (click)="createGenre(genreName.value)"><i class="bi bi-check-lg"></i> Sukurti</button>
+        <button type="button" class="btn btn-danger btn-xs" (click)="cancelCreate()"><i class="bi bi-arrow-return-left"></i> Atšaukti</button>
     </div>
     
     
@@ -29,8 +29,8 @@
             <td class="btn-group" style="width: 1%; white-space: nowrap;">
             <div *ngIf="showEdit && clickedIndex === i">
                 <input type="text" #genreName name="genreName" value="{{genre.name}}" class="search-box">
-                <button  type="button" class="btn btn-success btn-xs" (click)="updateGenre(genre.id, genreName.value)">Atnaujinti</button>
-                <button  type="button" class="btn btn-danger btn-xs" (click)="cancelEdit()">Atšaukti</button>
+                <button  type="button" class="btn btn-success btn-xs" (click)="updateGenre(genre.id, genreName.value)"><i class="bi bi-check-lg"></i> Atnaujinti</button>
+                <button  type="button" class="btn btn-danger btn-xs" (click)="cancelEdit()"><i class="bi bi-arrow-return-left"></i> Atšaukti</button>
             </div>
               
             <button *ngIf="showEdit === false" type="button" class="btn btn-secondary btn-xs" (click)="onEdit(); clickedIndex = i"><i class="bi bi-pencil"></i> Redaguoti</button>

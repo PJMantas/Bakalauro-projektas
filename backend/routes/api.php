@@ -66,6 +66,7 @@ Route::group([
     Route::post('/add-genre-request', [GenreRequestController::class, 'addGenreRequest']);
     Route::get('/get-user-genre-requests-list', [GenreRequestController::class, 'getUserGenreRequestsList']);
     Route::get('/get-auth-user-permissions', [PermissionController::class, 'getAuthUserPermissions']);
+    Route::delete('/delete-profile', [UserController::class, 'deleteProfile']);
     
 });
 

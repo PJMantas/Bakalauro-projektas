@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Video;
 use App\Models\User;
 use Illuminate\Support\Carbon;
-use Validator;
-use DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 
 class ReportController extends Controller

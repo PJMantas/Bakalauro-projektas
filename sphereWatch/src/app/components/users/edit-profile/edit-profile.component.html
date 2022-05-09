@@ -79,12 +79,12 @@
             <img src= 'http://127.0.0.1:8000/{{profileImage}}' style="max-width: 50vh; max-height: 30vh; border-radius: 10px; outline: auto;" class="img-fluid" >
             <br>
             <br>
-            <input formControlName="avatar_url" type="file" id="avatar_url" class="form-control" (change)="onFileChange($event)">
+            <input formControlName="avatar_url" type="file" accept=".jpg,.gif,.jpeg,.png" id="avatar_url" class="form-control" (change)="onFileChange($event)">
           </div>
         
         <br>
-        <button class="btn btn-dark btn-xs " type="submit">Atnaujinti</button>
-        <button class="btn btn-dark btn-xs " type="button" [routerLink]="['/profile']">Grįžti</button>
+        <button class="btn btn-success btn-xs " type="submit"><i class="bi bi-check-lg"></i> Atnaujinti</button>
+        <button class="btn btn-dark btn-xs " type="button" [routerLink]="['/profile']"><i class="bi bi-arrow-return-left"></i> Grįžti</button>
         
         <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
     </form>

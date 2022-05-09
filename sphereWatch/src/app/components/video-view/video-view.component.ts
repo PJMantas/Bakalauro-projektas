@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/shared/auth.service';
 import { Video } from '../../models/video';
 import { Permission } from 'src/app/models/permission';
 import { PermissionService } from 'src/app/services/permission.service';
@@ -22,10 +23,12 @@ export class VideoViewComponent implements OnInit {
   filtersLoaded!: Promise<boolean>;
   ratioChart: any;
   allowReact: boolean = false;
+  showEdit: boolean = false;
 
   constructor(
     private VideoService: VideoService,
     private PermissionService: PermissionService,
+    private AuthService: AuthService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
@@ -54,11 +57,16 @@ export class VideoViewComponent implements OnInit {
       //console.log(response);
       this.Video = response['video'];
       this.genreId = this.Video.genre;
+      this.AuthService.profileUser().subscribe(response => {
+        console.log(response);
+        if(this.Video.creator_id == response.id) {
+          this.showEdit = true;
+        }});
       this.filtersLoaded = Promise.resolve(true);
 
       this.VideoService.getVideoRecomendations(this.genreId, this.videoId).subscribe(response => {
         this.RecomendedVideoList = response['videos'];
-        //console.log(response);
+        //console.log(response); 
       });
 
     });

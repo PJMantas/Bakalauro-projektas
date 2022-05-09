@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12 col-lg-6 mb-4" *ngFor="let video of userVideos">
-            <a class="card my-6 text-decoration-none bg-dark text-light border-0"
+            <div class="card my-6 text-decoration-none bg-dark text-light border-0"
                 [routerLink]="'/viewVideo/' + video.id">
 
                 <img class="card-img-top" style="height: 25rem;" src="http://127.0.0.1:8000/{{video.thumbnail_url}}"
@@ -14,13 +14,13 @@
                             <h5 class="card-text">Peržiūros: {{video.clicks}} </h5>           
                             <span class="card-text">Įkelta {{video.created_at}}</span>
                         </div>
-                        <button class="btn btn-success btn-xs" [routerLink]="'/viewVideo/' + video.id">Žiūrėti</button>
+                        <button class="btn btn-success btn-xs" [routerLink]="'/viewVideo/' + video.id"><i class="bi bi-play"></i> Žiūrėti</button>
                         <button class="btn btn-primary btn-xs" [routerLink]="'/video/editVideo/' + video.id"><i class="bi bi-pencil"></i> Redaguoti</button>
                         <button *ngIf="!allowDelete" type="button" class="btn btn-danger btn-xs" (click)="onDelete(video.id)"><i class="bi bi-file-x"></i> Trinti</button>
                     </div>
                     
                 </div>
-            </a>
+            </div>
         </div>
     </div>
 </div>

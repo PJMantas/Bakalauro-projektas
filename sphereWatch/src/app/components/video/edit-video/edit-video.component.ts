@@ -61,8 +61,9 @@ export class EditVideoComponent implements OnInit {
       }
       if (this.UserPermissions.video_delete) {
         this.allowDelete = true;
-      }
-    });
+      }} , error => {
+        this.router.navigate(['/home']);
+      });
 
     this.videoId = Number(this.route.snapshot.paramMap.get('id'));
 
@@ -73,7 +74,6 @@ export class EditVideoComponent implements OnInit {
         video_id: [this.video.id, Validators.required],
         title: [this.video.title, Validators.required],
         description: [this.video.description, Validators.required],
-        //thumbnail: [this.video.thumbnail, Validators.required],
         creator_id: this.video.creator_id,
         genre: [this.video.genre, Validators.required],
       });

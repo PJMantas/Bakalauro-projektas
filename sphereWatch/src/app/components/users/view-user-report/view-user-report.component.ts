@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VideoService } from 'src/app/services/video.service';
+import { AuthStateService } from 'src/app/shared/auth-state.service';
 import { ReportService } from 'src/app/services/report.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Video } from 'src/app/models/video';
@@ -31,6 +32,7 @@ export class ViewUserReportComponent implements OnInit {
   TotalVideoViews!: number;
   TotalCommentCount!: number;
   chart!: Chart;
+  isSignedIn: boolean = false;
 
   mostLikedLabels: any;
   mostLikedData: any;
@@ -39,8 +41,17 @@ export class ViewUserReportComponent implements OnInit {
   constructor(
     private VideoService: VideoService,
     private ReportSerivce: ReportService,
+    private AuthStateService: AuthStateService,
     private router: Router,
-  ) { }
+  ) { 
+    this.AuthStateService.userAuthState.subscribe((val) => {
+      this.isSignedIn = val;
+      console.log(val);
+      if (!this.isSignedIn) {
+        this.router.navigate(['/home']);
+      }
+    });
+  }
 
   canvas: any;
   viewChart: any;

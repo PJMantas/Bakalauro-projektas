@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Video;
 use App\Models\Reaction;
+use App\Models\Comment;
 use App\Models\User;
 use Carbon\Carbon;
-use Validator;
-use DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+use File;
 use Illuminate\Support\Facades\Storage;
 
 class VideoController extends Controller
@@ -220,6 +222,20 @@ class VideoController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
+        $video = Video::find($request['id']);
+
+        Comment::where('video_id', $video->id)->delete();
+        Reaction::where('video_id', $video->id)->delete();
+
+        $videoPath = public_path().'/'.$video->video_url;
+        $thumbnailPath = public_path().'/'.$video->thumbnail_url;
+
+        if ($video->thumbnail_url != 'thumbnails/default_thumbnail.jpg') {
+            File::delete($thumbnailPath);
+        }
+
+        File::delete($videoPath);
+
         DB::table('videos')->where(
             'id', $request['id'])
             ->delete();
@@ -238,9 +254,9 @@ class VideoController extends Controller
     }
 
     public function getUserVideosList(){
-        $videos = DB::select('select * from videos where creator_id=' . auth()->user()->id);
-        //$videos = DB::select('select id, title, video_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where creator_id= 1');
-        
+
+        //$videos = DB::select('select * from videos where creator_id=' . auth()->user()->id);
+        $videos = Video::where('creator_id', auth()->user()->id)->get();
         return response()->json([
             'message' => 'Retrieved Video List',
             'videos' => $videos
@@ -278,7 +294,9 @@ class VideoController extends Controller
         if ($request['genre'] != -1)
         {
             //$videos = DB::select('select * from videos where genre=' . $request['genre'] . ' order by ' . $request['orderField'] . ' ' . $request['orderType']);
-            $videos = Video::Where('genre', $request['genre'])->orderBy($request['orderField'], $request['orderType'])->get();
+            $videos = Video::Where('genre', $request['genre'])
+                    ->orderBy($request['orderField'], $request['orderType'])
+                    ->get();
         }
         else
         {

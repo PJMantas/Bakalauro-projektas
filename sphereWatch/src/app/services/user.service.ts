@@ -23,4 +23,8 @@ export class UserService {
     return this.http.get<Permission>(`http://127.0.0.1:8000/api/user/get-user-permissions/`);
   }
 
+  deleteProfile() {
+    return this.http.delete<User>(`http://127.0.0.1:8000/api/user/delete-profile`);
+  }
+
 }
