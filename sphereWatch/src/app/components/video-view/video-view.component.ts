@@ -54,7 +54,7 @@ export class VideoViewComponent implements OnInit {
       });
 
     this.VideoService.getVideoById(this.videoId).subscribe(response => {
-      //console.log(response);
+      console.log(response);
       this.Video = response['video'];
       this.genreId = this.Video.genre;
       this.AuthService.profileUser().subscribe(response => {

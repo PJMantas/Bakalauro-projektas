@@ -10,7 +10,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
-use File;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class VideoController extends Controller
@@ -18,9 +18,9 @@ class VideoController extends Controller
     public function createVideo(Request $request){
 
     	$validator = Validator::make($request->all(), [
-            'title' => 'required|string|between:2,100',
+            'title' => 'required|string|between:4,100',
             'video_url' => 'required|file|mimetypes:video/mp4',
-            'description' => 'required',
+            'description' => 'required|string|between:4,255',
             'genre' => 'required|numeric',
             'thumbnail_url' => 'file|mimes:jpg,png,jpeg,gif|max:5120',
             
@@ -66,8 +66,8 @@ class VideoController extends Controller
     public function updateVideo(Request $request){
         $validator = Validator::make($request->all(), [
             'video_id' => 'required|numeric', 
-            'title' => 'required|string|between:2,100',
-            'description' => 'required',
+            'title' => 'required|string|between:4,100',
+            'description' => 'required|string|between:4,255',
             'genre' => 'required|numeric',
             'thumbnail_url' => 'file|mimes:jpg,png,jpeg,gif,svg|max:5120',
         ]);
@@ -190,9 +190,7 @@ class VideoController extends Controller
                 'message' => 'Video disliked',
                 'video' => $video
             ], 201);
-        }
-      
-        
+        }   
     }
 
 
@@ -205,12 +203,13 @@ class VideoController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        $video = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where id=' . $request['id'] . ' LIMIT 1');
+        //$video = DB::select('select * from videos where id=' . $request['id'] . ' LIMIT 1');
+        $video = Video::where('id', $request['id'])->get();
 
         return response()->json([
             'message' => 'Retrieved Video ID: ' . $request['id'],
             'video' => $video[0]
-        ], 201);
+        ], 200);
     }
 
     public function deleteVideo(Request $request){
@@ -236,9 +235,7 @@ class VideoController extends Controller
 
         File::delete($videoPath);
 
-        DB::table('videos')->where(
-            'id', $request['id'])
-            ->delete();
+        Video::where('id', $request['id'])->delete();
         
         return response()->json(200);
         

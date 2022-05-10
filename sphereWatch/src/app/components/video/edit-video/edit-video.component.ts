@@ -27,8 +27,7 @@ export class EditVideoComponent implements OnInit {
   UserPermissions!: Permission;
   loading = false;
   submitted = false;
-  error: any;
-  isLoaded:boolean = false;
+  errors: any;
   showWindow: boolean = false;
   allowDelete: boolean = false;
 
@@ -44,10 +43,7 @@ export class EditVideoComponent implements OnInit {
     this.editVideoForm = this.formBuilder.group({
       video_id: ['', Validators.required],
       title: ['', Validators.required],
-      video_url: ['', Validators.required],
       description: ['', Validators.required],
-      //thumbnail: ['', Validators.required],
-      creator_id: this.userId,
       genre: ['', Validators.required],
     });
   }
@@ -71,13 +67,11 @@ export class EditVideoComponent implements OnInit {
       console.log(response);
       this.video = response['video'];
       this.editVideoForm = this.formBuilder.group({
-        video_id: [this.video.id, Validators.required],
+        video_id: [this.videoId, Validators.required],
         title: [this.video.title, Validators.required],
         description: [this.video.description, Validators.required],
-        creator_id: this.video.creator_id,
         genre: [this.video.genre, Validators.required],
       });
-      this.isLoaded = true;
 
     });
 
@@ -98,12 +92,21 @@ export class EditVideoComponent implements OnInit {
 
   }
 
+  get f() { return this.editVideoForm.controls; }
+
   onSubmit() {
+    this.submitted = true;
+
+    if (this.editVideoForm.invalid) {
+      return;
+    }
+
     this.VideoService.updateVideo(this.editVideoForm.value).subscribe(
       data => {
         this.router.navigate(['/viewVideo/' + this.videoId]);
-      }
-    );
+      } , error => {
+        this.errors = error.error;
+      });
   }
 
   onDelete() {

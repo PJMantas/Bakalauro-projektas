@@ -76,7 +76,7 @@ Route::group([
 ], function ($router) {
     Route::post('/create-video', [VideoController::class, 'createVideo']); 
     Route::get('/get-video', [VideoController::class, 'getVideoById']); 
-    Route::post('/delete-video', [VideoController::class, 'deleteVideo']); 
+    Route::delete('/delete-video', [VideoController::class, 'deleteVideo']); 
     Route::get('/get-videos-list', [VideoController::class, 'getVideosList']);
     Route::post('/update-video', [VideoController::class, 'updateVideo']); 
     Route::get('/get-user-videos-list', [VideoController::class, 'getUserVideosList']);

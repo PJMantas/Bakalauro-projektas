@@ -14,6 +14,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class UserVideosComponent implements OnInit {
   userVideos: Video[] = [];
   allowDelete = false;
+  allowEdit = false;
   UserPermissions!: Permission;
   isSignedIn: boolean = false;
 
@@ -36,7 +37,10 @@ export class UserVideosComponent implements OnInit {
 
       if (!this.UserPermissions.video_delete) {
         this.allowDelete = true;
-      }   
+      }  
+      if (!this.UserPermissions.video_edit) {
+        this.allowEdit = true;
+      } 
     });
 
     this.VideoService.getUserVideosList().subscribe(result => {
@@ -47,12 +51,9 @@ export class UserVideosComponent implements OnInit {
   onDelete(videoId) {
     this.VideoService.deleteVideo(videoId).subscribe(
       data => {
-        this.router.navigate(['/video/userVideos']);
-        this.VideoService.getUserVideosList().subscribe(result => {
           this.userVideos = this.userVideos.filter(video => video.id !== videoId);
-        });
-      }
-    );
+        
+      });
   }
   
 

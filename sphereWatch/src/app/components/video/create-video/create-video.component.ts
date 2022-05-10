@@ -25,7 +25,7 @@ export class CreateVideoComponent implements OnInit {
   GenreList: Genre[] = [];
   loading = false;
   submitted = false;
-  error: any;
+  errors: any = null;
   isLoaded: boolean = false;
   file: any;
   thumbnail: any;
@@ -70,6 +70,8 @@ export class CreateVideoComponent implements OnInit {
     });
   }
 
+  get f() { return this.addVideoForm.controls; }
+
   onFileChange(event) {
 
     if (event.target.files.length > 0) {
@@ -93,12 +95,11 @@ export class CreateVideoComponent implements OnInit {
 
   }
 
-
   onSubmit() {
     this.submitted = true;
 
     if (this.addVideoForm.invalid) {
-      console.log("IVALID FORMAAA");
+      console.log('invalid');
       return;
     }
 
@@ -121,7 +122,8 @@ export class CreateVideoComponent implements OnInit {
           this.router.navigate(['/videoHome']);
         },
         error => {
-          this.error = error;
+          console.log(error);
+          this.errors = error.error;
           this.loading = false;
         });
   }

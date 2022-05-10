@@ -19,7 +19,7 @@ export class VideoService {
     return this.http.post<Video>(`http://127.0.0.1:8000/api/video/create-video/`, formBody );
   }
   deleteVideo(id: number) {
-    return this.http.post<Video>(`http://127.0.0.1:8000/api/video/delete-video/`, {"id": `${id}`});
+    return this.http.delete<Video>(`http://127.0.0.1:8000/api/video/delete-video/`, {params: {id}});
   }
   updateVideo(formBody) {
     return this.http.post<Video>(`http://127.0.0.1:8000/api/video/update-video/`, formBody );

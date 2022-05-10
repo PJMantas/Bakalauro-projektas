@@ -1,48 +1,96 @@
 <div *ngIf="showWindow">
-<div class="container card">
-    <h3 class="card-header bg-dark text-light">Sukurkite naują vaizdo įrašą</h3>
-    <form class="card-body" [formGroup]="addVideoForm"  (ngSubmit)="onSubmit()">
+    <div class="container card">
+        <h3 class="card-header bg-dark text-light">Sukurkite naują vaizdo įrašą</h3>
+        <form class="card-body" [formGroup]="addVideoForm" (ngSubmit)="onSubmit()">
 
-        <div class="form-group">
-            <label for="title">Pavadinimas</label>
-            <input type="text" formControlName="title" class="form-control"  />
-        </div>
-        
-        <div class="form-group">
-            <label for="video_url">Pasirinkite vaizdo įrašo failą</label>
+            <div class="form-group">
+                <label for="title">Pavadinimas</label>
+                <input type="text" formControlName="title" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['title'].errors }" />
+                <div *ngIf="submitted && f['title'].errors" class="invalid-feedback">
+                    <div *ngIf="f['title'].errors['required']">Pavadinimas yra privalomas</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="video_url">Pasirinkite vaizdo įrašo failą</label>
+                <br>
+                <input formControlName="video_url" type="file" accept=".mp4,.mkv" id="video_url" class="form-control"
+                    (change)="onFileChange($event)" [ngClass]="{ 'is-invalid': submitted && f['video_url'].errors }">
+                <div *ngIf="submitted && f['video_url'].errors" class="invalid-feedback">
+                    <div *ngIf="f['video_url'].errors['required']">Vaizdo įrašo failas yra privalomas</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="thumbnail_url">Pasirinkite miniatiūros failą</label>
+                <br>
+                <input formControlName="thumbnail_url" type="file" accept=".jpg,.gif,.jpeg,.png" id="thumbnail_url"
+                    class="form-control" (change)="onThumbnailChange($event)">
+
+            </div>
+
+            <div class="form-group">
+                <label for="description">Aprašymas</label>
+                <input type="text" formControlName="description" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['description'].errors }">
+                <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+                    <div *ngIf="f['description'].errors['required']">Aprašas yra privalomas</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="genre">Žanras</label>
+
+                <select formControlName="genre" class="form-control" (change)="onGenreChange($event)" [ngClass]="{ 'is-invalid': submitted && f['description'].errors }">
+                    <option disabled>Pasirinkti žanrą</option>
+                    <option *ngFor="let genre of GenreList" [value]="genre.id">{{genre.name}}</option>
+                </select>
+                <div *ngIf="submitted && f['genre'].errors" class="invalid-feedback">
+                    <div *ngIf="f['genre'].errors['required']">Žyma yra privaloma</div>
+                </div>
+            </div>
+
+            <div *ngIf="errors?.title" class="alert alert-danger mt-3">
+                {{ errors?.title }}
+            </div>
+            <div *ngIf="errors?.video_url" class="alert alert-danger mt-3">
+                {{ errors?.video_url }}
+            </div>
+            <div *ngIf="errors?.thumbnail_url" class="alert alert-danger mt-3">
+                {{ errors?.thumbnail_url }}
+            </div>
+            <div *ngIf="errors?.description" class="alert alert-danger mt-3">
+                {{ errors?.description }}
+            </div>
+            <div *ngIf="errors?. genre" class="alert alert-danger mt-3">
+                {{ errors?.genre }}
+            </div>
+
+            <div *ngIf="errors?.error" class="alert alert-danger mt-3">
+                {{ errors?.error }}
+            </div>
+
+
+
             <br>
-            <input formControlName="video_url" type="file" accept=".mp4,.mkv" id="video_url" class="form-control" (change)="onFileChange($event)">
-            
-        </div>
+            <div class="d-flex">
+                <button class="btn btn-success btn-xs " type="submit">
+                    <i class="bi bi-check-lg"></i> Sukurti
+                </button>
 
-        <div class="form-group">
-            <label for="thumbnail_url">Pasirinkite miniatiūros failą</label>
-            <br>
-            <input formControlName="thumbnail_url" type="file" accept=".jpg,.gif,.jpeg,.png" id="thumbnail_url" class="form-control" (change)="onThumbnailChange($event)">
-            
-        </div>
+                <button class="btn btn-dark btn-xs " type="button" [routerLink]="['/profile']"><i
+                        class="bi bi-arrow-return-left"></i> Grįžti
+                </button>
 
-        <div class="form-group">
-            <label for="description">Aprašymas</label>
-            <input type="text" formControlName="description" class="form-control" />
-        </div>
+                <div *ngIf="loading" class="d-flex justify-content-end">
+                    <h5 class="px-3">Įkeliama...</h5>
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only"></span>
+                    </div>
+                </div>
+            </div>
 
-        <div class="form-group">
-            <label for="genre">Žanras</label>
-
-            <select formControlName="genre" class="form-control" (change)="onGenreChange($event)">  
-                <option disabled>Pasirinkti žanrą</option>  
-                <option *ngFor="let genre of GenreList" [value]="genre.id">{{genre.name}}</option>  
-            </select>  
-        </div>
-
-        
-
-        <br>
-        <button class="btn btn-dark btn-xs " type="submit"><i class="bi bi-check-lg"></i> Sukurti</button>
-        <button class="btn btn-dark btn-xs " type="button" [routerLink]="['/profile']"><i class="bi bi-arrow-return-left"></i> Grįžti</button>
-        
-        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
-    </form>
-</div>
+        </form>
+    </div>
 </div>

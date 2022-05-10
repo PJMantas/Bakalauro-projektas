@@ -32,11 +32,11 @@ export class TokenService {
     const jwtPayload = token.split('.')[1];
     return JSON.parse(atob(jwtPayload));
   }
-  // User state based on valid token
+  
   isLoggedIn() {
     return this.isValidToken();
   }
-  // Remove token
+  
   removeToken() {
     localStorage.removeItem('auth_token');
   }
