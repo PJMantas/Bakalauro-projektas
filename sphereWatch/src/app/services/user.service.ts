@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { environment } from '../shared/enviroment/enviroment';
 import { User } from '../models/user';
 import { Permission } from '../models/permission';
 
@@ -12,19 +13,19 @@ export class UserService {
 
 
   getUser(id: number) {
-    return this.http.get<User>(`http://127.0.0.1:8000/api/user/get-user/`, {params: {id}});
+    return this.http.get<User>(`${environment.api}/user/get-user/`, {params: {id}});
   }
 
   updateProfile(formBuild) {
-  return this.http.post<User>(`http://127.0.0.1:8000/api/user/update-profile/`, formBuild);
+  return this.http.post<User>(`${environment.api}/user/update-profile/`, formBuild);
   }
 
   getUserPermissions() {
-    return this.http.get<Permission>(`http://127.0.0.1:8000/api/user/get-user-permissions/`);
+    return this.http.get<Permission>(`${environment.api}/user/get-user-permissions/`);
   }
 
   deleteProfile() {
-    return this.http.delete<User>(`http://127.0.0.1:8000/api/user/delete-profile`);
+    return this.http.delete<User>(`${environment.api}/user/delete-profile`);
   }
 
 }
