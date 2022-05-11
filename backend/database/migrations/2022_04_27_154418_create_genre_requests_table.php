@@ -19,7 +19,7 @@ class CreateGenreRequestsTable extends Migration
             $table->string('description');
             $table->string('username');
             $table->string('status');
-            $table->integer('user_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
 

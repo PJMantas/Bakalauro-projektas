@@ -8,7 +8,7 @@
           <video style="max-height: 70vh; width: 100%; height: auto; margin:0 auto" [vgMedia]="$any(media)" #media
             id="singleVideo" preload="auto" controls>
 
-            <source src='http://127.0.0.1:8000/{{Video.video_url}}' type="video/mp4">
+            <source src='http://192.168.1.108:8000/{{Video.video_url}}' type="video/mp4">
             <vg-controls>
               <vg-volume></vg-volume>
             </vg-controls>
@@ -51,7 +51,7 @@
         <h2> Žiūrėkite toliau </h2>
         <div class="card mt-3" *ngFor="let video of RecomendedVideoList">
           <a class="card my-6 text-decoration-none bg-dark text-light border-0" [routerLink]="'/viewVideo/' + video.id">
-            <img class="card-img-top" src="http://127.0.0.1:8000/{{video.thumbnail_url}}"
+            <img class="card-img-top" src="http://192.168.1.108:8000/{{video.thumbnail_url}}"
               alt="Card image cap">
             <div class="card-body p-5">
               <h4 class="card-title" style="font-weight: bolder;">{{video.title}}</h4>

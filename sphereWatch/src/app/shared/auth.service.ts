@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-// User interface
+import { environment } from '../shared/enviroment/enviroment';
+
 export class User {
   name!: String;
   email!: String;
@@ -15,14 +16,14 @@ export class AuthService {
   constructor(private http: HttpClient) {}
  
   register(formBody): Observable<any> {
-    return this.http.post('http://127.0.0.1:8000/api/auth/register', formBody);
+    return this.http.post(`${environment.api}/auth/register`, formBody);
   }
   
   signin(user: User): Observable<any> {
-    return this.http.post<any>('http://127.0.0.1:8000/api/auth/login', user);
+    return this.http.post<any>(`${environment.api}/auth/login`, user);
   }
 
   profileUser(): Observable<any> {
-    return this.http.get('http://127.0.0.1:8000/api/auth/user-profile');
+    return this.http.get(`${environment.api}/auth/user-profile`);
   }
 }

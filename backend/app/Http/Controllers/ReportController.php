@@ -33,8 +33,7 @@ class ReportController extends Controller
                                             group by videos.id, videos.title
                                             order by comments desc limit 5');
 
-        $userCountPerMonth = DB::select('select count(*) as count, MONTH(created_at) as month from users group by MONTH(created_at)');
-
+        //$userCountPerMonth = DB::select('select count(*) as count, MONTH(created_at) as month from users group by MONTH(created_at)');
         $users = User::select('id', 'created_at')
         ->get()
         ->groupBy(function($date) {
@@ -42,16 +41,16 @@ class ReportController extends Controller
             return Carbon::parse($date->created_at)->format('m'); // grouping by months
         });
 
-        $usermcount = [];
+        $userMonthCount = [];
         $userArr = [];
 
         foreach ($users as $key => $value) {
-            $usermcount[(int)$key] = count($value);
+            $userMonthCount[(int)$key] = count($value);
         }
 
         for($i = 1; $i <= 12; $i++){
-            if(!empty($usermcount[$i])){
-                $userArr[$i] = $usermcount[$i];    
+            if(!empty($userMonthCount[$i])){
+                $userArr[$i] = $userMonthCount[$i];    
             }else{
                 $userArr[$i] = 0;    
             }

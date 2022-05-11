@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { environment } from './enviroment/enviroment';
 @Injectable({
   providedIn: 'root',
 })
 export class TokenService {
   private issuer = {
-    login: 'http://127.0.0.1:8000/api/auth/login',
-    register: 'http://127.0.0.1:8000/api/auth/register',
+    login: `${environment.api}/auth/login`,
+    register: `${environment.api}/auth/register`,
   };
   constructor() {}
   handleData(token: any) {

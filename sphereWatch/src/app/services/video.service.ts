@@ -34,9 +34,6 @@ export class VideoService {
   reactToVideo(formBody) {
     return this.http.post<Video>(`${environment.api}/video/react-to-video/`, formBody);
   }
-  dislikeVideo(formBody) {
-    return this.http.post<Video>(`${environment.api}/video/dislike-video/`, formBody);
-  }
 
   searchVideo(search: string) {
     return this.http.get<Video>(`${environment.api}/video/search-video/`, {params: {search}})
