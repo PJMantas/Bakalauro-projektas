@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comment;
+use App\Models\Permission;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
@@ -25,6 +26,12 @@ class CommentController extends Controller
 
         if (!$user) {
             return response()->json(['error' => 'Neregistruotas naudotojas'], 401);
+        }
+
+        $permission = Permission::where('id', $user->group_id)->get();
+
+        if(!$permission[0]->comment_create){
+            return response()->json(['error' => 'Nėra teisių'], 401);
         }
 
         $comment = new Comment();
@@ -59,6 +66,12 @@ class CommentController extends Controller
             return response()->json(['error' => 'Neregistruotas naudotojas'], 401);
         }
 
+        $permission = Permission::where('id', $user->group_id)->get();
+
+        if(!$permission[0]->comment_create){
+            return response()->json(['error' => 'Nėra teisių'], 401);
+        }
+
         $comment = new Comment();
         $comment->user_id = $user->id;
         $comment->video_id = $request['video_id'];
@@ -84,13 +97,25 @@ class CommentController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
+        $user = auth()->user();
+
+        if (!$user) {
+            return response()->json(['error' => 'Neregistruotas naudotojas'], 401);
+        }
+
+        $permission = Permission::where('id', $user->group_id)->get();
+
+        if(!$permission[0]->comment_edit){
+            return response()->json(['error' => 'Nėra teisių'], 401);
+        }
+
         $comment = Comment::find($request['id']);
         $comment->comment_text = $request['comment_text'];
 
         $comment->save();
 
         return response()->json([
-            'message' => 'Komentaaras sėkmingai atnaujintas',
+            'message' => 'Komentaras sėkmingai atnaujintas',
             'comment' => $comment,
         ], 201);
     }
@@ -126,6 +151,18 @@ class CommentController extends Controller
 
         if($validator->fails()) {
             return response()->json($validator->errors(), 400);
+        }
+
+        $user = auth()->user();
+
+        if (!$user) {
+            return response()->json(['error' => 'Neregistruotas naudotojas'], 401);
+        }
+
+        $permission = Permission::where('id', $user->group_id)->get();
+
+        if(!$permission[0]->comment_delete){
+            return response()->json(['error' => 'Nėra teisių'], 401);
         }
 
         Comment::where('comment_parent_id', $request['id'])->delete();

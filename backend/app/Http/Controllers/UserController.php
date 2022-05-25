@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Comment;
 use App\Models\Video;
 use App\Models\Reaction;
+use App\Models\Permission;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -23,6 +24,12 @@ class UserController extends Controller
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
+        }
+
+        $user = auth()->user();
+
+        if (!$user) {
+            return response()->json(['error' => 'Neregistruotas naudotojas'], 401);
         }
 
         $user = User::where('id', $request['id'])->get();
@@ -47,6 +54,12 @@ class UserController extends Controller
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
+        }
+
+        $user = auth()->user();
+
+        if (!$user) {
+            return response()->json(['error' => 'Neregistruotas naudotojas'], 401);
         }
 
         $user = User::find($request['user_id']);

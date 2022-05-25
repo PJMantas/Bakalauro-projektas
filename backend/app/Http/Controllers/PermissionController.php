@@ -31,6 +31,18 @@ class PermissionController extends Controller
 
     public function getPermissionsList(){
 
+        $user = auth()->user();
+
+        if (!$user) {
+            return response()->json(['error' => 'Neregistruotas naudotojas'], 401);
+        }
+
+        $permission = Permission::where('id', $user->group_id)->get();
+
+        if(!$permission[0]->manage_permissions){
+            return response()->json(['error' => 'Nėra teisių'], 401);
+        }
+
         $permissions = new Permission();
 
         $permissions = DB::select('select * from permissions');
@@ -49,6 +61,18 @@ class PermissionController extends Controller
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
+        }
+
+        $user = auth()->user();
+
+        if (!$user) {
+            return response()->json(['error' => 'Neregistruotas naudotojas'], 401);
+        }
+
+        $permission = Permission::where('id', $user->group_id)->get();
+
+        if(!$permission[0]->manage_permissions){
+            return response()->json(['error' => 'Nėra teisių'], 401);
         }
 
         $permission = Permission::where('id', $request['id'])->get();
@@ -81,6 +105,18 @@ class PermissionController extends Controller
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
+        }
+
+        $user = auth()->user();
+
+        if (!$user) {
+            return response()->json(['error' => 'Neregistruotas naudotojas'], 401);
+        }
+
+        $permission = Permission::where('id', $user->group_id)->get();
+
+        if(!$permission[0]->manage_permissions){
+            return response()->json(['error' => 'Nėra teisių'], 401);
         }
 
         $permission = new Permission();
@@ -134,6 +170,18 @@ class PermissionController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
+        $user = auth()->user();
+
+        if (!$user) {
+            return response()->json(['error' => 'Neregistruotas naudotojas'], 401);
+        }
+
+        $permission = Permission::where('id', $user->group_id)->get();
+
+        if(!$permission[0]->manage_permissions){
+            return response()->json(['error' => 'Nėra teisių'], 401);
+        }
+
         $permission = new Permission();
 
         $permission = Permission::find($request['id']);
@@ -175,6 +223,18 @@ class PermissionController extends Controller
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
+        }
+
+        $user = auth()->user();
+
+        if (!$user) {
+            return response()->json(['error' => 'Neregistruotas naudotojas'], 401);
+        }
+
+        $permission = Permission::where('id', $user->group_id)->get();
+
+        if(!$permission[0]->manage_permissions){
+            return response()->json(['error' => 'Nėra teisių'], 401);
         }
 
         Permission::where('id', $request['id'])->delete();

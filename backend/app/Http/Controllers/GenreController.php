@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Video;
 use App\Models\Genre;
+use App\Models\Permission;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
@@ -41,6 +42,18 @@ class GenreController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
+        $user = auth()->user();
+
+        if (!$user) {
+            return response()->json(['error' => 'Neregistruotas naudotojas'], 401);
+        }
+
+        $permission = Permission::where('id', $user->group_id)->get();
+
+        if(!$permission[0]->manage_genres){
+            return response()->json(['error' => 'Nėra teisių'], 401);
+        }
+
         $genre = new Genre();
 
         $genre->name = $request['name'];
@@ -64,6 +77,18 @@ class GenreController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
+        $user = auth()->user();
+
+        if (!$user) {
+            return response()->json(['error' => 'Neregistruotas naudotojas'], 401);
+        }
+
+        $permission = Permission::where('id', $user->group_id)->get();
+
+        if(!$permission[0]->manage_genres){
+            return response()->json(['error' => 'Nėra teisių'], 401);
+        }
+
         $genre = Genre::find($request['id']);
 
         $genre->name = $request['name'];
@@ -84,6 +109,18 @@ class GenreController extends Controller
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
+        }
+
+        $user = auth()->user();
+
+        if (!$user) {
+            return response()->json(['error' => 'Neregistruotas naudotojas'], 401);
+        }
+
+        $permission = Permission::where('id', $user->group_id)->get();
+
+        if(!$permission[0]->manage_genres){
+            return response()->json(['error' => 'Nėra teisių'], 401);
         }
 
         Genre::find($request['id'])

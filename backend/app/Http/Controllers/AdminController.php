@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Permission;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 //use DB;
@@ -11,6 +12,19 @@ use Illuminate\Support\Facades\DB;
 class AdminController extends Controller
 {
     public function getUsersList(Request $request){
+
+        $user = auth()->user();
+
+        if (!$user) {
+            return response()->json(['error' => 'Naudotojas neautentifikuotas'], 401);
+        }
+
+        $permission = Permission::where('id', $user->group_id)->get();
+
+        if(!$permission[0]->is_admin){
+            return response()->json(['error' => 'Nėra teisių'], 401);
+        }
+
 
         $users = User::all();
 
@@ -22,6 +36,18 @@ class AdminController extends Controller
     }
 
     public function addUser(Request $request){
+
+        $authUser = auth()->user();
+
+        if (!$authUser) {
+            return response()->json(['error' => 'Naudotojas neautentifikuotas'], 401);
+        }
+
+        $permission = Permission::where('id', $authUser->group_id)->get();
+
+        if(!$permission[0]->manage_users){
+            return response()->json(['error' => 'Nėra teisių'], 401);
+        }
 
     	$validator = Validator::make($request->all(), [
             
@@ -76,6 +102,18 @@ class AdminController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
+        $authUser = auth()->user();
+
+        if (!$authUser) {
+            return response()->json(['error' => 'Naudotojas neautentifikuotas'], 401);
+        }
+
+        $permission = Permission::where('id', $authUser->group_id)->get();
+
+        if(!$permission[0]->manage_users){
+            return response()->json(['error' => 'Nėra teisių'], 401);
+        }
+
         DB::table('users')->where(
             'id', $request['id'])
             ->delete();
@@ -94,6 +132,18 @@ class AdminController extends Controller
 
         if($validator->fails()){
             return response()->json($validator->errors(), 422);
+        }
+
+        $authUser = auth()->user();
+
+        if (!$authUser) {
+            return response()->json(['error' => 'Naudotojas neautentifikuotas'], 401);
+        }
+
+        $permission = Permission::where('id', $authUser->group_id)->get();
+
+        if(!$permission[0]->manage_users){
+            return response()->json(['error' => 'Nėra teisių'], 401);
         }
 
         $user = User::find($request['user_id']);

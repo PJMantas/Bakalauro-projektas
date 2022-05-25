@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Video;
 use App\Models\User;
+use App\Models\Permission;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -72,6 +73,17 @@ class ReportController extends Controller
     public function getUserReport(){
         
         $user = auth()->user();
+
+        if (!$user) {
+            return response()->json(['error' => 'Neregistruotas naudotojas'], 401);
+        }
+
+        $permission = Permission::where('id', $user->group_id)->get();
+
+        if(!$permission[0]->is_admin){
+            return response()->json(['error' => 'Nėra teisių'], 401);
+        }
+
         $userid = $user->id;
 
         $userVideoCount = DB::select('select count(*) as count from videos where creator_id = ?', [$userid]);

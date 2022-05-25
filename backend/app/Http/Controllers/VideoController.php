@@ -7,6 +7,7 @@ use App\Models\Video;
 use App\Models\Reaction;
 use App\Models\Comment;
 use App\Models\User;
+use App\Models\Permission;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -33,6 +34,12 @@ class VideoController extends Controller
         $user = auth()->user();
         if (!$user) {
             return response()->json(['message' => 'Neautentifikuotas naudotojas'], 401);
+        }
+
+        $permission = Permission::where('id', $user->group_id)->get();
+
+        if(!$permission[0]->video_create){
+            return response()->json(['error' => 'Nėra teisių'], 401);
         }
 
         $video = new Video();
@@ -75,6 +82,17 @@ class VideoController extends Controller
 
         if($validator->fails()){
             return response()->json($validator->errors(), 400);
+        }
+
+        $user = auth()->user();
+        if (!$user) {
+            return response()->json(['message' => 'Neautentifikuotas naudotojas'], 401);
+        }
+
+        $permission = Permission::where('id', $user->group_id)->get();
+
+        if(!$permission[0]->video_edit){
+            return response()->json(['error' => 'Nėra teisių'], 401);
         }
 
         $video = Video::find($request['video_id']);
@@ -129,6 +147,8 @@ class VideoController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
+
+
         $video = Video::find($request['video_id']);
         if (!$video){
             return response()->json([
@@ -141,6 +161,12 @@ class VideoController extends Controller
 
         if (!$user){
             return response()->json(['message' => 'Naudotojas neautentifikuotas'], 401);
+        }
+
+        $permission = Permission::where('id', $user->group_id)->get();
+
+        if(!$permission[0]->reaction_create){
+            return response()->json(['error' => 'Nėra teisių'], 401);
         }
 
         $like = Reaction::where('user_id', $user->id)->where('video_id', $video->id)->first();
@@ -193,7 +219,7 @@ class VideoController extends Controller
                 'video' => $video
             ], 201);
         }
-        else{
+        else {
             return response()->json([
                 'message' => 'Vaizdo įrašas neigiamai įvertintas',
                 'video' => $video
@@ -233,6 +259,18 @@ class VideoController extends Controller
 
         if($validator->fails()) {
             return response()->json($validator->errors(), 400);
+        }
+
+        $user = auth()->user();
+
+        if (!$user){
+            return response()->json(['message' => 'Naudotojas neautentifikuotas'], 401);
+        }
+
+        $permission = Permission::where('id', $user->group_id)->get();
+
+        if(!$permission[0]->video_delete){
+            return response()->json(['error' => 'Nėra teisių'], 401);
         }
 
         $video = Video::find($request['id']);
