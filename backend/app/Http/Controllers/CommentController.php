@@ -12,7 +12,7 @@ class CommentController extends Controller
     public function createComment(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'comment_text' => 'required|string|max:255',
+            'comment_text' => 'required|string|between:2,100',
             'video_id' => 'required|numeric',
             'comment_parent_id' => 'nullable|numeric',
         ]);
@@ -44,7 +44,7 @@ class CommentController extends Controller
     public function createCommentReply(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'comment_text' => 'required|string|max:255',
+            'comment_text' => 'required|string|between:2,100',
             'video_id' => 'required|numeric',
             'comment_parent_id' => 'required|numeric',
         ]);
@@ -54,6 +54,10 @@ class CommentController extends Controller
         }
 
         $user = auth()->user();
+
+        if (!$user) {
+            return response()->json(['error' => 'Neregistruotas naudotojas'], 401);
+        }
 
         $comment = new Comment();
         $comment->user_id = $user->id;
@@ -72,7 +76,7 @@ class CommentController extends Controller
     public function editComment(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'comment_text' => 'required|string|max:255',
+            'comment_text' => 'required|string|between:2,100',
             'id' => 'required|numeric',
         ]);
 
@@ -124,9 +128,8 @@ class CommentController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
-        DB::table('comments')->where(
-            'id', $request['id'])
-            ->delete();
+        Comment::where('comment_parent_id', $request['id'])->delete();
+        Comment::where('id', $request['id'])->delete();
         
         return response()->json([
             'message' => 'Komentaras sėkmingai ištrintas',

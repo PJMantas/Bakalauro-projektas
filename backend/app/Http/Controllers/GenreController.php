@@ -16,7 +16,7 @@ class GenreController extends Controller
         ->get();
 
         return response()->json([
-            'message' => 'Genre list successfully returned:',
+            'message' => 'Žymų sąrašas sėkmingai gautas',
             'genres' => $genres
         ], 201);
     }
@@ -26,7 +26,7 @@ class GenreController extends Controller
         $genre = Genre::find($id);
 
         return response()->json([
-            'message' => 'Genre successfully returned:',
+            'message' => 'Žyma sėkmingai gauta',
             'genre' => $genre
         ], 201);
     }
@@ -48,7 +48,7 @@ class GenreController extends Controller
         $genre->save();
 
         return response()->json([
-            'message' => 'Genre successfully created',
+            'message' => 'Žyma sėkmingai pridėta',
             'genre' => $genre
         ], 201);
     }
@@ -71,7 +71,7 @@ class GenreController extends Controller
         $genre->save();
 
         return response()->json([
-            'message' => 'Genre successfully updated',
+            'message' => 'Žyma sėkmingai atnaujinta',
             'genre' => $genre
         ], 201);
     }
@@ -86,13 +86,11 @@ class GenreController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        $genre = Genre::find($request['id']);
-
-        $genre->delete();
+        Genre::find($request['id'])
+        ->delete();
 
         return response()->json([
-            'message' => 'Genre successfully deleted',
-            'genre' => $genre
+            'message' => 'Žyma sėkmingai ištrinta'
         ], 201);
     }
 }

@@ -51,12 +51,10 @@ class PermissionController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        $permission = new Permission();
-
-        $permission = DB::select('select * from permissions where id = ?', [$request['id']]);
+        $permission = Permission::where('id', $request['id'])->get();
 
         return response()->json([
-            'message' => 'Permission successfully fetched',
+            'message' => 'Teisių grupė sėkmingai gauta',
             'permission' => $permission[0]
         ], 200);
     }
@@ -73,7 +71,7 @@ class PermissionController extends Controller
             'comment_edit' => 'boolean',
             'comment_delete' => 'boolean',
 
-            // admin-only permissions
+            // administratoriaus teisės
             'is_admin' => 'boolean',
             'manage_users' => 'boolean',
             'manage_permissions' => 'boolean',
@@ -97,7 +95,7 @@ class PermissionController extends Controller
         $permission->comment_edit = $request['comment_edit'];
         $permission->comment_delete = $request['comment_delete'];
 
-        // admin-only permissions
+        // administratoriaus teisės
         $permission->is_admin = $request['is_admin'];
         $permission->manage_users = $request['manage_users'];
         $permission->manage_permissions = $request['manage_permissions'];
@@ -125,7 +123,7 @@ class PermissionController extends Controller
             'comment_edit' => 'boolean',
             'comment_delete' => 'boolean',
 
-            // admin-only permissions
+            // administratoriaus teisės
             'is_admin' => 'boolean',
             'manage_users' => 'boolean',
             'manage_permissions' => 'boolean',
@@ -142,7 +140,7 @@ class PermissionController extends Controller
 
         if(!$permission){
             return response()->json([
-                'message' => 'Permission not found'
+                'message' => 'Teisių grupė nerasta'
             ], 404);
         }
         
@@ -156,8 +154,7 @@ class PermissionController extends Controller
         $permission->comment_edit = $request['comment_edit'];
         $permission->comment_delete = $request['comment_delete'];
         
-
-        // admin-only permissions
+        // administratoriaus teisės
         $permission->is_admin = $request['is_admin'];
         $permission->manage_users = $request['manage_users'];
         $permission->manage_permissions = $request['manage_permissions'];
@@ -179,10 +176,6 @@ class PermissionController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-
-        //DB::table('permissions')->where(
-        //    'id', $request['id'])
-        //    ->delete();
 
         Permission::where('id', $request['id'])->delete();
 

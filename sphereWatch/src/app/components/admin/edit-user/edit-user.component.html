@@ -2,19 +2,6 @@
     <h3 class="card-header bg-dark text-light">Redaguokite esamą naudotoją</h3>
     <form class="card-body" [formGroup]="editForm" (ngSubmit)="onSubmit()">
 
-        <div *ngIf="error?.username" class="alert alert-danger mt-3">
-            {{ error?.username }}
-          </div>
-          <div *ngIf="error?.email" class="alert alert-danger mt-3">
-            {{ error?.email }}
-          </div>
-          <div *ngIf="error?.password" class="alert alert-danger mt-3">
-            {{ error?.password }}
-          </div>
-          <div *ngIf="error?.password_confirmation" class="alert alert-danger mt-3">
-            {{ error?.password_confirmation }}
-          </div>
-
         <div class="form-group">
             <label for="email">E. Paštas</label>
             <input [readonly]="true" type="text" formControlName="email" class="form-control"   [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
@@ -87,6 +74,14 @@
         <button class="btn btn-dark btn-xs " type="submit"><i class="bi bi-check-lg"></i> Išsaugoti</button>
         <button class="btn btn-dark btn-xs " type="button" [routerLink]="['/admin']"><i class="bi bi-arrow-return-left"></i> Grįžti</button>
         
-        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+        <div *ngIf="error?.first_name" class="alert alert-danger mt-3">
+            {{ error?.first_name }}
+        </div>
+        <div *ngIf="error?.last_name" class="alert alert-danger mt-3">
+            {{ error?.last_name }}
+        </div>
+        <div *ngIf="error?.group_id" class="alert alert-danger mt-3">
+            {{ error?.group_id }}
+        </div>
     </form>
 </div>

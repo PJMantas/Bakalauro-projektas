@@ -55,7 +55,7 @@ class ReportController extends Controller
         }
 
         return response()->json([
-            'message' => 'Retrieved SystemReportValues',
+            'message' => 'Gauti sistemos ataskaitos duomenys',
             'RegisteredUsers' => $usersCount,
             'Videos' => $videoCount,
             'VideoSums' => $videoSums,
@@ -99,7 +99,7 @@ class ReportController extends Controller
                                                 where videos.creator_id = ? ', [$userid]);
 
         return response()->json([
-            'message' => 'Retrieved UserReport',
+            'message' => 'Gauti naudotojo ataskaitos duomenys',
             'VideoCount' => $userVideoCount,
             'MostCommentedVideos' => $mostCommentedVideos,
             'MostLikedVideos' => $mostLikedVideos,

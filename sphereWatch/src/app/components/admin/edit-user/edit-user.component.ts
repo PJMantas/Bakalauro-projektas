@@ -40,7 +40,7 @@ export class EditUserComponent implements OnInit {
         age: [''],
         country: [''],
         city: [''],
-        group_id: ['']
+        group_id: ['', Validators.required]
       });
   
   }
@@ -72,7 +72,7 @@ export class EditUserComponent implements OnInit {
         age: this.user.age,
         country: this.user.country,
         city: this.user.city,
-        group_id: this.user.group_id
+        group_id: [this.user.group_id, Validators.required]
     });
   })
   }
@@ -80,12 +80,20 @@ export class EditUserComponent implements OnInit {
   get f() { return this.editForm.controls; }
 
   onSubmit(){
-    this.AdminService.adminUpdateUser(this.editForm.value).subscribe(response => {
-      
+    this.submitted = true;
+    
+    if (this.editForm.invalid) {
+      return;
+    }
+
+    this.AdminService.adminUpdateUser(this.editForm.value).subscribe(
+      data => {
         this.router.navigate(['/admin']);
-    
-    })
-    
+      },
+      error => {
+        this.error = error.error;
+        this.loading = false;
+      });
   }
 
 }

@@ -2,30 +2,19 @@
     <h3 class="card-header bg-dark text-light">Pridėti naują naudotoją</h3>
     <form class="card-body" [formGroup]="addForm" (ngSubmit)="onSubmit()">
 
-        <div *ngIf="error?.username" class="alert alert-danger mt-3">
-            {{ error?.username }}
-          </div>
-          <div *ngIf="error?.email" class="alert alert-danger mt-3">
-            {{ error?.email }}
-          </div>
-          <div *ngIf="error?.password" class="alert alert-danger mt-3">
-            {{ error?.password }}
-          </div>
-          <div *ngIf="error?.password_confirmation" class="alert alert-danger mt-3">
-            {{ error?.password_confirmation }}
-          </div>
-
         <div class="form-group">
             <label for="email">E. Paštas</label>
-            <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
+            <input type="text" formControlName="email" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
             <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
                 <div *ngIf="f['email'].errors['required']">E. Paštas yra privalomas</div>
             </div>
         </div>
-        
+
         <div class="form-group">
             <label for="username">Slapyvardis</label>
-            <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" />
+            <input type="text" formControlName="username" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" />
             <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
                 <div *ngIf="f['username'].errors['required']">Slapyvardis yra privalomas</div>
             </div>
@@ -34,7 +23,8 @@
         <div class="form-group">
 
             <label for="password">Slaptažodis</label>
-            <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" />
+            <input type="password" formControlName="password" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" />
             <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
                 <div *ngIf="f['password'].errors['required']">Slaptažodis yra privalomas</div>
             </div>
@@ -42,66 +32,68 @@
 
         <div class="form-group">
             <label for="password">Patvirtinti slaptažodį</label>
-            <input type="password" formControlName="password_confirmation" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['password_confirmation'].errors }" />
+            <input type="password" formControlName="password_confirmation" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['password_confirmation'].errors }" />
             <div *ngIf="submitted && f['password_confirmation'].errors" class="invalid-feedback">
-                <div *ngIf="f['password_confirmation'].errors['required']">Slaptažodžio patvirtinimas yra privalomas</div>
+                <div *ngIf="f['password_confirmation'].errors['required']">Slaptažodžio patvirtinimas yra privalomas
+                </div>
             </div>
         </div>
 
         <div class="form-group">
-
             <label for="first_name">Vardas</label>
-            <input type="text" formControlName="first_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['first_name'].errors }" />
-            <div *ngIf="submitted && f['first_name'].errors" class="invalid-feedback">
-                <div *ngIf="f['first_name'].errors['required']">Vardas yra privalomas</div>
-            </div>
+            <input type="text" formControlName="first_name" class="form-control" />
         </div>
 
         <div class="form-group">
             <label for="last_name">Pavardė</label>
-            <input type="text" formControlName="last_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['last_name'].errors }" />
-            <div *ngIf="submitted && f['last_name'].errors" class="invalid-feedback">
-                <div *ngIf="f['last_name'].errors['required']">Pavardė yra privaloma</div>
-            </div>
+            <input type="text" formControlName="last_name" class="form-control" />
         </div>
 
         <div class="form-group">
             <label for="age">Amžius</label>
-            <input type="text" formControlName="age" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['age'].errors }" />
-            <div *ngIf="submitted && f['age'].errors" class="invalid-feedback">
-                <div *ngIf="f['age'].errors['required']">Amžius yra privalomas</div>
-            </div>
+            <input type="text" formControlName="age" class="form-control" />
         </div>
 
         <div class="form-group">
             <label for="country">Šalis</label>
-            <input type="text" formControlName="country" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['country'].errors }" />
-            <div *ngIf="submitted && f['country'].errors" class="invalid-feedback">
-                <div *ngIf="f['country'].errors['required']">Šalis yra privaloma</div>
-            </div>
+            <input type="text" formControlName="country" class="form-control" />
         </div>
 
         <div class="form-group">
             <label for="city">Miestas</label>
-            <input type="text" formControlName="city" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['city'].errors }" />
-            <div *ngIf="submitted && f['city'].errors" class="invalid-feedback">
-                <div *ngIf="f['city'].errors['required']">Miestas yra privalomas</div>
-            </div>
+            <input type="text" formControlName="city" class="form-control" />
         </div>
 
         <div class="form-group">
             <label for="group_id">Leidimų grupės nr.</label>
-            <input type="text" formControlName="group_id" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['group_id'].errors }" />
+            <input type="text" formControlName="group_id" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['group_id'].errors }" />
             <div *ngIf="submitted && f['group_id'].errors" class="invalid-feedback">
                 <div *ngIf="f['group_id'].errors['required']">Leidimų grupės nr. yra privalomas</div>
             </div>
         </div>
 
-        
+
         <br>
         <button class="btn btn-success btn-xs " type="submit"><i class="bi bi-check-lg"></i> Pridėti</button>
-        <button class="btn btn-dark btn-xs " type="button" [routerLink]="['/admin']"><i class="bi bi-arrow-return-left"></i> Grįžti</button>
-        
-        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+        <button class="btn btn-dark btn-xs " type="button" [routerLink]="['/admin']"><i
+                class="bi bi-arrow-return-left"></i> Grįžti</button>
+
+        <div *ngIf="error?.username" class="alert alert-danger mt-3">
+            {{ error?.username }}
+        </div>
+        <div *ngIf="error?.email" class="alert alert-danger mt-3">
+            {{ error?.email }}
+        </div>
+        <div *ngIf="error?.password" class="alert alert-danger mt-3">
+            {{ error?.password }}
+        </div>
+        <div *ngIf="error?.password_confirmation" class="alert alert-danger mt-3">
+            {{ error?.password_confirmation }}
+        </div>
+        <div *ngIf="error?.group_id" class="alert alert-danger mt-3">
+            {{ error?.group_id }}
+        </div>
     </form>
 </div>

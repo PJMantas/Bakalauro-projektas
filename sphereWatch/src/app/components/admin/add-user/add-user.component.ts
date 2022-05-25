@@ -29,7 +29,7 @@ export class AddUserComponent implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private router: Router,
-  ) { 
+  ) {
     this.addForm = this.formBuilder.group(
       {
         username: ['', Validators.required],
@@ -53,13 +53,14 @@ export class AddUserComponent implements OnInit {
         this.router.navigate(['/home']);
       } else {
         this.manageUsers = true;
-      }},
+      }
+    },
       error => {
         this.router.navigate(['/home']);
-    });
+      });
   }
 
-  get f() {return this.addForm.controls; }
+  get f() { return this.addForm.controls; }
 
   onSubmit() {
     this.submitted = true;
@@ -69,20 +70,15 @@ export class AddUserComponent implements OnInit {
     }
 
     this.loading = true;
-    
-    this.AdminService.addUser(this.addForm.value)
-    .pipe(first())
-            .subscribe(
-                data => {
-                    this.router.navigate(['/admin']);
-                },
-                error => {
-                    this.error = error;
-                    this.loading = false;
-                });
 
-    
-        
+    this.AdminService.addUser(this.addForm.value).subscribe(
+      data => {
+        this.router.navigate(['/admin']);
+      },
+      error => {
+        this.error = error.error;
+        this.loading = false;
+      });
   }
 
 }

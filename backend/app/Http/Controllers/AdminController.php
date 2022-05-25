@@ -12,10 +12,10 @@ class AdminController extends Controller
 {
     public function getUsersList(Request $request){
 
-        $users = DB::select('select id, username, email, first_name, last_name, age, city, country, group_id from users ');
+        $users = User::all();
 
         return response()->json([
-            'message' => 'Users list successfully returned:',
+            'message' => 'Naudotojų sąrašas sėkmingai gautas',
             'users' => $users
         ], 200);
 
@@ -62,7 +62,7 @@ class AdminController extends Controller
 
 
         return response()->json([
-            'message' => 'User successfully added',
+            'message' => 'Naudotojas sėkmingai sukurtas',
             'user' => $user
         ], 201);
     }
@@ -89,9 +89,6 @@ class AdminController extends Controller
             'user_id' => 'numeric|required', 
             'first_name' => 'string|between:2,100',
             'last_name' => 'string|between:2,100',
-            'age' => 'numeric',
-            'country' => 'string|between:2,100',
-            'city' => 'string|between:2,100',
             'group_id' => 'numeric|required',
         ]);
 
@@ -111,7 +108,7 @@ class AdminController extends Controller
         $user->save();
 
         return response()->json([
-            'message' => 'User edited',
+            'message' => 'Naudotojas sėkmingai atnaujintas',
             'user' => $user
             ], 200);
     }

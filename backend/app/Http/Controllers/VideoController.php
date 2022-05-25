@@ -38,7 +38,7 @@ class VideoController extends Controller
         $video = new Video();
 
         $video->title = $request['title'];
-        //$video->video_url = $request['video_url'];
+
         if ($request->hasFile('video_url'))
         {
             $path = $request->file('video_url')->store('videos', ['disk' => 'videos']);
@@ -60,8 +60,7 @@ class VideoController extends Controller
 
         return response()->json([
             'message' => 'Vaizdo įrašas sėkmingai sukurtas',
-            'video' => $video,
-            'path' => $path
+            'video' => $video
         ], 201);
     }
 
@@ -131,8 +130,7 @@ class VideoController extends Controller
         }
 
         $video = Video::find($request['video_id']);
-        if (!$video)
-        {
+        if (!$video){
             return response()->json([
                 'message' => 'Vaizdo įrašas nerastas',
             ], 404);
@@ -141,8 +139,7 @@ class VideoController extends Controller
         $isLiked = $request['reaction_type'] === 'true';
         $user = auth()->user();
 
-        if (!$user)
-        {
+        if (!$user){
             return response()->json(['message' => 'Naudotojas neautentifikuotas'], 401);
         }
 
@@ -173,20 +170,17 @@ class VideoController extends Controller
                 }
             }
         }
-        else
-        {
+        else {
             $reaction = new Reaction();
             $reaction->user_id = $user->id;
             $reaction->video_id = $video->id;
             $reaction->reaction_type = $isLiked;
             $reaction->save();
 
-            if ($isLiked)
-            {
+            if ($isLiked){
                 $video->increment('likes');
             }
-            else
-            {
+            else {
                 $video->increment('dislikes');
             }
         }
@@ -262,6 +256,7 @@ class VideoController extends Controller
     }
 
     public function getVideosList(){
+
         $videos = DB::select('select * from videos');
 
         return response()->json([
@@ -276,8 +271,9 @@ class VideoController extends Controller
         {
             return response()->json(['message' => 'Naudotojas neautentifikuotas'], 401);
         }
-        //$videos = DB::select('select * from videos where creator_id=' . auth()->user()->id);
-        $videos = Video::where('creator_id', auth()->user()->id)->get();
+
+        $videos = DB::select('select * from videos where creator_id=' . auth()->user()->id);
+
         return response()->json([
             'message' => 'Sėkmingai gautas naudotojo vaizdo įrašų sąrašas',
             'videos' => $videos
@@ -377,8 +373,6 @@ class VideoController extends Controller
 
     public function getMostPopularGanreRecomendedVideos(Request $request)
     {
-
-
         $popularGenres = DB::select('select sum(clicks) as totalViews, genre  from videos group by genre order by totalViews desc limit 3');
         $videos1 = Video::where('genre', $popularGenres[0]->genre)
             ->where('created_at', '>=', Carbon::now()->subDays(30))
