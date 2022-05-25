@@ -5,6 +5,7 @@ import { Genre } from 'src/app/models/genre';
 import { GenreService } from 'src/app/services/genre.service';
 import { VideoService } from '../../../services/video.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
@@ -22,6 +23,7 @@ export class VideoHomeComponent implements OnInit {
   orderType = 'asc';
   orderField = 'created_at';
   filterForm: FormGroup;
+  enviroment = environment.files;
 
   constructor(
     private VideoService: VideoService,
@@ -45,12 +47,10 @@ export class VideoHomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.GenreService.getGenresList().subscribe(result => {
-      console.log(result);
       this.GenreList = result['genres'];
     });
 
     this.VideoService.getVideosList().subscribe(result => {
-      console.log(result);
       this.VideoList = result['videos'];
     }
     )};
@@ -59,7 +59,6 @@ export class VideoHomeComponent implements OnInit {
     
     const searchTerm = event.target.value;
     this.VideoService.searchVideo(searchTerm.trim()).subscribe(result => {
-      console.log(result);
       this.VideoList = result['videos'];
     }
   )};
@@ -74,8 +73,6 @@ export class VideoHomeComponent implements OnInit {
     return false;
   }
   selectUnselect(genreId: number) {
-    console.log(genreId);
-
     this.toggle = !this.toggle;
 
     if(this.genreId === genreId) 
@@ -130,8 +127,6 @@ export class VideoHomeComponent implements OnInit {
    
     this.VideoService.getOrderedVideosByGenre(this.filterForm.value).subscribe(result => {
       this.VideoList = result['videos'];
-      console.log(result);
-      
     });
   }
 

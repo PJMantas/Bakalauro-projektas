@@ -36,7 +36,7 @@ class CommentController extends Controller
         $comment->save();
 
         return response()->json([
-            'message' => 'Comment successfully created',
+            'message' => 'Komentaras sėkmingai pridėtas',
             'comment' => $comment,
         ], 201);
     }
@@ -64,7 +64,7 @@ class CommentController extends Controller
         $comment->save();
 
         return response()->json([
-            'message' => 'Comment reply successfully created',
+            'message' => 'Komentaro atsakymas sėkmingai pridėtas',
             'comment' => $comment,
         ], 201);
     }
@@ -86,7 +86,7 @@ class CommentController extends Controller
         $comment->save();
 
         return response()->json([
-            'message' => 'Comment successfully edited',
+            'message' => 'Komentaaras sėkmingai atnaujintas',
             'comment' => $comment,
         ], 201);
     }
@@ -110,7 +110,7 @@ class CommentController extends Controller
 
 
         return response()->json([
-            'message' => 'Comments successfully fetched',
+            'message' => 'Komentarai sėkmingai gauti',
             'comments' => $comments,
         ], 200);
     }
@@ -129,7 +129,7 @@ class CommentController extends Controller
             ->delete();
         
         return response()->json([
-            'message' => 'Comment successfully deleted',
+            'message' => 'Komentaras sėkmingai ištrintas',
             'comments' => $request['id'],
         ], 200);
         

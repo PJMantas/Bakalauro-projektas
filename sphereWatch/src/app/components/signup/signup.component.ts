@@ -32,7 +32,7 @@ export class SignupComponent implements OnInit {
   
     if (event.target.files.length > 0) {
       this.file = event.target.files[0];
-      console.log(this.file);
+      //console.log(this.file);
     }
   }
 
@@ -57,12 +57,11 @@ export class SignupComponent implements OnInit {
 
     this.authService.register(formData).subscribe(
       (result) => {
-        console.log(result);
+        //console.log(result);
       },
       (error) => {
-        console.log(error);
         this.errors = error.error;
-        console.log(this.errors.email);
+        //console.log(this.errors.email);
       },
       () => {
         this.registerForm.reset();

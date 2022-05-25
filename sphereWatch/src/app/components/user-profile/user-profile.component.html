@@ -1,69 +1,89 @@
 <br>
 <div *ngIf="isSignedIn" class="container">
-    <div class="card inner-main">
-      <h3 class="card-header bg-dark text-light" style="text-align: center;">Mano paskyra</h3> 
-      <div class="card-header">
-        
-      </div>
-      <div class="card-body d-flex flex-column" style="padding-left: 10%; padding-right: 10%; font-size: large;">
-        <div>
-          <div class="row">
-            <div class="col-md-6">
-              <img src= 'http://192.168.1.108:8000/{{UserProfile?.avatar_url}}' max-width="500" max-height="333" class="img-fluid py-3">
-            </div>
-            <div class="container card col-sm border">
-              <div class="row">
-                <p class="card-text col-3">Slapyvardis:</p>
-                <strong class="col-sm">{{UserProfile?.username}}</strong>
-              </div>
-              <div class="row">
-                <p class="card-text col-3">E-paštas: </p>
-                <strong class="col-sm">{{UserProfile?.email}}</strong>
-              </div>
-              <div class="row">
-                <p class="card-text col-3">Vardas: </p>
-                <strong class="col-sm">{{UserProfile?.first_name}}</strong>
-              </div>
-              <div class="row">
-                <p class="card-text col-3">Pavardė: </p>
-                <strong class="col-sm">{{UserProfile?.last_name}}</strong>
-              </div>
-              <div class="row">
-                <p class="card-text col-3">Amžius: </p>
-                <strong class="col-sm">{{UserProfile?.age}}</strong>
-              </div>
-              <div class="row">
-                <p class="card-text col-3">Šalis:</p>
-                <strong class="col-sm">{{UserProfile?.country}}</strong>
-              </div>
+  <div class="card inner-main">
+    <h3 class="card-header bg-dark text-light" style="text-align: center;">Mano paskyra</h3>
+    <div class="card-header">
 
-              <p class="btn btn-outline-dark btn-xs " type="button" [routerLink]="['/edit-profile']"><i class="bi bi-pencil-square"></i> Redaguoti profilį</p>
-
-              <p class="btn btn-outline-danger btn-xs " type="button" (click)="onDeleteProfile()"><i class="bi bi-x-octagon"></i> Trinti profilį</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="row btn-toolbar" style="font-weight: bolder;">
-          <div class="col-md-6 card">
-            <h2>Vaizdo įrašai</h2>
-        
-            <button class="btn btn-outline-success btn-lg " type="button" [disabled]="!enableButton" [routerLink]="['/video/createVideo']" ><i class="bi bi-plus fa-lg"></i> Kurti naują vaizdo įrašą </button>
-            <p class="col-md-6"></p>
-            <button class="btn btn-outline-primary btn-lg" type="button" [routerLink]="['/video/userVideos']"><i class="bi bi-camera-video fa-lg"> </i> Mano vaizdo įrašai </button>
-            
-          </div>
-          <div class="col-sm card">
-            <h2>Kita</h2>
-            <button class="btn btn-outline-info btn-lg" type="button" [routerLink]="['/viewUserReport']"><i class="bi bi-graph-up"></i> Mano statistika </button>
-            <p class="col-md-6"></p>
-            <button class="btn btn-outline-warning btn-lg" type="button" [routerLink]="['/user-genre-requests']"><i class="bi bi-envelope"></i> Mano prašymai </button>
-          </div>
-        </div>
-        
-      </div>
-      
-      
     </div>
-    
+    <div class="card-body d-flex flex-column" style="padding-left: 10%; padding-right: 10%; font-size: large;">
+      <div>
+        <div class="row">
+          <div class="col-md-6">
+            <img src='{{enviroment}}/{{UserProfile?.avatar_url}}' max-width="500" max-height="333"
+              class="img-fluid py-3">
+          </div>
+          <div class="container card col-sm border">
+            <div class="row">
+              <p class="card-text col-3">Slapyvardis:</p>
+              <strong class="col-sm">{{UserProfile?.username}}</strong>
+            </div>
+            <div class="row">
+              <p class="card-text col-3">E-paštas: </p>
+              <strong class="col-sm">{{UserProfile?.email}}</strong>
+            </div>
+            <div class="row">
+              <p class="card-text col-3">Vardas: </p>
+              <strong class="col-sm">{{UserProfile?.first_name}}</strong>
+            </div>
+            <div class="row">
+              <p class="card-text col-3">Pavardė: </p>
+              <strong class="col-sm">{{UserProfile?.last_name}}</strong>
+            </div>
+            <div class="row">
+              <p class="card-text col-3">Amžius: </p>
+              <strong class="col-sm">{{UserProfile?.age}}</strong>
+            </div>
+            <div class="row">
+              <p class="card-text col-3">Šalis:</p>
+              <strong class="col-sm">{{UserProfile?.country}}</strong>
+            </div>
+
+            <p class="btn btn-outline-dark btn-xs " type="button" [routerLink]="['/edit-profile']"><i
+                class="bi bi-pencil-square"></i> Redaguoti profilį</p>
+            <button class="btn btn-outline-danger btn-xs" (click)="open(content)"><i class="bi bi-x-octagon"></i> Trinti
+              profilį</button>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="row btn-toolbar" style="font-weight: bolder;">
+        <div class="col-md-6 card">
+          <h2>Vaizdo įrašai</h2>
+
+          <button class="btn btn-outline-success btn-lg " type="button" [disabled]="!enableButton"
+            [routerLink]="['/video/createVideo']"><i class="bi bi-plus fa-lg"></i> Kurti naują vaizdo įrašą </button>
+          <p class="col-md-6"></p>
+          <button class="btn btn-outline-primary btn-lg" type="button" [routerLink]="['/video/userVideos']"><i
+              class="bi bi-camera-video fa-lg"> </i> Mano vaizdo įrašai </button>
+
+        </div>
+        <div class="col-sm card">
+          <h2>Kita</h2>
+          <button class="btn btn-outline-info btn-lg" type="button" [routerLink]="['/viewUserReport']"><i
+              class="bi bi-graph-up"></i> Mano statistika </button>
+          <p class="col-md-6"></p>
+          <button class="btn btn-outline-warning btn-lg" type="button" [routerLink]="['/user-genre-requests']"><i
+              class="bi bi-envelope"></i> Mano prašymai </button>
+        </div>
+      </div>
+
+    </div>
   </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Patvirtinkite veiksmą</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <p>Visa informacija susijusi su jumis bus pašalinta iš sistemos. Visi sukurti vaizdo įrašai,
+      jų komentarai bei reakcijos. Taip pat bus pašalinti jūsų visi komentarai bei reakcijos kituose vaizdo įrašuose</p>
+  </div>
+  <div class="modal-footer">
+    <p class="btn btn-outline-danger btn-xs " type="button" (click)="onDeleteProfile()"><i
+        class="bi bi-x-octagon"></i>Taip</p>
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Atšaukti</button>
+  </div>
+</ng-template>

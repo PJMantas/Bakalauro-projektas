@@ -50,7 +50,7 @@ export class GenreComponent implements OnInit {
 
 
     this.GenreService.getGenresList().subscribe(result => {
-      console.log(result);
+      //console.log(result);
       this.GenreList = result['genres'];
     });
     

@@ -60,7 +60,6 @@ export class AddPermissionComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    // stop here if form is invalid
     if (this.addForm.invalid) {
       return;
     }
@@ -68,23 +67,15 @@ export class AddPermissionComponent implements OnInit {
 
   this.PermissionService.addPermission(this.addForm.value).subscribe(
     (result) => {
-      console.log(result);
     },
     (error) => {
       this.error = error.error;
-      console.log(this.error);
     },
     () => {
       this.addForm.reset();
       this.router.navigate(['/admin/view-permissions']);
     }
   );
-  /*
-    this.PermissionService.addPermission(this.addForm.value).subscribe(response => {
-      this.router.navigate(['/admin/view-permissions']);
-    }
-    
-    );*/
   }
 
 }

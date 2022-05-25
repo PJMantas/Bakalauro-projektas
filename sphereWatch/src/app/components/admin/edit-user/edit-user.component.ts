@@ -84,7 +84,6 @@ export class EditUserComponent implements OnInit {
       
         this.router.navigate(['/admin']);
     
-      console.log(response);
     })
     
   }

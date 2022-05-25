@@ -32,14 +32,13 @@ export class UserGenreRequestsComponent implements OnInit {
 
   ngOnInit(): void { 
     this.GenreRequestService.getUserGenreRequestsList().subscribe(result => {
-      //console.log(JSON.stringify(result));
       this.UserGenreRequests = result['genreRequests'];
     })
   }
 
   onDelete(genreRequestId){
     this.GenreRequestService.deleteGenreRequest(genreRequestId).subscribe(result => {
-      console.log(result);
+      //console.log(result);
       window.location.reload();
     })
   }

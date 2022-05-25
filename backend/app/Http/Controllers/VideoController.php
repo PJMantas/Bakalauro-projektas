@@ -19,9 +19,9 @@ class VideoController extends Controller
 
     	$validator = Validator::make($request->all(), [
             'title' => 'required|string|between:4,100',
-            'video_url' => 'required|file|mimetypes:video/mp4',
+            'video_url' => 'required|file|mimetypes:video/mp4,video/x-matroska|max:1000000',
             'description' => 'required|string|between:4,255',
-            'genre' => 'required|numeric',
+            'genre' => 'required|string',
             'thumbnail_url' => 'file|mimes:jpg,png,jpeg,gif|max:5120',
             
         ]);
@@ -29,9 +29,11 @@ class VideoController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-
-        
+      
         $user = auth()->user();
+        if (!$user) {
+            return response()->json(['message' => 'Neautentifikuotas naudotojas'], 401);
+        }
 
         $video = new Video();
 
@@ -57,7 +59,7 @@ class VideoController extends Controller
 
 
         return response()->json([
-            'message' => 'Video successfully created',
+            'message' => 'Vaizdo įrašas sėkmingai sukurtas',
             'video' => $video,
             'path' => $path
         ], 201);
@@ -91,7 +93,7 @@ class VideoController extends Controller
         $video->save();
 
         return response()->json([
-            'message' => 'Video edited',
+            'message' => 'Vaizdo įrašas sėkmingai atnaujintas',
             'video' => $video
             ], 201);
     }
@@ -113,9 +115,9 @@ class VideoController extends Controller
         $video->save();
 
         return response()->json([
-            'message' => 'Video count added',
+            'message' => 'Vaizdo įrašo peržiūra sėkmingai pridėta',
             'video' => $video
-            ], 201);
+            ], 200);
     }
 
     public function reactToVideo(Request $request){
@@ -129,8 +131,20 @@ class VideoController extends Controller
         }
 
         $video = Video::find($request['video_id']);
+        if (!$video)
+        {
+            return response()->json([
+                'message' => 'Vaizdo įrašas nerastas',
+            ], 404);
+        }
+
         $isLiked = $request['reaction_type'] === 'true';
         $user = auth()->user();
+
+        if (!$user)
+        {
+            return response()->json(['message' => 'Naudotojas neautentifikuotas'], 401);
+        }
 
         $like = Reaction::where('user_id', $user->id)->where('video_id', $video->id)->first();
 
@@ -181,13 +195,13 @@ class VideoController extends Controller
 
         if ($isLiked) {
             return response()->json([
-                'message' => 'Video liked',
+                'message' => 'Vaizdo įrašo teigiami įvertintas',
                 'video' => $video
             ], 201);
         }
         else{
             return response()->json([
-                'message' => 'Video disliked',
+                'message' => 'Vaizdo įrašas neigiamai įvertintas',
                 'video' => $video
             ], 201);
         }   
@@ -203,11 +217,17 @@ class VideoController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        //$video = DB::select('select * from videos where id=' . $request['id'] . ' LIMIT 1');
         $video = Video::where('id', $request['id'])->get();
 
+        if ($video == null)
+        {
+            return response()->json([
+                'message' => 'Vaizdo įrašas nerastas',
+            ], 404);
+        }
+
         return response()->json([
-            'message' => 'Retrieved Video ID: ' . $request['id'],
+            'message' => 'Gauto vaizdo įrašo ID: ' . $request['id'],
             'video' => $video[0]
         ], 200);
     }
@@ -245,17 +265,21 @@ class VideoController extends Controller
         $videos = DB::select('select * from videos');
 
         return response()->json([
-            'message' => 'Retrieved Video List',
+            'message' => 'Sėkmingai gautas vaizdo įrašų sąrašas',
             'videos' => $videos
         ], 200);
     }
 
     public function getUserVideosList(){
-
+        $user = auth()->user();
+        if (!$user)
+        {
+            return response()->json(['message' => 'Naudotojas neautentifikuotas'], 401);
+        }
         //$videos = DB::select('select * from videos where creator_id=' . auth()->user()->id);
         $videos = Video::where('creator_id', auth()->user()->id)->get();
         return response()->json([
-            'message' => 'Retrieved Video List',
+            'message' => 'Sėkmingai gautas naudotojo vaizdo įrašų sąrašas',
             'videos' => $videos
         ], 200);
     }
@@ -272,7 +296,7 @@ class VideoController extends Controller
         $videos = Video::where('title', 'like', '%' . $request['search'] . '%')->get();
 
         return response()->json([
-            'message' => 'Retrieved Video List',
+            'message' => 'Sėkmingai gautas vaizdo įrašų sąrašas',
             'videos' => $videos
         ], 201);
     }
@@ -302,7 +326,7 @@ class VideoController extends Controller
         }
 
         return response()->json([
-            'message' => 'Retrieved Video List',
+            'message' => 'Sėkmingai gautas vaizdo įrašų sąrašas',
             'videos' => $videos
         ], 201);
     }
@@ -320,7 +344,7 @@ class VideoController extends Controller
         $videos = DB::select('select * from videos where genre="' . $request['genre'] . '"');
 
         return response()->json([
-            'message' => 'Retrieved Video List',
+            'message' => 'Sėkmingai gautas žymos vaizdo įrašų sąrašas',
             'videos' => $videos
         ], 201);
     }
@@ -345,7 +369,7 @@ class VideoController extends Controller
             ->get();
 
         return response()->json([
-            'message' => 'Retrieved Video Recomendation List',
+            'message' => 'Sėkmingai gautas rekomenduojamų vaizdo įrašų sąrašas',
             'videos' => $videos
         ], 201);
 
@@ -378,7 +402,7 @@ class VideoController extends Controller
             ->get();
 
         return response()->json([
-            'message' => 'Retrieved Video Recomendation List',
+            'message' => 'Sėkmingai gauti rekomenduojamų vaizdo įrašų sąrašai',
             'videos1' => $videos1,
             'videos2' => $videos2,
             'videos3' => $videos3

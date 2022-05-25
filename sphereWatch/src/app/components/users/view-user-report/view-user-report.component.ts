@@ -46,7 +46,6 @@ export class ViewUserReportComponent implements OnInit {
   ) { 
     this.AuthStateService.userAuthState.subscribe((val) => {
       this.isSignedIn = val;
-      console.log(val);
       if (!this.isSignedIn) {
         this.router.navigate(['/home']);
       }
@@ -62,7 +61,7 @@ export class ViewUserReportComponent implements OnInit {
   ngOnInit(): void {
 
     this.ReportSerivce.getUserReport().subscribe(result => {
-      console.log(result);
+      //console.log(result);
       this.MostDislikedVideos = result['MostDislikedVideos'];
       this.MostLikedVideos = result['MostLikedVideos'];
       this.MostViewedVideos = result['MostViewedVideos'];
@@ -74,14 +73,6 @@ export class ViewUserReportComponent implements OnInit {
       this.TotalVideoDislikes = result['VideoSums'][0].dislikes;
       this.TotalVideoViews = result['VideoSums'][0].clicks;
       this.TotalCommentCount = result['CommentCount'][0].commentCount;
-
-      //console.log(this.MostDislikedVideos);
-      console.log(this.MostLikedVideos);
-      console.log(this.MostViewedVideos);
-      console.log(this.TotalVideoCount);
-      console.log(this.TotalVideoLikes);
-      console.log(this.TotalVideoDislikes);
-      console.log(this.TotalVideoViews);
       
       this.viewChart = new Chart('viewChart', {
         type: 'bar',
@@ -142,18 +133,18 @@ export class ViewUserReportComponent implements OnInit {
             borderColor: '#3e95cd',
             borderWidth: 5
           },{
-            label: 'Neigiami įvertinimai',
-            type: 'bar',
-            data: this.mostDislikedData,
-            borderColor: '#FF0000',
-            borderWidth: 5
-          },{
             label: 'Teigiami įvertinimai',
             type: 'bar',
             data: this.mostLikedData,
             borderColor: '#5cb85c',
             borderWidth: 5
-          }
+          },{
+            label: 'Neigiami įvertinimai',
+            type: 'bar',
+            data: this.mostDislikedData,
+            borderColor: '#FF0000',
+            borderWidth: 5
+          },
         ]
         },
         options: {

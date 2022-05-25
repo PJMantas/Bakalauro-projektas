@@ -17,7 +17,7 @@ class AdminController extends Controller
         return response()->json([
             'message' => 'Users list successfully returned:',
             'users' => $users
-        ], 201);
+        ], 200);
 
     }
 
@@ -80,23 +80,23 @@ class AdminController extends Controller
             'id', $request['id'])
             ->delete();
         
-        return response()->json(200);
+        return response()->json(201);
         
     }
 
     public function adminUpdateUser(Request $request){
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required|numeric', 
+            'user_id' => 'numeric|required', 
             'first_name' => 'string|between:2,100',
             'last_name' => 'string|between:2,100',
             'age' => 'numeric',
             'country' => 'string|between:2,100',
             'city' => 'string|between:2,100',
-            'group_id' => 'required|numeric',
+            'group_id' => 'numeric|required',
         ]);
 
         if($validator->fails()){
-            return response()->json($validator->errors(), 400);
+            return response()->json($validator->errors(), 422);
         }
 
         $user = User::find($request['user_id']);
@@ -113,7 +113,7 @@ class AdminController extends Controller
         return response()->json([
             'message' => 'User edited',
             'user' => $user
-            ], 201);
+            ], 200);
     }
 
     

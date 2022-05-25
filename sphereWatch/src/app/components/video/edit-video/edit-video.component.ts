@@ -64,7 +64,6 @@ export class EditVideoComponent implements OnInit {
     this.videoId = Number(this.route.snapshot.paramMap.get('id'));
 
     this.VideoService.getVideoById(this.videoId).subscribe(response => {
-      console.log(response);
       this.video = response['video'];
       this.editVideoForm = this.formBuilder.group({
         video_id: [this.videoId, Validators.required],
@@ -86,7 +85,6 @@ export class EditVideoComponent implements OnInit {
       });
 
     this.GenreService.getGenresList().subscribe(result => {
-        console.log(result);
         this.GenreList = result['genres'];
       });
 

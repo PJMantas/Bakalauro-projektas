@@ -7,6 +7,8 @@ import { User } from '../../models/user';
 import { Router } from '@angular/router';
 import { Permission } from 'src/app/models/permission';
 import { PermissionService } from 'src/app/services/permission.service';
+import { environment } from 'src/environments/environment';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-user-profile',
@@ -18,6 +20,8 @@ export class UserProfileComponent implements OnInit {
   UserPermissions!: Permission;
   enableButton = false;
   isSignedIn: boolean = false;
+  enviroment = environment.files;
+  closeResult = '';
   constructor(
     public authService: AuthService,
     private PermissionService: PermissionService,
@@ -25,6 +29,7 @@ export class UserProfileComponent implements OnInit {
     private AuthStateService: AuthStateService,
     private UserService: UserService,
     private router: Router,
+    private modalService: NgbModal,
   ) {
     this.AuthStateService.userAuthState.subscribe((val) => {
       this.isSignedIn = val;
@@ -47,11 +52,16 @@ export class UserProfileComponent implements OnInit {
   }
   onDeleteProfile() {
     this.UserService.deleteProfile().subscribe(result => {
-      console.log(result);
+      //console.log(result);
       this.AuthStateService.setAuthState(false);
       this.token.removeToken();
+      this.modalService.dismissAll();
       this.router.navigate(['/home']);
     });
+  }
+
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
   }
 
   

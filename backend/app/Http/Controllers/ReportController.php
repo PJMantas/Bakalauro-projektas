@@ -13,18 +13,18 @@ use Illuminate\Support\Facades\DB;
 class ReportController extends Controller
 {
     public function getSystemReport(){
-        //$videos = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos');
+       
         $usersCount = DB::select('select count(*) as count from users');
 
         $videoCount = DB::select('select count(*) as count from videos');
 
         $videoSums = DB::select('select sum(clicks) as clicks, sum(likes) as likes, sum(dislikes) as dislikes from videos');
 
-        $mostLikedVideos = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos order by likes desc limit 5');
+        $mostLikedVideos = DB::select('select * from videos order by likes desc limit 5');
         
-        $mostDislikedVideos = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos order by dislikes desc limit 5');
+        $mostDislikedVideos = DB::select('select * from videos order by dislikes desc limit 5');
         
-        $mostViewedVideos = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos order by clicks desc limit 5');
+        $mostViewedVideos = DB::select('select * from videos order by clicks desc limit 5');
 
         $commentCount = DB::select('select count(*) as count from comments');
 
@@ -33,12 +33,10 @@ class ReportController extends Controller
                                             group by videos.id, videos.title
                                             order by comments desc limit 5');
 
-        //$userCountPerMonth = DB::select('select count(*) as count, MONTH(created_at) as month from users group by MONTH(created_at)');
         $users = User::select('id', 'created_at')
         ->get()
         ->groupBy(function($date) {
-            //return Carbon::parse($date->created_at)->format('Y'); // grouping by years
-            return Carbon::parse($date->created_at)->format('m'); // grouping by months
+            return Carbon::parse($date->created_at)->format('m');
         });
 
         $userMonthCount = [];
@@ -72,7 +70,7 @@ class ReportController extends Controller
     }
 
     public function getUserReport(){
-        //$videos = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos');
+        
         $user = auth()->user();
         $userid = $user->id;
 
@@ -86,15 +84,15 @@ class ReportController extends Controller
                                                 group by videos.id, videos.title
                                                 order by comments desc limit 3', [$userid]);
 
-        $mostLikedVideos = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where creator_id = ? order by likes desc limit 3', [$userid]);
+        $mostLikedVideos = DB::select('select * from videos where creator_id = ? order by likes desc limit 3', [$userid]);
 
-        $mostLikedVideosByDate = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where creator_id = ? order by created_at', [$userid]);
+        $mostLikedVideosByDate = DB::select('select * from videos where creator_id = ? order by created_at', [$userid]);
 
-        $mostViewedVideos = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where creator_id = ? order by clicks desc limit 3', [$userid]);
+        $mostViewedVideos = DB::select('select * from videos where creator_id = ? order by clicks desc limit 3', [$userid]);
         
-        $mostDislikedVideos = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where creator_id = ? order by dislikes desc limit 3', [$userid]);
+        $mostDislikedVideos = DB::select('select * from videos where creator_id = ? order by dislikes desc limit 3', [$userid]);
 
-        $mostDislikedVideosByDate = DB::select('select id, title, video_url, thumbnail_url, description, clicks, likes, dislikes, genre, creator_id, created_at, updated_at from videos where creator_id = ? order by created_at', [$userid]);
+        $mostDislikedVideosByDate = DB::select('select * from videos where creator_id = ? order by created_at', [$userid]);
         
         $userVideoCommentCount = DB::select('select count(comments.id) as commentCount from videos
                                             inner join comments on videos.id = comments.video_id 

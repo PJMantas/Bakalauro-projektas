@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { environment } from '../shared/enviroment/enviroment';
+import { environment } from '../../environments/environment';
 import { Comment } from '../models/comment';
 
 @Injectable({
@@ -23,11 +23,11 @@ export class CommentService {
   };
 
   deleteComment(id: number) {
-    return this.http.post<Comment>(`${environment.api}/comment/delete-comment/`, {"id": `${id}`});
+    return this.http.delete<Comment>(`${environment.api}/comment/delete-comment/`, {params: {id}});
   };
 
   editComment(formBody) {
-    return this.http.post<Comment>(`${environment.api}/comment/edit-comment/`, formBody );
+    return this.http.patch<Comment>(`${environment.api}/comment/edit-comment/`, formBody );
   };
 
 }

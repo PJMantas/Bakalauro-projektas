@@ -71,7 +71,7 @@ export class ViewReportComponent implements OnInit {
 
 
     this.ReportSerivce.getSystemReport().subscribe(result => {
-      console.log(result);
+      //console.log(result);
       this.MostDislikedVideos = result['MostDislikedVideos'];
       this.MostLikedVideos = result['MostLikedVideos'];
       this.MostViewedVideos = result['MostViewedVideos'];
@@ -84,8 +84,7 @@ export class ViewReportComponent implements OnInit {
       this.TotalVideoViews = result['VideoSums'][0].clicks;
       this.TotalCommentCount = result['Comments'][0].count;
       
-      
-      console.log(this.UserCountByMonth);
+      //console.log(this.UserCountByMonth);
 
       this.ratingsChart = new Chart('ratingsChart', {
         type: 'doughnut',

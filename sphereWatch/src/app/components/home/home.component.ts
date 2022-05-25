@@ -3,6 +3,7 @@ import { Video } from 'src/app/models/video';
 import { Genre } from 'src/app/models/genre';
 import { VideoService } from 'src/app/services/video.service';
 import { GenreService } from 'src/app/services/genre.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +18,7 @@ export class HomeComponent implements OnInit {
   genreTitle1: string = "";
   genreTitle2: string = "";
   genreTitle3: string = "";
+  enviroment = environment.files;
 
   constructor(
     private VideoService: VideoService,

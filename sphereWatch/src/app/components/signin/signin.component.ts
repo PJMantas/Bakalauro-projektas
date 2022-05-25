@@ -42,7 +42,7 @@ export class SigninComponent implements OnInit {
       },
       (error) => {
         this.errors = error.error;
-        console.log(this.errors);
+        //console.log(this.errors);
       },
       () => {
         this.authState.setAuthState(true);
@@ -51,7 +51,7 @@ export class SigninComponent implements OnInit {
       }
     );
   }
-  // Handle response
+
   responseHandler(data:any) {
     this.token.handleData(data.access_token);
   }

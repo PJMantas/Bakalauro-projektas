@@ -1,16 +1,53 @@
 <div *ngIf="showWindow" class="container">
-    <h2 class="card-header">SphereWatch sistemos informacija</h2>
+  <h2 class="card-header bg-dark text-light">SphereWatch sistemos informacija</h2>
         
         <div class="row">
             <div class="card col-sm">
                 <h3>Bendra informacija</h3>
-                <h4>Registruotų naudotojų skaičius : {{RegisteredUsers}}</h4>
-                <h4>Esamų vaizdo įrašų kiekis : {{TotalVideoCount}}</h4>
-                <h4>Sistemos vaizdo įrašų peržiūrų skaičius : {{TotalVideoViews}}</h4>
+
+                <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+                <h4 style="text-align:left;">
+                  Registruotų naudotojų skaičius :
+                    <span style="float:right;">
+                      {{RegisteredUsers}}
+                    </span>
+                </h4>
+
+                <h4 style="text-align:left;">
+                  Esamų vaizdo įrašų kiekis :
+                    <span style="float:right;">
+                      {{TotalVideoCount}}
+                    </span>
+                </h4>
+
+                <h4 style="text-align:left;">
+                  Sistemos vaizdo įrašų peržiūrų skaičius :
+                    <span style="float:right;">
+                      {{TotalVideoViews}}
+                    </span>
+                </h4>
                 <br>
-                <h4>Sistemos vaizdo įrašų teigiamų įvertinimų : {{TotalVideoLikes}}</h4>
-                <h4>Sistemos vaizdo įrašų neigiamų įvertinimų : {{TotalVideoDislikes}}</h4>
-                <h4 class="border-bottom">Sistemos vaizdo įrašų komentarų skaičius : {{TotalCommentCount}}</h4>
+
+                <h4 style="text-align:left;">
+                  Sistemos vaizdo įrašų teigiamų įvertinimų skaičius :
+                    <span style="float:right;">
+                      {{TotalVideoLikes}}
+                    </span>
+                </h4>
+
+                <h4 style="text-align:left;">
+                  Sistemos vaizdo įrašų neigiamų įvertinimų skaičius: 
+                    <span style="float:right;">
+                      {{TotalVideoDislikes}}
+                    </span>
+                </h4>
+
+                <h4 style="text-align:left;">
+                  Sistemos vaizdo įrašų komentarų skaičius :
+                    <span style="float:right;">
+                      {{TotalCommentCount}}
+                    </span>
+                </h4>
 
                 
             </div>
@@ -101,7 +138,7 @@
           <table class="table table-striped mb-0">
               <thead>
                 <tr>
-                  <th scope="col">VideoID</th>
+                  <th scope="col">ID</th>
                   <th scope="col">Pavadinimas</th>
                   <th scope="col">Komentarų skaičius</th>
                   <th scope="col" style="width: 1%; white-space: nowrap;"></th>
@@ -150,11 +187,12 @@
                   </table>
             </div>
           </div>
+          <div style="height: fit-content; text-align: center;">
+            <h3>Užsiregistravusių naudotojų skaičius pagal mėnesį</h3>
+            <canvas id="usersByMonth"></canvas>
+          </div>
       </div>
-      <div style="height: fit-content; text-align: center;">
-        <h3>Užsiregistravusių naudotojų skaičius pagal mėnesį</h3>
-        <canvas id="usersByMonth"></canvas>
-      </div>
+      
 
       
 

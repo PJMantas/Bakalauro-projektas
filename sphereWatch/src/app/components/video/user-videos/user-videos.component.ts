@@ -5,6 +5,7 @@ import { PermissionService } from 'src/app/services/permission.service';
 import { AuthStateService } from 'src/app/shared/auth-state.service';
 import { VideoService } from '../../../services/video.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-user-videos',
@@ -17,6 +18,7 @@ export class UserVideosComponent implements OnInit {
   allowEdit = false;
   UserPermissions!: Permission;
   isSignedIn: boolean = false;
+  enviroment = environment.files;
 
   constructor(
     private VideoService: VideoService,

@@ -63,7 +63,6 @@ export class CommentsComponent implements OnInit {
 
     this.authService.profileUser().subscribe(result => {
       this.userId = result.id;
-      console.log(this.userId);
     });
 
 
@@ -144,19 +143,18 @@ export class CommentsComponent implements OnInit {
   onCreateReply(commentId: number) {
     this.submitted = true;
     this.loading = true;
-    console.log('reply');
-    console.log(this.addReplyForm.value);
     
     this.addReplyForm.patchValue({
       comment_parent_id: commentId
     });
-    console.log(this.addReplyForm.value);
+    
     this.CommentService.createCommentReply(this.addReplyForm.value).subscribe(
       data => {
         this.submitted = false;
 
         this.CommentService.getCommentsList(this.videoId, this.commentsCount).subscribe(result => {
           this.CommentsList = result['comments'];
+          this.addReplyForm.reset();
         });
       },
       error => {

@@ -61,7 +61,6 @@ export class EditPermissionComponent implements OnInit {
     this.PermissionService.getPermission(this.$permisionId).subscribe(response => {
       
       this.$permission = response['permission'];
-      console.log(this.$permission.id);
       this.editForm = this.formBuilder.group({
         id: [this.$permission.id, Validators.required],
         group_name: [this.$permission.group_name, Validators.required], 
@@ -92,11 +91,11 @@ export class EditPermissionComponent implements OnInit {
 
     this.PermissionService.updatePermission(this.editForm.value).subscribe(
       (result) => {
-        console.log(result);
+        //console.log(result);
       },
       (error) => {
         this.error = error.error;
-        console.log(this.error);
+        //console.log(this.error);
       },
       () => {
         this.editForm.reset();

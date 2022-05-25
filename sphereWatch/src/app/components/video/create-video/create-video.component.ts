@@ -55,17 +55,18 @@ export class CreateVideoComponent implements OnInit {
       this.UserPermissions = result['permissions'];
 
       if (!this.UserPermissions.video_create) {
-        this.router.navigate(['/video/userVideos']);
+        this.router.navigate(['/profile']);
+        return;
       } else {
         this.showWindow = true;
       }
 
     }, error => {
       this.router.navigate(['/home']);
+      return;
     });
 
     this.GenreService.getGenresList().subscribe(result => {
-      console.log(result);
       this.GenreList = result['genres'];
     });
   }
@@ -99,7 +100,6 @@ export class CreateVideoComponent implements OnInit {
     this.submitted = true;
 
     if (this.addVideoForm.invalid) {
-      console.log('invalid');
       return;
     }
 
@@ -122,7 +122,6 @@ export class CreateVideoComponent implements OnInit {
           this.router.navigate(['/videoHome']);
         },
         error => {
-          console.log(error);
           this.errors = error.error;
           this.loading = false;
         });

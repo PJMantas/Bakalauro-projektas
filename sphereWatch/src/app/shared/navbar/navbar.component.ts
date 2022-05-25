@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PermissionService } from '../../services/permission.service';
-import { Permission } from '../../models/permission';
 import { TokenService } from '../token.service';
 import { AuthStateService } from '../auth-state.service';
 import { AuthService } from '../auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-navbar',
@@ -17,6 +17,7 @@ export class NavbarComponent implements OnInit {
   userName!: string;
   isCollapsed = false;
   isAdmin: boolean = false;
+  enviroment = environment.files;
 
   constructor(
     private auth: AuthStateService,
@@ -39,9 +40,6 @@ export class NavbarComponent implements OnInit {
         });
       }
     });
-
-
-
   }
 
   signOut() {

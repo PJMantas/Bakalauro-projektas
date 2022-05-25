@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { environment } from '../shared/enviroment/enviroment';
+import { environment } from '../../environments/environment';
 import { GenreRequest } from '../models/genreRequest';
 
 @Injectable({
@@ -19,15 +19,15 @@ export class GenreRequestService {
   };
 
   deleteGenreRequest(id: number) {
-    return this.http.post<GenreRequest>(`${environment.api}/admin/delete-genre-request/`, {"id": `${id}`});
+    return this.http.delete<GenreRequest>(`${environment.api}/admin/delete-genre-request/`, {params: {id}});
   };
 
   approveGenreRequest(id: number) {
-    return this.http.post<GenreRequest>(`${environment.api}/admin/approve-genre-request/`, {"id": `${id}`});
+    return this.http.patch<GenreRequest>(`${environment.api}/admin/approve-genre-request/`, {"id": `${id}`});
   };
 
   rejectGenreRequest(id: number) {
-    return this.http.post<GenreRequest>(`${environment.api}/admin/reject-genre-request/`, {"id": `${id}`});
+    return this.http.patch<GenreRequest>(`${environment.api}/admin/reject-genre-request/`, {"id": `${id}`});
   };
 
   getUserGenreRequestsList() {

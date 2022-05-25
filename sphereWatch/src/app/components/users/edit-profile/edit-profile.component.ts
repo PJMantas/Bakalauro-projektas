@@ -5,6 +5,7 @@ import { UserService } from '../../../services/user.service';
 import { AuthStateService } from '../../../shared/auth-state.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../shared/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-edit-profile',
@@ -21,6 +22,7 @@ export class EditProfileComponent implements OnInit {
   error: any;
   file: any;
   isSignedIn = false;
+  enviroment = environment.files;
 
   constructor(
     private UserService: UserService,
@@ -57,7 +59,6 @@ export class EditProfileComponent implements OnInit {
   get f() { return this.editUserForm.controls; }
 
   ngOnInit(): void {
-    console.log("pries error");
     this.authService.profileUser().subscribe((data: any) => {
       this.user = data;
       this.profileImage = this.user.avatar_url;
@@ -106,16 +107,13 @@ export class EditProfileComponent implements OnInit {
     if (this.file) {
       formData.append("avatar_url", this.file);
     }
-    console.log("viska ikiso");
+
     this.loading = true;
     this.UserService.updateProfile(formData).subscribe(
       data => {
-        console.log(data);
         this.router.navigate(['/profile']);
-        
       },
       error => {
-        console.log(this.error);
         this.error = error;
         this.loading = false;
       });

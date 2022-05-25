@@ -6,6 +6,7 @@ import { Permission } from 'src/app/models/permission';
 import { PermissionService } from 'src/app/services/permission.service';
 import { VideoService } from '../../services/video.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import Chart  from 'chart.js/auto';
 
 @Component({
@@ -24,6 +25,7 @@ export class VideoViewComponent implements OnInit {
   ratioChart: any;
   allowReact: boolean = false;
   showEdit: boolean = false;
+  enviroment = environment.files;
 
   constructor(
     private VideoService: VideoService,
@@ -54,11 +56,9 @@ export class VideoViewComponent implements OnInit {
       });
 
     this.VideoService.getVideoById(this.videoId).subscribe(response => {
-      console.log(response);
       this.Video = response['video'];
       this.genreId = this.Video.genre;
       this.AuthService.profileUser().subscribe(response => {
-        console.log(response);
         if(this.Video.creator_id == response.id) {
           this.showEdit = true;
         }});
@@ -81,7 +81,6 @@ export class VideoViewComponent implements OnInit {
     formData.append('reaction_type', reactionType.toString());
 
     this.VideoService.reactToVideo(formData).subscribe(response => {
-      console.log(response);
       this.Video = response['video'];
     });
   }

@@ -24,7 +24,7 @@ class PermissionController extends Controller
         $permissions = DB::select('select * from permissions where id = ?', [$userGroup]);
 
         return response()->json([
-            'message' => 'Permissions successfully fetched',
+            'message' => 'Naudotojo teisės sėkmingai gautos',
             'permissions' => $permissions[0]
         ], 200);
     }
@@ -36,7 +36,7 @@ class PermissionController extends Controller
         $permissions = DB::select('select * from permissions');
 
         return response()->json([
-            'message' => 'Permissions successfully fetched',
+            'message' => 'Visos teisių grupės sėkmingai gautos',
             'permissions' => $permissions
         ], 200);
     }
@@ -106,7 +106,7 @@ class PermissionController extends Controller
         $permission->save();
 
         return response()->json([
-            'message' => 'Permission successfully added',
+            'message' => 'Teisių grupė sėkmingai sukurta',
             'permission' => $permission
         ], 201);
 
@@ -166,7 +166,7 @@ class PermissionController extends Controller
         $permission->save();
 
         return response()->json([
-            'message' => 'Permission successfully edited',
+            'message' => 'Teisių grupė sėkmingai atnaujinta',
             'permission' => $permission
         ], 200);
     }
@@ -180,15 +180,14 @@ class PermissionController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        $permission = new Permission();
+        //DB::table('permissions')->where(
+        //    'id', $request['id'])
+        //    ->delete();
 
-        DB::table('permissions')->where(
-            'id', $request['id'])
-            ->delete();
+        Permission::where('id', $request['id'])->delete();
 
         return response()->json([
-            'message' => 'Permission successfully deleted',
-            'permission' => $permission
+            'message' => 'Teisių grupė sėkmingai ištrinta'
         ], 200);
     }
     

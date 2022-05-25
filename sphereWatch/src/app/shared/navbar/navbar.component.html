@@ -43,7 +43,7 @@
                 <li  class="nav-item align-items-center" *ngIf="isSignedIn" >
                     <a class="navbar-brand" [routerLink]="['/profile']" routerLinkActive="active" class="nav-link" >
                         
-                        <img src="http://192.168.1.108:8000/{{profile_pic}}" width="60" height="50" style="align-self: auto;">
+                        <img src="{{enviroment}}/{{profile_pic}}" width="60" height="50" style="align-self: auto;">
                         
                     </a>
                    

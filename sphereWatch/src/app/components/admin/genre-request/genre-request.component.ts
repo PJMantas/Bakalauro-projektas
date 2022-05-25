@@ -42,31 +42,30 @@ export class GenreRequestComponent implements OnInit {
     });
 
     this.GenreRequestService.getGenreRequestsList().subscribe(result => {
-      //console.log(JSON.stringify(result));
       this.GenreRequests = result['genreRequests'];
     });
   }
 
   onDelete(genreRequestId) {
     this.GenreRequestService.deleteGenreRequest(genreRequestId).subscribe(result => {
-      console.log(result);
+      //console.log(result);
       window.location.reload();
     });
   }
   
   onReject(genreRequestId) {
     this.GenreRequestService.rejectGenreRequest(genreRequestId).subscribe(result => {
-      console.log(result);
+      //console.log(result);
       window.location.reload();
     });
   }
 
   onAccept(genreRequestId, genreName) {
     this.GenreRequestService.approveGenreRequest(genreRequestId).subscribe(result => {
-      console.log(result);
+      //console.log(result);
     });
     this.GenreService.createGenre(genreName).subscribe(result => {
-      console.log(result);
+      //console.log(result);
       window.location.reload();
     });
   }

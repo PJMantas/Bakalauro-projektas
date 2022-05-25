@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { environment } from '../shared/enviroment/enviroment';
+import { environment } from '../../environments/environment';
 import { User } from '../models/user';
 
 @Injectable({
@@ -19,10 +19,10 @@ export class AdminService {
   }
   
   deleteUser(id: number){
-    return this.http.post<number>(`${environment.api}/admin/delete-user/`, {"id": `${id}`});
+    return this.http.delete<number>(`${environment.api}/admin/delete-user/`, {params: {id}});
   }
 
   adminUpdateUser(formBody) {
-    return this.http.post<User>(`${environment.api}/admin/admin-update-user/`, formBody );
+    return this.http.patch<User>(`${environment.api}/admin/admin-update-user/`, formBody );
   }
 }

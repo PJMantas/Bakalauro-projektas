@@ -30,7 +30,6 @@ export class AdminComponent implements OnInit {
     this.PermissionService.getAuthUserPermissions().subscribe(result => {
       this.UserPermissions = result['permissions'];
       if (this.UserPermissions.is_admin) {
-        console.log('Admin');
         this.showWindow = true;
       } else{
         this.router.navigate(['/home']);

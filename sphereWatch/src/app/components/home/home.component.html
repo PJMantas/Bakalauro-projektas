@@ -23,7 +23,7 @@
         <h2> {{genreTitle1}} </h2>
         <div class="card mt-3" *ngFor="let video of RecomendedVideos1">
           <a class="card my-6 text-decoration-none bg-dark text-light border-0" [routerLink]="'/viewVideo/' + video.id">
-            <img class="card-img-top" style="height: 16rem;" src="http://192.168.1.108:8000/{{video.thumbnail_url}}"
+            <img class="card-img-top" style="height: 16rem;" src="{{enviroment}}/{{video.thumbnail_url}}"
               alt="Card image cap">
             <div class="card-body p-5">
               <h4 class="card-title" style="font-weight: bolder;">{{video.title}}</h4>
@@ -45,7 +45,7 @@
         <h2> {{genreTitle2}} </h2>
         <div class="card mt-3" *ngFor="let video of RecomendedVideos2">
           <a class="card my-6 text-decoration-none bg-dark text-light border-0" [routerLink]="'/viewVideo/' + video.id">
-            <img class="card-img-top" style="height: 16rem;" src="http://192.168.1.108:8000/{{video.thumbnail_url}}"
+            <img class="card-img-top" style="height: 16rem;" src="{{enviroment}}/{{video.thumbnail_url}}"
               alt="Card image cap">
             <div class="card-body p-5">
               <h4 class="card-title" style="font-weight: bolder;">{{video.title}}</h4>
@@ -67,7 +67,7 @@
         <h2> {{genreTitle3}} </h2>
         <div class="card mt-3" *ngFor="let video of RecomendedVideos3">
           <a class="card my-6 text-decoration-none bg-dark text-light border-0" [routerLink]="'/viewVideo/' + video.id">
-            <img class="card-img-top" style="height: 16rem;" src="http://192.168.1.108:8000/{{video.thumbnail_url}}"
+            <img class="card-img-top" style="height: 16rem;" src="{{enviroment}}/{{video.thumbnail_url}}"
               alt="Card image cap">
             <div class="card-body p-5">
               <h4 class="card-title" style="font-weight: bolder;">{{video.title}}</h4>

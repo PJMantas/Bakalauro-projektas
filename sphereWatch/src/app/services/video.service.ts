@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { environment } from '../shared/enviroment/enviroment';
+import { environment } from '../../environments/environment';
 import { Video } from '../models/video';
 
 @Injectable({
@@ -23,7 +23,7 @@ export class VideoService {
     return this.http.delete<Video>(`${environment.api}/video/delete-video/`, {params: {id}});
   }
   updateVideo(formBody) {
-    return this.http.post<Video>(`${environment.api}/video/update-video/`, formBody );
+    return this.http.patch<Video>(`${environment.api}/video/update-video/`, formBody );
   }
   getUserVideosList() {
     return this.http.get<Video>(`${environment.api}/video/get-user-videos-list/`);

@@ -76,7 +76,7 @@
             <label for="avatar_url">Profilio nuotrauka</label>
             <br>
             <br>
-            <img src= 'http://127.0.0.1:8000/{{profileImage}}' style="max-width: 50vh; max-height: 30vh; border-radius: 10px; outline: auto;" class="img-fluid" >
+            <img src= '{{enviroment}}/{{profileImage}}' style="max-width: 50vh; max-height: 30vh; border-radius: 10px; outline: auto;" class="img-fluid" >
             <br>
             <br>
             <input formControlName="avatar_url" type="file" accept=".jpg,.gif,.jpeg,.png" id="avatar_url" class="form-control" (change)="onFileChange($event)">

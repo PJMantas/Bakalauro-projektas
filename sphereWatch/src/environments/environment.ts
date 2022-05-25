@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  //api: 'https://mp-ifk8-bakalauras.azurewebsites.net/api'
+  api: 'http://192.168.1.108:8000/api',
+  files: 'http://192.168.1.108:8000'
 };
 
 /*
